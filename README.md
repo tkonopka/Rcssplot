@@ -6,7 +6,9 @@ data crunching in plots and charts.
 
 See http://github.com/tkonopka/Rcssplot/wiki for usage documentation.
 
+&nbsp;
 
+&nbsp;
 
 Copyright (c) 2015 Tomasz Konopka
 
