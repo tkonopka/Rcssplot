@@ -62,7 +62,7 @@ RcssMakeParseTree <- function(lextab) {
   ## Start Parsing until "n" is within the lex table
   while (n <= nrow(lextab)) {
     ruleset <- RcssParseRuleSet(lextab, n)
-    parsetree[[length(parsetree)+1]] = ruleset$RuleSet
+    parsetree[[length(parsetree)+1]] <- ruleset$RuleSet
     n <- ruleset$n
   }
   
@@ -183,7 +183,7 @@ RcssParseDeclarationSet <- function(lextab, n) {
   while(n <= nrow(lextab) & lextab[n, "token"] != "}") {
     ## parse a property/expr pair
     exprprop = RcssParseDeclaration(lextab, n)
-    
+
     ## format and store in a list
     ans[[length(ans) + 1]] <- exprprop$Expr    
     names(ans)[length(ans)] <- exprprop$Property
@@ -238,6 +238,12 @@ RcssParseDeclaration <- function(lextab, n) {
     n <- n + 1
   }
 
+  ## when the user leaves the expression blank, assume that means ""
+  ## e.g. this can be used to set xlab=""
+  if (is.null(expr)) {
+    expr <- ""
+  }
+  
   ## return an object with the property/expr pair, but also
   ## the number of the next non-trivial token
   ans <- list(n = n, Property = property, Expr = expr)
