@@ -357,7 +357,9 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
   
   if (!(selector %in% names(Rcss))) {
-    stopCF("RcssGetPropertyValue: unknown selector ",selector,"\n")
+    warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
+    ans <- list(defined = FALSE, value = NULL)
+    return(ans)
   }
   
   ## get properties for the selector
@@ -365,8 +367,7 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
                                      property, Rcssclass = Rcssclass)
   
   ## check if the property was defined and what its value was
-  ans <- list(defined = FALSE)
-  ans["value"] <- list(NULL)
+  ans <- list(defined = FALSE, value = NULL)
   if (bestvalue$level >= 0) {
     ans$defined <- TRUE
     if (!is.null(bestvalue$value)) {

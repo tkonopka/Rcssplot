@@ -60,7 +60,7 @@ RcssMakeParseTree <- function(lextab) {
   n <- 1
   
   ## Start Parsing until "n" is within the lex table
-  while ( n <= nrow(lextab)) {
+  while (n <= nrow(lextab)) {
     ruleset <- RcssParseRuleSet(lextab, n)
     parsetree[[length(parsetree)+1]] = ruleset$RuleSet
     n <- ruleset$n
@@ -119,7 +119,7 @@ RcssParseSelector <- function(lextab, n) {
   }
   
   ## after the first ident, can have classes
-  while (lextab[n,"token"] == ".") {
+  while (n <= nrow(lextab) & lextab[n,"token"] == ".") {
     n <- n + 1
     if (lextab[n,"type"] == "IDENT") {
       ans[length(ans)+1] = PSZ(lextab[n, "token"])
@@ -151,7 +151,7 @@ RcssParseSelectorSet <- function(lextab, n) {
   n <- as.integer(sel$n);
   
   ## now parse other selectors as long as they are separated by ','
-  while (lextab[n,"token"] == ",") {
+  while (n <= nrow(lextab) & lextab[n,"token"] == ",") {
     sel = RcssParseSelector(lextab, n + 1)
     ans[[length(ans) + 1]] = sel$Selector
     n <- sel$n
@@ -180,7 +180,7 @@ RcssParseDeclarationSet <- function(lextab, n) {
   ans <- list();
 
   ## keep reading declarations until hit a }
-  while(lextab[n, "token"] != "}") {
+  while(n <= nrow(lextab) & lextab[n, "token"] != "}") {
     ## parse a property/expr pair
     exprprop = RcssParseDeclaration(lextab, n)
     
@@ -203,24 +203,22 @@ RcssParseDeclarationSet <- function(lextab, n) {
 ## Parse one declaration (expects an IDENT)
 ##
 RcssParseDeclaration <- function(lextab, n) {
-
-  if (lextab[n,"type"] != "IDENT") {
-    RcssParseError(lextab, n, "RcssParseDeclaration", "IDENT");
-  }
   
-  ## this token is the name of the property
-  property <- lextab[n,"token"];
+  ## get name of the property, then move over the property
+  property <- RcssParseProperty(lextab, n)
+  n <- property$n
+  property <- property$Property
   
   ## move over the ':'
-  n <- n + 1  
   if (lextab[n,"token"] != ":") {
     RcssParseError(lextab, n, "RcssParseDeclaration", ":");
   }
+  n <- n + 1
   
   ## keep reading the declarations until hit a ';' or a '}'
-  n <- n + 1
   expr <- c()
-  while (lextab[n,"token"] != ";" & lextab[n, "token"] != "}") {
+  while (n <= nrow(lextab) &
+         lextab[n,"token"] != ";" & lextab[n, "token"] != "}") {
     
     ## allowed tokens are IDENT, NUMBER, HEXCOLOR, STRING
     if (lextab[n, "type"] %in% c("IDENT", "STRING", "HEXCOLOR")) {
@@ -246,3 +244,36 @@ RcssParseDeclaration <- function(lextab, n) {
   return(ans)
 }
 
+
+
+
+## parse the name of a property
+## This is usually one token,
+## but if a property has dots (e.g. cex.axis) this function
+## will concatenate the text together
+RcssParseProperty <- function(lextab, n) {
+
+  if (lextab[n,"type"] != "IDENT") {
+    RcssParseError(lextab, n, "RcssParseProperty", "IDENT");
+  }
+
+  ## deal with the expected case (one token)
+  property <- lextab[n, "token"]
+  n <- n + 1
+
+  ## deal with extension of property when the next tokens are ".IDENT"
+  while (n < nrow(lextab) &
+         lextab[n,"type"] == "TERMINAL" & lextab[n, "token"] == ".") {
+    
+    if (lextab[n + 1, "type"] == "IDENT") {
+      property <- c(property, ".", lextab[n + 1, "token"])
+    }
+    
+    n <- n + 2;
+  }
+  
+  ## build a unified property
+  property <- paste(property, collapse = "")
+
+  return(list(n = n, Property = property))
+}
