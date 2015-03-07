@@ -289,7 +289,6 @@ Rcsslegend <- function(x, y = NULL, legend,
     ## execute R's graphics function with custom properties
     cmd <- PSZ("legend (x, y = y, legend = legend",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    cat(cmd,"\n")
     eval(parse(text = cmd))
   }
 }
@@ -311,7 +310,7 @@ Rcsslegend <- function(x, y = NULL, legend,
 Rcsslines <- function(x, y = NULL,
                       Rcss = NULL, Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("legend" %in% names(Rcss))) {
+  if (is.null(Rcss) | !("lines" %in% names(Rcss))) {
     lines(x, y = y, ...)
   } else {    
     ## get a list of properties
