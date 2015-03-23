@@ -90,7 +90,8 @@ Rcss <- function(file = NULL) {
 ##' @export 
 print.Rcss <- function(x, ...) {  
   cat("Rcssplot:\n")
-  cat("Defined selectors: ", paste(names(x), collapse = ", "), "\n")    
+  cat("Defined selectors: ", paste(names(x), collapse = ", "), "\n")
+  cat("Use function printRcss() to view details for individual selectors\n")
 }
 
 
@@ -376,6 +377,37 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
   }
   
   return(ans)
+}
+
+
+
+
+##' Extracts a value for an Rcss property
+##' 
+##' If the requested property is defined within an Rcss object, this
+##' function will return the associated value. If the property is not
+##' defined, the function returns a default value that can be passed
+##' into the function and is set NULL otherwise. See also related function
+##' RcssGetPropertyValue()
+##' 
+##' @param Rcss style sheet object
+##' @param selector name of selector of interest (e.g. "plot", "axis",
+##' "text", etc.)
+##' @param property name of property of interest (e.g. "col", "pch", etc.)
+##' @param default value to return if the desired property is not defined
+##' in Rcss
+##' @param Rcssclass subclass of style sheet
+##' @export 
+RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
+                                          default=NULL,
+                                          Rcssclass = NULL) {
+
+  ans <- RcssGetPropertyValue(Rcss, selector, property, Rcssclass = Rcssclass);
+  if (ans$defined) {
+    return (ans$value)
+  } else {
+    return (default)
+  }    
 }
 
 
