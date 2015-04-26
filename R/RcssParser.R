@@ -37,7 +37,7 @@ RcssParser <- function(file) {
 
 ## Wrapper to produce generic errors
 RcssParseError <- function(lextab, n, parsefunction, expecting) {
-  stopCF(PSZ(parsefunction,": \n",
+  stopCF(paste0(parsefunction,": \n",
              "   expecting: ", expecting,"\n",
              "   got: ", lextab[n,"token"],"\n"))
 }
@@ -122,7 +122,7 @@ RcssParseSelector <- function(lextab, n) {
   while (n <= nrow(lextab) & lextab[n,"token"] == ".") {
     n <- n + 1
     if (lextab[n,"type"] == "IDENT") {
-      ans[length(ans)+1] = PSZ(lextab[n, "token"])
+      ans[length(ans)+1] = paste0(lextab[n, "token"])
       n <- n +1
     } else {
       RcssParseError(lextab, n, "RcssParseSelector", "IDENT")
