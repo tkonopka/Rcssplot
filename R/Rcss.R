@@ -116,7 +116,7 @@ printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
   
   ## if selector is not specified, print all the available ones
   if (is.null(selector)) {
-    stopCF(PSZ("printRcss: must specify selector.\n",
+    stopCF(paste0("printRcss: must specify selector.\n",
                "Defined selectors: ",paste(names(Rcss), collapse = ", "),
                "\n"))
   }
@@ -149,7 +149,7 @@ print.RcssProperties <- function(RcssProperties,
   printPropertySet = function(propset) {
     if (length(propset) > 0) {
       for (i in names(propset)) {
-        cat(PSZ(indent, "| ",  i, ": ",paste(propset[[i]], collapse=" "),
+        cat(paste0(indent, "| ",  i, ": ",paste(propset[[i]], collapse=" "),
                 "\n"))
       }
     }    
@@ -162,14 +162,14 @@ print.RcssProperties <- function(RcssProperties,
   if (verbose) {
     for (nowclass in names(classesRcss)) {
       cat("\n")
-      cat(PSZ(indent,"class ",nowclass,"\n"))
+      cat(paste0(indent,"class ",nowclass,"\n"))
       nowclass = classesRcss[[nowclass]]
       print.RcssProperties(nowclass, verbose = verbose,
-                           indent = PSZ("  ", indent))
+                           indent = paste0("  ", indent))
     }        
   }  else {
     cat("\n")
-    cat(PSZ(indent, "Defined classes: ",
+    cat(paste0(indent, "Defined classes: ",
             paste(names(classesRcss), collapse = ", "), "\n"))   
   }
   
@@ -266,7 +266,7 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
   if (is.null(propertylist)) {
     propertylist <- list()
     if (is.null(property)) {
-      stopCF(PSZ("RcssChangePropertyValue: ",
+      stopCF(paste0("RcssChangePropertyValue: ",
                  "specify at least one property to change\n"))
     }
     propertylist[[property]] <- value

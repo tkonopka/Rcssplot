@@ -4,7 +4,8 @@ The Rcssplot package brings cascading style sheets to the R graphical
 environment. It provides a means to separate the aesthetics from 
 data crunching in plots and charts.
 
-See http://github.com/tkonopka/Rcssplot/wiki for usage documentation.
+See [http://www.rcssplot.org](http://www.rcssplot.org) and the [github wiki](http://github.com/tkonopka/Rcssplot/wiki) for documentation.
+
 
 &nbsp;
 
