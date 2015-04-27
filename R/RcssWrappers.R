@@ -54,7 +54,7 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
     nowcss <- RcssGetProperties(Rcss, "abline", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("abline (a = a, b = b, h = h, v = v, ",
+    cmd <- paste0("abline (a = a, b = b, h = h, v = v, ",
                "reg = reg, coef = coef",             
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
@@ -90,7 +90,7 @@ Rcssaxis <-  function(side,
     nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("axis (side",
+    cmd <- paste0("axis (side",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -120,7 +120,7 @@ Rcssbarplot <- function(height,
     nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("barplot (height",
+    cmd <- paste0("barplot (height",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -151,7 +151,7 @@ Rcssbox <-  function(which = "plot",
     nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("box (which = which",
+    cmd <- paste0("box (which = which",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -182,7 +182,7 @@ Rcssboxplot <-  function(x,
     nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("boxplot (x",
+    cmd <- paste0("boxplot (x",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -212,7 +212,7 @@ Rcsshist <- function(x,
     nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("hist (x",
+    cmd <- paste0("hist (x",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -246,7 +246,7 @@ Rcssjpeg <- function(file,
     nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("jpeg (file",
+    cmd <- paste0("jpeg (file",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -287,7 +287,7 @@ Rcsslegend <- function(x, y = NULL, legend,
     nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("legend (x, y = y, legend = legend",
+    cmd <- paste0("legend (x, y = y, legend = legend",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -317,7 +317,7 @@ Rcsslines <- function(x, y = NULL,
     nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("lines (x, y = y",
+    cmd <- paste0("lines (x, y = y",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -348,7 +348,7 @@ Rcssmtext <- function(text,
     nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("mtext (text",
+    cmd <- paste0("mtext (text",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -379,7 +379,7 @@ Rcsspar <- function(Rcss = NULL, Rcssclass = NULL, ...) {
     ## execute R's graphics function with custom properties
     ## here cut out the "comma" inserted automatically by RcssMakeCallCodeString
     temp = RcssMakeCallCodeString(names(nowcss), "nowcss")
-    cmd <- PSZ("par (", substring(temp, 2), ")")
+    cmd <- paste0("par (", substring(temp, 2), ")")
     eval(parse(text = cmd))
   }
 }
@@ -411,7 +411,7 @@ Rcsspdf <- function(file,
     nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("pdf (file",
+    cmd <- paste0("pdf (file",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -441,7 +441,7 @@ Rcssplot <- function(x, y,
     nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("plot (x, y",
+    cmd <- paste0("plot (x, y",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -474,7 +474,7 @@ Rcsspng <- function(file,
     nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("png (file",
+    cmd <- paste0("png (file",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))  
   }
@@ -504,7 +504,7 @@ Rcsspoints <- function(x, y = NULL,
     nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("points (x, y = y",
+    cmd <- paste0("points (x, y = y",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -536,7 +536,7 @@ Rcsspolygon <- function(x, y = NULL,
     nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("polygon (x, y = y",
+    cmd <- paste0("polygon (x, y = y",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -569,7 +569,7 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
     nowcss <- RcssGetProperties(Rcss, "rect", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("rect (xleft, ybottom, xright, ytop",
+    cmd <- paste0("rect (xleft, ybottom, xright, ytop",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -598,7 +598,7 @@ Rcssstripchart <- function(x,
     nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("stripchart (x",
+    cmd <- paste0("stripchart (x",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -631,7 +631,7 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
     nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("text (x, y = y, labels = labels",
+    cmd <- paste0("text (x, y = y, labels = labels",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }
@@ -664,7 +664,7 @@ Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
     nowcss <- RcssGetProperties(Rcss, "title", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
-    cmd <- PSZ("title (main = main, sub = sub, xlab = xlab, ylab = ylab",
+    cmd <- paste0("title (main = main, sub = sub, xlab = xlab, ylab = ylab",
                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
     eval(parse(text = cmd))
   }

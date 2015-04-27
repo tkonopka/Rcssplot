@@ -9,15 +9,6 @@
 
 
 ##
-## Helper function PSZ = paste set ""
-##
-PSZ <- function(...) {
-  return(paste(..., sep=""));
-}
-
-
-
-##
 ## Helper function stopCF = stop with call. = FALSE
 ##
 stopCF <- function(...) {
@@ -37,9 +28,9 @@ RcssMakeCallCodeString <- function(varnames, listname) {
     return ("")
   }
   ans = sapply(as.list(varnames), function(x) {
-    return (PSZ(x, "=", listname, "$", x))
+    return (paste0(x, "=", listname, "$", x))
   })  
-  return (PSZ(", ",paste(ans, collapse = ", ")));    
+  return (paste0(", ",paste(ans, collapse = ", ")));    
 }
 
 
