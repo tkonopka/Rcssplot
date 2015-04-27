@@ -402,6 +402,11 @@ RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
                                           default=NULL,
                                           Rcssclass = NULL) {
 
+  ## deal with case where input is not specified
+  if (is.null(Rcss)) {
+    return(default)
+  }
+  
   ans <- RcssGetPropertyValue(Rcss, selector, property, Rcssclass = Rcssclass);
   if (ans$defined) {
     return (ans$value)
