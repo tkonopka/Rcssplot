@@ -17,16 +17,16 @@
 ##' Rcss file. When a file is not specified, creates a base object
 ##' object without any styling.
 ##' 
-##' @param file filename containing Rcss definitions. If set to NULL,
+##' @param file filename containing Rcss definitions. If not set,
 ##' function returns a basic Rcss object.
 ##' @export 
-Rcss <- function(file = NULL) {
+Rcss <- function(file) {
   
   ## create the css object
   ans <- RcssConstructor()
   
   ## if user does not specify a css file, return bare-bones object
-  if (is.null(file)) {
+  if (missing(file) || is.null(file)) {
     return(ans)
   }
 
