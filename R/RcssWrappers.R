@@ -31,7 +31,7 @@
 RcssGeneric <- function(..., Rcss, Rcssclass, f) {
 
   RcssCall <- substitute(f(...))
-  if(!missing(Rcss)){
+  if(!missing(Rcss) || !(formals()$Rcss == "")){
     css <- RcssGetProperties(Rcss, as.character(RcssCall[[1]]), Rcssclass = Rcssclass)
     css[names(RcssCall)] <- NULL
     if(length(css) > 0) {
@@ -75,6 +75,29 @@ for(symbol in towrap){
   formals(f)$f <- symbol
   assign(paste0("Rcss", symbol), f)
 }
-rm(symbol, f, towrap)
+rm(symbol, f)
+
+
+#' RCSS - Don't repeat yourself 
+#' 
+#' @param 
+#' @return a 'convert to Rcss' object
+#' 
+dryer <- function(Rcss) {
+  e <- new.env(parent = .GlobalEnv)
+  CSS <- substitute(Rcss)
+  
+  f <- RcssGeneric
+  for(symbol in towrap) {
+    formals(f)$f <- symbol
+    formals(f)$Rcss <- CSS
+    assign(as.character(symbol), f, e)
+  }
+  
+  
+  e
+}
+
+
 
 

@@ -2,3 +2,4 @@
 
 S3method(print,Rcss)
 exportPattern("^Rcss.*$")
+export(dryer)

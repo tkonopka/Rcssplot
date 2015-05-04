@@ -434,6 +434,8 @@ RcssHelperGetPropertyValue <- function(RcssProperties, property,
     bestvalue <- list(level = -1, value = 0)
   }
   
+  if(missing(Rcssclass)) Rcssclass <- NULL #todo fix tryinclass %in% Rcssclass below
+  
   ## check for the property in the base properties
   if (property %in% names(RcssProperties$base)) {
     if (length(inclass) >= bestvalue$level) {
