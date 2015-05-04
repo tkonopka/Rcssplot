@@ -4,7 +4,7 @@
 \alias{printRcss}
 \title{Display properties encoded in an Rcss object}
 \usage{
-printRcss(Rcss, selector = NULL, verbose = FALSE)
+printRcss(Rcss, selector, verbose = FALSE)
 }
 \arguments{
 \item{Rcss}{style sheet object}

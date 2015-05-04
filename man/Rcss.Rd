@@ -4,10 +4,10 @@
 \alias{Rcss}
 \title{Create an Rcss style object}
 \usage{
-Rcss(file = NULL)
+Rcss(file)
 }
 \arguments{
-\item{file}{filename containing Rcss definitions. If set to NULL,
+\item{file}{filename containing Rcss definitions. If not set,
 function returns a basic Rcss object.}
 }
 \description{
