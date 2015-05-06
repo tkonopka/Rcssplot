@@ -45,7 +45,7 @@
 ##' @export
 Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
                         reg = NULL, coef = NULL,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("abline" %in% names(Rcss))) {
     abline(a = a, b = b, h = h, v = v, reg = reg, coef = coef, ...)
@@ -81,7 +81,7 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 ##' @param ... Further parameters, see documentation of axis()
 ##' @export 
 Rcssaxis <-  function(side,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("axis" %in% names(Rcss))) {
     axis(side, ...)
@@ -111,7 +111,7 @@ Rcssaxis <-  function(side,
 ##' @param ... Further parameters, see documentation of barplot()
 ##' @export 
 Rcssbarplot <- function(height,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("barplot" %in% names(Rcss))) {
     barplot(height, ...)
@@ -142,7 +142,7 @@ Rcssbarplot <- function(height,
 ##' @param ... Further parameters, see documentation of box()
 ##' @export 
 Rcssbox <-  function(which = "plot",
-                     Rcss = NULL, Rcssclass = NULL, ...) {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("box" %in% names(Rcss))) {
     box(which = which, ...)
@@ -173,7 +173,7 @@ Rcssbox <-  function(which = "plot",
 ##' @param ... Further parameters, see documentation of boxplot()
 ##' @export 
 Rcssboxplot <-  function(x,
-                         Rcss = NULL, Rcssclass = NULL, ...) {
+                         Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("boxplot" %in% names(Rcss))) {
     boxplot(x, ...)
@@ -203,7 +203,7 @@ Rcssboxplot <-  function(x,
 ##' @param ... Further parameters, see documentation of hist()
 ##' @export 
 Rcsshist <- function(x,
-                     Rcss = NULL, Rcssclass = NULL, ...) {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("hist" %in% names(Rcss))) {
     hist(x, ...)
@@ -237,7 +237,7 @@ Rcsshist <- function(x,
 ##' @param ... Further parameters, see documentation of jpeg()
 ##' @export 
 Rcssjpeg <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("jpeg" %in% names(Rcss))) {
     jpeg(file, ...)
@@ -278,7 +278,7 @@ Rcssjpeg <- function(file,
 ##' @param ... Further parameters, see documentation of legend()
 ##' @export 
 Rcsslegend <- function(x, y = NULL, legend,
-                       Rcss = NULL, Rcssclass = NULL, ...) {  
+                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {  
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("legend" %in% names(Rcss))) {
     legend(x, y = y, legend = legend, ...)
@@ -308,7 +308,7 @@ Rcsslegend <- function(x, y = NULL, legend,
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 Rcsslines <- function(x, y = NULL,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("lines" %in% names(Rcss))) {
     lines(x, y = y, ...)
@@ -339,7 +339,7 @@ Rcsslines <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of mtext()
 ##' @export 
 Rcssmtext <- function(text,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("mtext" %in% names(Rcss))) {
     mtext(text, ...)
@@ -368,7 +368,7 @@ Rcssmtext <- function(text,
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 ##' 
-Rcsspar <- function(Rcss = NULL, Rcssclass = NULL, ...) {
+Rcsspar <- function(Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("par" %in% names(Rcss))) {
     par(...)
@@ -402,7 +402,7 @@ Rcsspar <- function(Rcss = NULL, Rcssclass = NULL, ...) {
 ##' @param ... Further parameters, see documentation of pdf()
 ##' @export 
 Rcsspdf <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("pdf" %in% names(Rcss))) {
     pdf(file, ...)
@@ -432,7 +432,7 @@ Rcsspdf <- function(file,
 ##' @param ... Further parameters, see documentation of plot()
 ##' @export 
 Rcssplot <- function(x, y,
-                     Rcss = NULL, Rcssclass = NULL, ...) {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("plot" %in% names(Rcss))) {
     plot(x, y, ...)
@@ -465,7 +465,7 @@ Rcssplot <- function(x, y,
 ##' @param ... Further parameters, see documentation of png()
 ##' @export 
 Rcsspng <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("png" %in% names(Rcss))) {
     png(file, ...)
@@ -495,7 +495,7 @@ Rcsspng <- function(file,
 ##' @param ... Further parameters, see documentation of points()
 ##' @export 
 Rcsspoints <- function(x, y = NULL,
-                       Rcss = NULL, Rcssclass = NULL, ...) {
+                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(points) | !("points" %in% names(Rcss))) {
     points(x, y = y, ...)
@@ -527,7 +527,7 @@ Rcsspoints <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of polygon()
 ##' @export 
 Rcsspolygon <- function(x, y = NULL,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("polygon" %in% names(Rcss))) {
     polygon(x, y = y, ...)
@@ -560,7 +560,7 @@ Rcsspolygon <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of rect()
 ##' @export 
 Rcssrect <- function(xleft, ybottom, xright, ytop, 
-                     Rcss = NULL, Rcssclass = NULL, ...) {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("rect" %in% names(Rcss))) {
     rect(xleft, ybottom, xright, ytop, ...)
@@ -589,7 +589,7 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
 ##' @param ... Further parameters, see documentation of stripchart()
 ##' @export 
 Rcssstripchart <- function(x,
-                           Rcss = NULL, Rcssclass = NULL, ...) {
+                           Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("stripchart" %in% names(Rcss))) {
     stripchart(x, ...)
@@ -622,7 +622,7 @@ Rcssstripchart <- function(x,
 ##' @param ... Further parameters, see documentation of text()
 ##' @export 
 Rcsstext <- function(x, y=NULL, labels=seq_along(x),
-                     Rcss = NULL, Rcssclass = NULL, ...) {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("text" %in% names(Rcss))) {
     text(x, y = y, labels = labels, ...)
@@ -655,7 +655,7 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
 ##' @param ... Further parameters, see documentation of title()
 ##' @export 
 Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
   if (is.null(Rcss) | !("title" %in% names(Rcss))) {
     title (main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
