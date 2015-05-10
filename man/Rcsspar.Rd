@@ -4,10 +4,11 @@
 \alias{Rcsspar}
 \title{Set styled parameters for base graphics}
 \usage{
-Rcsspar(Rcss = NULL, Rcssclass = NULL, ...)
+Rcsspar(Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

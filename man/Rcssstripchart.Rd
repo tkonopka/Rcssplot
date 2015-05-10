@@ -4,12 +4,13 @@
 \alias{Rcssstripchart}
 \title{Draw styled strip chart}
 \usage{
-Rcssstripchart(x, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssstripchart(x, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x}{list of numeric vectors}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

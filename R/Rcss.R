@@ -16,13 +16,15 @@
 ##' Creates a style sheet object using definition specified in an
 ##' Rcss file. When a file is not specified, creates a base object
 ##' object without any styling.
+##'
+##' See also related functions RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
 ##' function returns a basic Rcss object.
 ##' @param default (logical) Should the style object be used as a default
-##' style ?
+##' style ? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' @export 
-Rcss <- function(file = NULL, default = TRUE) {
+Rcss <- function(file = NULL, default = FALSE) {
   
   ## create the css object
   ans <- RcssConstructor()
@@ -76,7 +78,7 @@ Rcss <- function(file = NULL, default = TRUE) {
     }
   }
   
-  ##
+  ## perhaps record this style sheet as a default
   if (default) {
     options(RcssDefaultStyle=ans)
   }
@@ -84,6 +86,50 @@ Rcss <- function(file = NULL, default = TRUE) {
   ## if user specifies file, parse it 
   return(ans)  
 }
+
+
+
+
+##' Set default Rcssplot style sheet
+##'
+##' Set a default Rcssplot style sheet. This style sheet will be
+##' applied in all functions of the Rcss family. See also related
+##' function RcssGetDefaultStyle()
+##' 
+##' @param Rcss style sheet object (set NULL to remove default style)
+##' @export
+RcssSetDefaultStyle <- function(Rcss) {
+  ## default style is remembered using the options/getOption system
+  if (class(Rcss)=="Rcss") {
+    options(RcssDefaultStyle=Rcss)
+  }
+}
+
+
+
+
+##' Get current default Rcssplot style sheet
+##'
+##' Get a copy of the current default Rcssplot style sheet. See also
+##' related RcssSetDefaultStyle()
+##' 
+##' @export
+RcssGetDefaultStyle <- function() {
+  ## Dummy; does the same as a straight call to getOption().
+  ## However, it provides an interface with an "Rcss" feel.
+  ## Also, the user does not need to know the "RcssDeaultsStyle" label
+  return(getOption("RcssDefaultStyle", default = NULL))
+}
+
+
+
+
+## Function from file zzz.R by cuche27 - loads a default style
+## when the package is loaded. Is this really necessary?
+## .onLoad <- function(libname, pkgname) {
+##  options(RcssDefaultStyle=Rcss())
+##}
+
 
 
 
@@ -515,6 +561,11 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
 
   ## get the RcssProperties object for this selector
   nowProperties <- Rcss[[selector]]
+
+  ## avoid work if the selector is not styled
+  if (is.null(nowProperties)) {
+    return(list());
+  }
   
   ## get a vector with all the property codes associated with the selector
   allproperties <- getAllProperties(nowProperties)

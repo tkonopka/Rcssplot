@@ -4,12 +4,13 @@
 \alias{Rcssjpeg}
 \title{Create a styled jpg figure}
 \usage{
-Rcssjpeg(file, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssjpeg(file, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{file}{character string with file name}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

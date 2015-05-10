@@ -4,12 +4,13 @@
 \alias{Rcsshist}
 \title{##' Draw a styled histogram}
 \usage{
-Rcsshist(x, Rcss = NULL, Rcssclass = NULL, ...)
+Rcsshist(x, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x}{numeric vector}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

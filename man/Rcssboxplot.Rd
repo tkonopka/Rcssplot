@@ -4,13 +4,14 @@
 \alias{Rcssboxplot}
 \title{##' Draw a styled boxplot}
 \usage{
-Rcssboxplot(x, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssboxplot(x, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x}{data for boxplot; either single numeric vector or a list
 of numeric vectors; see documentation of boxplot()}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

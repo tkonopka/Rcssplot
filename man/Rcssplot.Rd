@@ -4,12 +4,13 @@
 \alias{Rcssplot}
 \title{Create a styled plot}
 \usage{
-Rcssplot(x, y, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssplot(x, y, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x,y}{coordinates for points on the plot}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

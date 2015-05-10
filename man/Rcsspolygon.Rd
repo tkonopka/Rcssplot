@@ -4,12 +4,13 @@
 \alias{Rcsspolygon}
 \title{Draw a styled polygon on a plot}
 \usage{
-Rcsspolygon(x, y = NULL, Rcss = NULL, Rcssclass = NULL, ...)
+Rcsspolygon(x, y = NULL, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x,y}{coordinates for polygon vertices}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

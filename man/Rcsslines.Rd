@@ -4,12 +4,13 @@
 \alias{Rcsslines}
 \title{Add styled line segments to a plot}
 \usage{
-Rcsslines(x, y = NULL, Rcss = NULL, Rcssclass = NULL, ...)
+Rcsslines(x, y = NULL, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x,y}{coordinates for start and end points for lines}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

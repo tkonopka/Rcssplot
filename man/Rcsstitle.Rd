@@ -5,7 +5,7 @@
 \title{Add styled annotation to a plot}
 \usage{
 Rcsstitle(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-  Rcss = NULL, Rcssclass = NULL, ...)
+  Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{main}{plot title}
@@ -14,7 +14,8 @@ Rcsstitle(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
 
 \item{xlab,ylab}{labels on axes}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

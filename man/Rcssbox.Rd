@@ -4,13 +4,14 @@
 \alias{Rcssbox}
 \title{Add a styled box around a plot}
 \usage{
-Rcssbox(which = "plot", Rcss = NULL, Rcssclass = NULL, ...)
+Rcssbox(which = "plot", Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{which}{character specifying where to draw a box;
 see documentation of box()}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

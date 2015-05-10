@@ -4,14 +4,15 @@
 \alias{Rcssaxis}
 \title{Add a styled axis to a plot}
 \usage{
-Rcssaxis(side, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssaxis(side, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{side}{integer specifying what side of the plot to draw the axis.
 The codes are 1: bottom, 2: left, 3: top, 4: top.
 vertices}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

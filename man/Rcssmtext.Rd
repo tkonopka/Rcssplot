@@ -4,12 +4,13 @@
 \alias{Rcssmtext}
 \title{Write styled text into a plot margin}
 \usage{
-Rcssmtext(text, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssmtext(text, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{text}{characters to print on the plot}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

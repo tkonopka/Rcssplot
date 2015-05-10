@@ -4,12 +4,13 @@
 \alias{Rcssbarplot}
 \title{Draw a styled barplot}
 \usage{
-Rcssbarplot(height, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssbarplot(height, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{height}{numeric vector giving bar lengths}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

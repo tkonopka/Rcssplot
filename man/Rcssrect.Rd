@@ -4,13 +4,15 @@
 \alias{Rcssrect}
 \title{Draw styled rectangles on a plot}
 \usage{
-Rcssrect(xleft, ybottom, xright, ytop, Rcss = NULL, Rcssclass = NULL, ...)
+Rcssrect(xleft, ybottom, xright, ytop, Rcss = "default", Rcssclass = NULL,
+  ...)
 }
 \arguments{
 \item{xleft,ybottom,xright,ytop}{vector of coordinates for rectangles'
 vertices}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

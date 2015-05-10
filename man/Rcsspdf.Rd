@@ -4,12 +4,13 @@
 \alias{Rcsspdf}
 \title{Create a styled pdf figure}
 \usage{
-Rcsspdf(file, Rcss = NULL, Rcssclass = NULL, ...)
+Rcsspdf(file, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{file}{character string with file name}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 

@@ -32,18 +32,25 @@
 ##' @param h,v horizontal, vertical positions for line
 ##' @param reg an object with a coef method
 ##' @param coef vector with interect and slope for line
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle().
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of abline()
 ##' @export
 Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
                         reg = NULL, coef = NULL,
-                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "abline", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., a=a, b=b, h=h, v=v, reg=reg, coef=coef))
-    ## execute R's graphics function with custom properties
-    do.call(abline, nowcss)
+                        Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "abline", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss,
+                                 list(..., a=a, b=b, h=h, v=v,
+                                      reg=reg, coef=coef))
+  ## execute R's graphics function with custom properties
+  do.call(abline, nowcss)
 }
 
 
@@ -61,18 +68,23 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 ##' @param side integer specifying what side of the plot to draw the axis.
 ##' The codes are 1: bottom, 2: left, 3: top, 4: top.
 ##' vertices
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of axis()
 ##' @export 
 Rcssaxis <-  function(side,
-                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., side=side))
-    ## execute R's graphics function with custom properties
-    do.call(axis, nowcss)
+                      Rcss = "default", Rcssclass = NULL, ...) {
+
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., side=side))
+  ## execute R's graphics function with custom properties
+  do.call(axis, nowcss)
 }
 
 
@@ -85,17 +97,22 @@ Rcssaxis <-  function(side,
 ##' See R's documentation for barplot() for further details.
 ##' 
 ##' @param height numeric vector giving bar lengths
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of barplot()
 ##' @export 
 Rcssbarplot <- function(height,
-                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., height=height))
-    ## execute R's graphics function with custom properties
-    do.call(barplot, nowcss)
+                        Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., height=height))
+  ## execute R's graphics function with custom properties
+  do.call(barplot, nowcss)
 }
 
 
@@ -109,17 +126,22 @@ Rcssbarplot <- function(height,
 ##' 
 ##' @param which character specifying where to draw a box;
 ##' see documentation of box()
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of box()
 ##' @export 
 Rcssbox <-  function(which = "plot",
-                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., which=which))
-    ## execute R's graphics function with custom properties
-    do.call(box, nowcss)
+                     Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., which=which))
+  ## execute R's graphics function with custom properties
+  do.call(box, nowcss)
 }
 
 
@@ -133,17 +155,22 @@ Rcssbox <-  function(which = "plot",
 ##' 
 ##' @param x data for boxplot; either single numeric vector or a list
 ##' of numeric vectors; see documentation of boxplot() 
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of boxplot()
 ##' @export 
 Rcssboxplot <-  function(x,
-                         Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
-    ## execute R's graphics function with custom properties
-    do.call(boxplot, nowcss)
+                         Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
+  ## execute R's graphics function with custom properties
+  do.call(boxplot, nowcss)
 }
 
 
@@ -156,17 +183,22 @@ Rcssboxplot <-  function(x,
 ##' See R's documentation for hist() for further details.
 ##' 
 ##' @param x numeric vector
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of hist()
 ##' @export 
 Rcsshist <- function(x,
-                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
-    ## execute R's graphics function with custom properties
-    do.call(hist, nowcss)
+                     Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
+  ## execute R's graphics function with custom properties
+  do.call(hist, nowcss)
 }
 
 
@@ -183,17 +215,22 @@ Rcsshist <- function(x,
 ##' See R's documentation for jpeg() for further details
 ##'
 ##' @param file character string with file name
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of jpeg()
 ##' @export 
 Rcssjpeg <- function(file,
-                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
-    ## execute R's graphics function with custom properties
-    do.call(jpeg, nowcss)
+                    Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
+  ## execute R's graphics function with custom properties
+  do.call(jpeg, nowcss)  
 }
 
 
@@ -217,17 +254,22 @@ Rcssjpeg <- function(file,
 ##'
 ##' @param x,y position of the legend
 ##' @param legend character vector with labels (text appears in the legend)
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of legend()
 ##' @export 
 Rcsslegend <- function(x, y = NULL, legend,
-                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {    
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, legend=legend))
-    ## execute R's graphics function with custom properties
-    do.call(legend, nowcss)
+                       Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, legend=legend))
+  ## execute R's graphics function with custom properties
+  do.call(legend, nowcss)
 }
 
 
@@ -240,17 +282,22 @@ Rcsslegend <- function(x, y = NULL, legend,
 ##' See R's documentation for lines() for further details.
 ##'
 ##' @param x,y coordinates for start and end points for lines
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 Rcsslines <- function(x, y = NULL,
-                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {   
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y))
-    ## execute R's graphics function with custom properties
-    do.call(lines, nowcss)
+                      Rcss = "default", Rcssclass = NULL, ...) {   
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y))
+  ## execute R's graphics function with custom properties
+  do.call(lines, nowcss)
 }
 
 
@@ -264,17 +311,22 @@ Rcsslines <- function(x, y = NULL,
 ##' See R's documentation for mtext() for further details.
 ##'
 ##' @param text characters to print on the plot
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of mtext()
 ##' @export 
 Rcssmtext <- function(text,
-                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., text=text))
-    ## execute R's graphics function with custom properties
-    do.call(mtext, nowcss)
+                      Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., text=text))
+  ## execute R's graphics function with custom properties
+  do.call(mtext, nowcss)
 }
 
 
@@ -286,18 +338,22 @@ Rcssmtext <- function(text,
 ##' Rcsspar is a wrapper for R's par() function.
 ##' See R's documentation for par() for further details.
 ##'
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 ##' 
-Rcsspar <- function(Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) { 
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "par", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
-    ## execute R's graphics function with custom properties
-    ## here cut out the "comma" inserted automatically by RcssMakeCallCodeString
-    do.call(par, nowcss)
+Rcsspar <- function(Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "par", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(...))
+  ## execute R's graphics function with custom properties
+  do.call(par, nowcss)
 }
 
 
@@ -313,17 +369,22 @@ Rcsspar <- function(Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...)
 ##' See R's documentation for pdf() for further details
 ##'
 ##' @param file character string with file name
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of pdf()
 ##' @export 
 Rcsspdf <- function(file,
-                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
-    ## execute R's graphics function with custom properties
-    do.call(pdf, nowcss)
+                    Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
+  ## execute R's graphics function with custom properties
+  do.call(pdf, nowcss)
 }
 
 
@@ -336,18 +397,23 @@ Rcsspdf <- function(file,
 ##' See R's documentation for plot() for further details.
 ##'
 ##' @param x,y coordinates for points on the plot
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of plot()
 ##' @export 
 Rcssplot <- function(x, y,
-                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {       
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...,x=x))
-    if (!missing(y)) nowcss$y <- y
-    ## execute R's graphics function with custom properties
-    do.call(plot, nowcss)
+                     Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(...,x=x))
+  if (!missing(y)) nowcss$y <- y
+  ## execute R's graphics function with custom properties
+  do.call(plot, nowcss)
 }
 
 
@@ -363,17 +429,22 @@ Rcssplot <- function(x, y,
 ##' See R's documentation for png() for further details
 ##'
 ##' @param file character string with file name
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of png()
 ##' @export 
 Rcsspng <- function(file,
-                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(file=file, ...))
-    ## execute R's graphics function with custom properties
-    do.call(png, nowcss)
+                    Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(file=file, ...))
+  ## execute R's graphics function with custom properties
+  do.call(png, nowcss)
 }
 
 
@@ -386,17 +457,22 @@ Rcsspng <- function(file,
 ##' See R's documentation for points() for further details.
 ##'
 ##' @param x,y coordinates for points on the plot
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of points()
 ##' @export 
 Rcsspoints <- function(x, y = NULL,
-                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
-    ## execute R's graphics function with custom properties
-    do.call(points, nowcss)
+                       Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
+  ## execute R's graphics function with custom properties
+  do.call(points, nowcss)
 }
 
 
@@ -411,17 +487,22 @@ Rcsspoints <- function(x, y = NULL,
 ##' See R's documentation for polygon() for further details.
 ##'
 ##' @param x,y coordinates for polygon vertices
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of polygon()
 ##' @export 
 Rcsspolygon <- function(x, y = NULL,
-                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
-    ## execute R's graphics function with custom properties
-    do.call(polygon, nowcss)
+                        Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
+  ## execute R's graphics function with custom properties
+  do.call(polygon, nowcss)
 }
 
 
@@ -437,17 +518,24 @@ Rcsspolygon <- function(x, y = NULL,
 ##'
 ##' @param xleft,ybottom,xright,ytop vector of coordinates for rectangles'
 ##' vertices
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of rect()
 ##' @export 
 Rcssrect <- function(xleft, ybottom, xright, ytop, 
-                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {   
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "rect", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(xleft=xleft, ybottom=ybottom, xright=xright, ytop=ytop, ...))
-    ## execute R's graphics function with custom properties
-    do.call(rect, nowcss)
+                     Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "rect", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss,
+                                 list(xleft=xleft, ybottom=ybottom,
+                                      xright=xright, ytop=ytop, ...))
+  ## execute R's graphics function with custom properties
+  do.call(rect, nowcss)
 }
 
 
@@ -459,17 +547,22 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
 ##' See R's documentation for stripchart() for further details.
 ##'
 ##' @param x list of numeric vectors
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of stripchart()
 ##' @export 
 Rcssstripchart <- function(x,
-                           Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {  
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
-    ## execute R's graphics function with custom properties
-    do.call(stripchart, nowcss)
+                           Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
+  ## execute R's graphics function with custom properties
+  do.call(stripchart, nowcss)
 }
 
 
@@ -485,17 +578,22 @@ Rcssstripchart <- function(x,
 ##'
 ##' @param x,y coordinates where to write labels
 ##' @param labels characters to print on the plot
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of text()
 ##' @export 
 Rcsstext <- function(x, y=NULL, labels=seq_along(x),
-                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
-    ## execute R's graphics function with custom properties
-    do.call(text, nowcss)
+                     Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, labels=labels, ...))
+  ## execute R's graphics function with custom properties
+  do.call(text, nowcss)
 }
 
 
@@ -511,17 +609,24 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
 ##' @param main plot title
 ##' @param sub plot sub title
 ##' @param xlab,ylab labels on axes
-##' @param Rcss style sheet object
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
 ##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of title()
 ##' @export 
 Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {       
-    ## get a list of properties
-    nowcss <- RcssGetProperties(Rcss, "title", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(main=main, sub=sub, xlab=xlab, ylab=ylab, ...))
-    ## execute R's graphics function with custom properties
-    do.call(title, nowcss)
+                      Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "title", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss,
+                                 list(main=main, sub=sub,
+                                      xlab=xlab, ylab=ylab, ...))
+  ## execute R's graphics function with custom properties
+  do.call(title, nowcss)
 }
 
 

@@ -4,7 +4,7 @@
 \alias{Rcsstext}
 \title{Add styled text to a plot}
 \usage{
-Rcsstext(x, y = NULL, labels = seq_along(x), Rcss = NULL,
+Rcsstext(x, y = NULL, labels = seq_along(x), Rcss = "default",
   Rcssclass = NULL, ...)
 }
 \arguments{
@@ -12,7 +12,8 @@ Rcsstext(x, y = NULL, labels = seq_along(x), Rcss = NULL,
 
 \item{labels}{characters to print on the plot}
 
-\item{Rcss}{style sheet object}
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
 
 \item{Rcssclass}{sub class of style sheet}
 
