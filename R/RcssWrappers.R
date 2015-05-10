@@ -20,13 +20,6 @@
 ## e.g. "side" for axis() vs. "x" and "y" for plot
 ## Perhaps some of these function could be generated automatically.
 ##
-## Note 2:
-##
-## The is.null(Rcss) statement surrounding each body is not elegant
-## either. It is there to improve performance when an Rcss object
-## is absent or does not specify settings for a function.
-##
-##
 
 
 
@@ -45,20 +38,12 @@
 ##' @export
 Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
                         reg = NULL, coef = NULL,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("abline" %in% names(Rcss))) {
-    abline(a = a, b = b, h = h, v = v, reg = reg, coef = coef, ...)
-  } else {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "abline", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., a=a, b=b, h=h, v=v, reg=reg, coef=coef))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("abline (a = a, b = b, h = h, v = v, ",
-               "reg = reg, coef = coef",             
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }  
+    do.call(abline, nowcss)
 }
 
 
@@ -81,19 +66,13 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 ##' @param ... Further parameters, see documentation of axis()
 ##' @export 
 Rcssaxis <-  function(side,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
   ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("axis" %in% names(Rcss))) {
-    axis(side, ...)
-  } else {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., side=side))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("axis (side",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(axis, nowcss)
 }
 
 
@@ -111,19 +90,12 @@ Rcssaxis <-  function(side,
 ##' @param ... Further parameters, see documentation of barplot()
 ##' @export 
 Rcssbarplot <- function(height,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("barplot" %in% names(Rcss))) {
-    barplot(height, ...)
-  } else {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., height=height))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("barplot (height",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(barplot, nowcss)
 }
 
 
@@ -142,19 +114,12 @@ Rcssbarplot <- function(height,
 ##' @param ... Further parameters, see documentation of box()
 ##' @export 
 Rcssbox <-  function(which = "plot",
-                     Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("box" %in% names(Rcss))) {
-    box(which = which, ...)
-  } else {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., which=which))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("box (which = which",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(box, nowcss)
 }
 
 
@@ -173,19 +138,12 @@ Rcssbox <-  function(which = "plot",
 ##' @param ... Further parameters, see documentation of boxplot()
 ##' @export 
 Rcssboxplot <-  function(x,
-                         Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("boxplot" %in% names(Rcss))) {
-    boxplot(x, ...)
-  } else {
+                         Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("boxplot (x",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(boxplot, nowcss)
 }
 
 
@@ -203,19 +161,12 @@ Rcssboxplot <-  function(x,
 ##' @param ... Further parameters, see documentation of hist()
 ##' @export 
 Rcsshist <- function(x,
-                     Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("hist" %in% names(Rcss))) {
-    hist(x, ...)
-  } else {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("hist (x",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(hist, nowcss)
 }
 
 
@@ -237,19 +188,12 @@ Rcsshist <- function(x,
 ##' @param ... Further parameters, see documentation of jpeg()
 ##' @export 
 Rcssjpeg <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("jpeg" %in% names(Rcss))) {
-    jpeg(file, ...)
-  } else {    
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("jpeg (file",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(jpeg, nowcss)
 }
 
 
@@ -278,19 +222,12 @@ Rcssjpeg <- function(file,
 ##' @param ... Further parameters, see documentation of legend()
 ##' @export 
 Rcsslegend <- function(x, y = NULL, legend,
-                       Rcss = NULL, Rcssclass = NULL, ...) {  
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("legend" %in% names(Rcss))) {
-    legend(x, y = y, legend = legend, ...)
-  } else {    
+                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {    
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, legend=legend))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("legend (x, y = y, legend = legend",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(legend, nowcss)
 }
 
 
@@ -308,19 +245,12 @@ Rcsslegend <- function(x, y = NULL, legend,
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 Rcsslines <- function(x, y = NULL,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("lines" %in% names(Rcss))) {
-    lines(x, y = y, ...)
-  } else {    
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {   
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("lines (x, y = y",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(lines, nowcss)
 }
 
 
@@ -339,19 +269,12 @@ Rcsslines <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of mtext()
 ##' @export 
 Rcssmtext <- function(text,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("mtext" %in% names(Rcss))) {
-    mtext(text, ...)
-  } else {
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., text=text))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("mtext (text",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(mtext, nowcss)
 }
 
 
@@ -368,20 +291,13 @@ Rcssmtext <- function(text,
 ##' @param ... Further parameters, see documentation of lines()
 ##' @export 
 ##' 
-Rcsspar <- function(Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("par" %in% names(Rcss))) {
-    par(...)
-  } else {    
+Rcsspar <- function(Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) { 
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "par", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(...))
     ## execute R's graphics function with custom properties
     ## here cut out the "comma" inserted automatically by RcssMakeCallCodeString
-    temp = RcssMakeCallCodeString(names(nowcss), "nowcss")
-    cmd <- paste0("par (", substring(temp, 2), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(par, nowcss)
 }
 
 
@@ -402,19 +318,12 @@ Rcsspar <- function(Rcss = NULL, Rcssclass = NULL, ...) {
 ##' @param ... Further parameters, see documentation of pdf()
 ##' @export 
 Rcsspdf <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("pdf" %in% names(Rcss))) {
-    pdf(file, ...)
-  } else {        
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("pdf (file",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(pdf, nowcss)
 }
 
 
@@ -432,19 +341,13 @@ Rcsspdf <- function(file,
 ##' @param ... Further parameters, see documentation of plot()
 ##' @export 
 Rcssplot <- function(x, y,
-                     Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("plot" %in% names(Rcss))) {
-    plot(x, y, ...)
-  } else {        
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {       
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(...,x=x))
+    if (!missing(y)) nowcss$y <- y
     ## execute R's graphics function with custom properties
-    cmd <- paste0("plot (x, y",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(plot, nowcss)
 }
 
 
@@ -465,19 +368,12 @@ Rcssplot <- function(x, y,
 ##' @param ... Further parameters, see documentation of png()
 ##' @export 
 Rcsspng <- function(file,
-                    Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("png" %in% names(Rcss))) {
-    png(file, ...)
-  } else {        
+                    Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(file=file, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("png (file",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))  
-  }
+    do.call(png, nowcss)
 }
 
 
@@ -495,19 +391,12 @@ Rcsspng <- function(file,
 ##' @param ... Further parameters, see documentation of points()
 ##' @export 
 Rcsspoints <- function(x, y = NULL,
-                       Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(points) | !("points" %in% names(Rcss))) {
-    points(x, y = y, ...)
-  } else {        
+                       Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {      
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("points (x, y = y",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(points, nowcss)
 }
 
 
@@ -527,19 +416,12 @@ Rcsspoints <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of polygon()
 ##' @export 
 Rcsspolygon <- function(x, y = NULL,
-                        Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("polygon" %in% names(Rcss))) {
-    polygon(x, y = y, ...)
-  } else {
+                        Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("polygon (x, y = y",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(polygon, nowcss)
 }
 
 
@@ -560,19 +442,12 @@ Rcsspolygon <- function(x, y = NULL,
 ##' @param ... Further parameters, see documentation of rect()
 ##' @export 
 Rcssrect <- function(xleft, ybottom, xright, ytop, 
-                     Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("rect" %in% names(Rcss))) {
-    rect(xleft, ybottom, xright, ytop, ...)
-  } else {    
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {   
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "rect", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(xleft=xleft, ybottom=ybottom, xright=xright, ytop=ytop, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("rect (xleft, ybottom, xright, ytop",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(rect, nowcss)
 }
 
 
@@ -589,19 +464,12 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
 ##' @param ... Further parameters, see documentation of stripchart()
 ##' @export 
 Rcssstripchart <- function(x,
-                           Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("stripchart" %in% names(Rcss))) {
-    stripchart(x, ...)
-  } else {    
+                           Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {  
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("stripchart (x",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(stripchart, nowcss)
 }
 
 
@@ -622,19 +490,12 @@ Rcssstripchart <- function(x,
 ##' @param ... Further parameters, see documentation of text()
 ##' @export 
 Rcsstext <- function(x, y=NULL, labels=seq_along(x),
-                     Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("text" %in% names(Rcss))) {
-    text(x, y = y, labels = labels, ...)
-  } else {
+                     Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("text (x, y = y, labels = labels",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(text, nowcss)
 }
 
 
@@ -655,19 +516,12 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
 ##' @param ... Further parameters, see documentation of title()
 ##' @export 
 Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-                      Rcss = NULL, Rcssclass = NULL, ...) {
-  ## possibly make a shortcut if Rcss object is missing
-  if (is.null(Rcss) | !("title" %in% names(Rcss))) {
-    title (main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
-  } else {        
+                      Rcss = getOption("RcssDefaultStyle"), Rcssclass = NULL, ...) {       
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "title", Rcssclass = Rcssclass)
-    nowcss <- RcssUpdateProperties(nowcss, list(...))
+    nowcss <- RcssUpdateProperties(nowcss, list(main=main, sub=sub, xlab=xlab, ylab=ylab, ...))
     ## execute R's graphics function with custom properties
-    cmd <- paste0("title (main = main, sub = sub, xlab = xlab, ylab = ylab",
-               RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
-    eval(parse(text = cmd))
-  }
+    do.call(title, nowcss)
 }
 
 

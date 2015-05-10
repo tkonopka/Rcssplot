@@ -19,8 +19,10 @@
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
 ##' function returns a basic Rcss object.
+##' @param default (logical) Should the style object be used as a default
+##' style ?
 ##' @export 
-Rcss <- function(file = NULL) {
+Rcss <- function(file = NULL, default = TRUE) {
   
   ## create the css object
   ans <- RcssConstructor()
@@ -72,6 +74,11 @@ Rcss <- function(file = NULL) {
                                      Rcssclass = nowRcssclass,
                                      propertylist = nowdecset)
     }
+  }
+  
+  ##
+  if (default) {
+    options(RcssDefaultStyle=ans)
   }
   
   ## if user specifies file, parse it 
