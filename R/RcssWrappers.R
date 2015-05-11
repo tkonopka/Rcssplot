@@ -196,9 +196,11 @@ Rcsshist <- function(x,
   }
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
-  nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
+  nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
-  do.call(hist, nowcss)
+  cmd <- paste0("hist (", deparse(substitute(x)),
+                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  eval(parse(text = cmd))
 }
 
 
@@ -410,10 +412,16 @@ Rcssplot <- function(x, y,
   }
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
-  nowcss <- RcssUpdateProperties(nowcss, list(...,x=x))
-  if (!missing(y)) nowcss$y <- y
+  nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
-  do.call(plot, nowcss)
+  if (missing(y)) {
+    cmd <- paste0("plot (x=", deparse(substitute(x)),
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  } else {
+    cmd <- paste0("plot (x=", deparse(substitute(x)), ", y=", deparse(substitute(y)),
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  }  
+  eval(parse(text = cmd))
 }
 
 
