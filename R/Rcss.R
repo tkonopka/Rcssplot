@@ -19,18 +19,18 @@
 ##'
 ##' See also related functions RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' 
-##' @param file filename containing Rcss definitions. If set to NULL,
+##' @param file filename containing Rcss definitions. If not set,
 ##' function returns a basic Rcss object.
 ##' @param default (logical) Should the style object be used as a default
 ##' style ? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' @export 
 Rcss <- function(file = NULL, default = FALSE) {
-  
+
   ## create the css object
   ans <- RcssConstructor()
   
   ## if user does not specify a css file, return bare-bones object
-  if (is.null(file)) {
+  if (missing(file) || is.null(file)) {
     return(ans)
   }
 
@@ -486,6 +486,8 @@ RcssHelperGetPropertyValue <- function(RcssProperties, property,
   if (is.null(bestvalue)) {
     bestvalue <- list(level = -1, value = 0)
   }
+  
+  if(missing(Rcssclass)) Rcssclass <- NULL #todo fix tryinclass %in% Rcssclass below
   
   ## check for the property in the base properties
   if (property %in% names(RcssProperties$base)) {

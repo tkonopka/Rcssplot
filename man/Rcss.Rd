@@ -7,7 +7,7 @@
 Rcss(file = NULL, default = FALSE)
 }
 \arguments{
-\item{file}{filename containing Rcss definitions. If set to NULL,
+\item{file}{filename containing Rcss definitions. If not set,
 function returns a basic Rcss object.}
 
 \item{default}{(logical) Should the style object be used as a default
