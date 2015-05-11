@@ -2,6 +2,9 @@
 % Please edit documentation in R/RcssWrappers.R
 \name{RcssWrappers}
 \alias{RcssWrappers}
+\alias{Rcssabline}
+\alias{Rcssaxis}
+\alias{Rcssbarplot}
 \alias{Rcssbox}
 \alias{Rcssboxplot}
 \alias{Rcsshist}

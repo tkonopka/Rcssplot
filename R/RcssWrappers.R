@@ -48,11 +48,14 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
 #' RCss Wrapper functions
 #' 
 #' @name RcssWrappers
-#' @aliases Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
-#' @export Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
+#' @aliases Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
+#' @export  Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
 NULL
 
 towrap <- list(
+  quote(graphics::abline),
+  quote(graphics::axis),
+  quote(graphics::barplot),
   quote(graphics::box),
   quote(graphics::boxplot),                   
   quote(graphics::hist),
