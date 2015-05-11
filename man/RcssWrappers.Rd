@@ -23,7 +23,26 @@
 \alias{Rcsstext}
 \alias{Rcsstitle}
 \title{RCss Wrapper functions}
+\arguments{
+\item{Rcss}{style sheet object. Leave "default" to use a style
+defined via RcssSetDefaultStyle()}
+
+\item{Rcssclass}{sub class of style sheet}
+
+\item{...}{Further parameters, see base R documentation of corresponding functions.}
+}
 \description{
-RCss Wrapper functions
+The Rcssplot package provides of a family of wrapper functions for the base
+plotting functions in the graphics package. In addition to their usual
+parameters, they have have additional parameters for specifying the stylesheet
+and class to apply to the plot.
+}
+\seealso{
+\link{abline} \link{axis}    \link{barplot}
+         \link{box}    \link{boxplot} \link{hist}    \link{jpeg}
+         \link{legend} \link{lines}   \link{mtext}   \link{par}
+         \link{pdf}    \link{plot}    \link{png}     \link{points}
+         \link{polygon} \link{rect}   \link{stripchart} \link{text}
+         \link{title}
 }
 

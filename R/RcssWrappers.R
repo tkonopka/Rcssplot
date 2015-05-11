@@ -47,9 +47,25 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
 
 #' RCss Wrapper functions
 #' 
+#' The Rcssplot package provides of a family of wrapper functions for the base 
+#' plotting functions in the graphics package. In addition to their usual 
+#' parameters, they have have additional parameters for specifying the stylesheet
+#' and class to apply to the plot.
+#' 
+#' @param Rcss style sheet object. Leave "default" to use a style		
+#'   defined via RcssSetDefaultStyle()		
+#' @param Rcssclass sub class of style sheet		
+#' @param ... Further parameters, see base R documentation of corresponding functions.		
+#' 
 #' @name RcssWrappers
-#' @aliases Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
-#' @export  Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
+#' @aliases  Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
+#' @export   Rcssabline Rcssaxis Rcssbarplot Rcssbox Rcssboxplot Rcsshist Rcssjpeg Rcsslegend Rcsslines Rcssmtext Rcsspar Rcsspdf Rcssplot Rcsspng Rcsspoints Rcsspolygon Rcssrect Rcssstripchart Rcsstext Rcsstitle
+#' @seealso \link{abline} \link{axis}    \link{barplot}
+#'          \link{box}    \link{boxplot} \link{hist}    \link{jpeg} 
+#'          \link{legend} \link{lines}   \link{mtext}   \link{par}  
+#'          \link{pdf}    \link{plot}    \link{png}     \link{points}
+#'          \link{polygon} \link{rect}   \link{stripchart} \link{text} 
+#'          \link{title}
 NULL
 
 towrap <- list(
