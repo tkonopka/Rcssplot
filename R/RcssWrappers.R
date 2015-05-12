@@ -26,7 +26,10 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
   # construct call
   RcssCall <- match.call(.f, sys.call())
   RcssCall[[1]] = substitute(.f)
-  
+  if(!missing(Rcss))      RcssCall[["Rcss"]] <- NULL
+  if(!missing(Rcssclass)) RcssCall[["Rcssclass"]] <- NULL
+  if(!missing(.f))        RcssCall[[".f"]] <- NULL
+
   
   if(!missing(Rcss) || !(formals()$Rcss == "")){
     ## convert between a description of a default Rcss to an actual object
@@ -42,7 +45,7 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
       names(RcssCall)[i] <- names(css)
     }
   }
-  eval(RcssCall, -1);
+  eval(RcssCall, parent.frame());
 }
 
 #' RCss Wrapper functions
@@ -112,7 +115,7 @@ rm(symbol)
 #' @export
 #' 
 dryer <- function(Rcss) {
-  e <- new.env(parent = .GlobalEnv)
+  e <- new.env(parent = parent.frame())
   CSS <- substitute(Rcss)
   
   for(symbol in towrap) {
