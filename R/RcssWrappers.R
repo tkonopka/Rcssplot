@@ -269,9 +269,16 @@ Rcsslegend <- function(x, y = NULL, legend,
   }
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
-  nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, legend=legend))
+  nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
+  if(!missing(legend)) {
+    nowcss <- RcssUpdateProperties(nowcss, list(y=y, legend=legend))
+  } else {
+    nowcss <- RcssUpdateProperties(nowcss, list(legend=y))
+  }
   ## execute R's graphics function with custom properties
-  do.call(legend, nowcss)
+  # There is a confusion between the arg "legend" and the function
+  # "legend". This is why we use "graphics::"
+  do.call(graphics::legend, nowcss)
 }
 
 
