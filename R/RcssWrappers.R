@@ -421,8 +421,14 @@ Rcssplot <- function(x, y,
   nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
-  cmd <- paste0("plot (x, y",
-                RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  if (!missing(y)) {
+    cmd <- paste0("plot (x, y",
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  } else {
+    cmd <- paste0("plot (x,",
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  }
+  
   eval(parse(text = cmd))
 }
 
