@@ -309,7 +309,37 @@ Rcsslines <- function(x, y = NULL,
   do.call(lines, nowcss)
 }
 
-
+##' Add styled line segments to a plot
+##' 
+##' Rcssmatplot is a wrapper for R's \code{\link{matplot}()} function.
+##' See R's documentation for \code{\link{matplot}()} for further details.
+##'
+##' @param x,y vectors or matrices of data for plotting. The number of rows 
+##' should match. If one of them are missing, the other is taken as y and an x 
+##' vector of 1:n is used. Missing values (NAs) are allowed.
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
+##' @param Rcssclass sub class of style sheet
+##' @param ... Further parameters, see documentation of lines()
+##' @export 
+Rcssmatplot <- function(x, y,
+                        Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "matplot", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(...))
+  if (!missing(y)) {
+    cmd <- paste0("matplot (x, y",
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  } else {
+    cmd <- paste0("matplot (x,",
+                  RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
+  }
+  eval(parse(text = cmd))
+}
 
 ## mtext(text, side = 3, line = 0, outer = FALSE, at = NA,
 ##           adj = NA, padj = NA, cex = NA, col = NA, font = NA, ...)
