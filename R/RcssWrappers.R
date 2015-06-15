@@ -173,7 +173,29 @@ Rcssboxplot <-  function(x,
   do.call(graphics::boxplot, nowcss)
 }
 
-
+## grid(...)
+##
+##' ##' Draw a styled grid
+##' 
+##' Rcssgrid is a wrapper for R's \code{\link{grid}}() function.
+##' See R's documentation for \code{\link{grid}}() for further details.
+##' 
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
+##' @param Rcssclass sub class of style sheet
+##' @param ... Further parameters, see documentation of grid()
+##' @export 
+Rcssgrid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "grid", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(...))
+  ## execute R's graphics function with custom properties
+  do.call(graphics::grid, nowcss)
+}
 
 ## hist(x, ...)
 ##
