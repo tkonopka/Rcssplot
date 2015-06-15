@@ -50,7 +50,7 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
                                  list(..., a=a, b=b, h=h, v=v,
                                       reg=reg, coef=coef))
   ## execute R's graphics function with custom properties
-  do.call(abline, nowcss)
+  do.call(graphics::abline, nowcss)
 }
 
 
@@ -84,7 +84,7 @@ Rcssaxis <-  function(side,
   nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., side=side))
   ## execute R's graphics function with custom properties
-  do.call(axis, nowcss)
+  do.call(graphics::axis, nowcss)
 }
 
 
@@ -112,7 +112,7 @@ Rcssbarplot <- function(height,
   nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., height=height))
   ## execute R's graphics function with custom properties
-  do.call(barplot, nowcss)
+  do.call(graphics::barplot, nowcss)
 }
 
 
@@ -141,7 +141,7 @@ Rcssbox <-  function(which = "plot",
   nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., which=which))
   ## execute R's graphics function with custom properties
-  do.call(box, nowcss)
+  do.call(graphics::box, nowcss)
 }
 
 
@@ -170,7 +170,7 @@ Rcssboxplot <-  function(x,
   nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
   ## execute R's graphics function with custom properties
-  do.call(boxplot, nowcss)
+  do.call(graphics::boxplot, nowcss)
 }
 
 
@@ -198,7 +198,7 @@ Rcsshist <- function(x,
   nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
-  cmd <- paste0("hist (x",
+  cmd <- paste0("graphics::hist (x",
              RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   eval(parse(text = cmd))
 }
@@ -232,7 +232,7 @@ Rcssjpeg <- function(file,
   nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
   ## execute R's graphics function with custom properties
-  do.call(jpeg, nowcss)  
+  do.call(grDevices::jpeg, nowcss)  
 }
 
 
@@ -306,7 +306,7 @@ Rcsslines <- function(x, y = NULL,
   nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y))
   ## execute R's graphics function with custom properties
-  do.call(lines, nowcss)
+  do.call(graphics::lines, nowcss)
 }
 
 ##' Add styled line segments to a plot
@@ -365,7 +365,7 @@ Rcssmtext <- function(text,
   nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., text=text))
   ## execute R's graphics function with custom properties
-  do.call(mtext, nowcss)
+  do.call(graphics::mtext, nowcss)
 }
 
 
@@ -392,7 +392,7 @@ Rcsspar <- function(Rcss = "default", Rcssclass = NULL, ...) {
   nowcss <- RcssGetProperties(Rcss, "par", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
-  do.call(par, nowcss)
+  do.call(graphics::par, nowcss)
 }
 
 
@@ -423,7 +423,7 @@ Rcsspdf <- function(file,
   nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
   ## execute R's graphics function with custom properties
-  do.call(pdf, nowcss)
+  do.call(grDevices::pdf, nowcss)
 }
 
 
@@ -458,7 +458,6 @@ Rcssplot <- function(x, y,
     cmd <- paste0("plot (x,",
                   RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   }
-  
   eval(parse(text = cmd))
 }
 
@@ -490,7 +489,7 @@ Rcsspng <- function(file,
   nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(file=file, ...))
   ## execute R's graphics function with custom properties
-  do.call(png, nowcss)
+  do.call(grDevices::png, nowcss)
 }
 
 
@@ -518,7 +517,7 @@ Rcsspoints <- function(x, y = NULL,
   nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
   ## execute R's graphics function with custom properties
-  do.call(points, nowcss)
+  do.call(graphics::points, nowcss)
 }
 
 
@@ -548,7 +547,7 @@ Rcsspolygon <- function(x, y = NULL,
   nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
   ## execute R's graphics function with custom properties
-  do.call(polygon, nowcss)
+  do.call(graphics::polygon, nowcss)
 }
 
 
@@ -581,7 +580,7 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
                                  list(xleft=xleft, ybottom=ybottom,
                                       xright=xright, ytop=ytop, ...))
   ## execute R's graphics function with custom properties
-  do.call(rect, nowcss)
+  do.call(graphics::rect, nowcss)
 }
 
 
@@ -608,7 +607,7 @@ Rcssstripchart <- function(x,
   nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
   ## execute R's graphics function with custom properties
-  do.call(stripchart, nowcss)
+  do.call(graphics::stripchart, nowcss)
 }
 
 
@@ -639,7 +638,7 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
   nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, labels=labels, ...))
   ## execute R's graphics function with custom properties
-  do.call(text, nowcss)
+  do.call(graphics::text, nowcss)
 }
 
 
@@ -672,7 +671,7 @@ Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                                  list(main=main, sub=sub,
                                       xlab=xlab, ylab=ylab, ...))
   ## execute R's graphics function with custom properties
-  do.call(title, nowcss)
+  do.call(graphics::title, nowcss)
 }
 
 
