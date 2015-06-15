@@ -583,6 +583,8 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
         if (length(temp$value)==1) {
           if (temp$value == "NULL") {
             ans[nowprop] <- list(NULL)
+          } else if (temp$value == "NA") {
+            ans[nowprop] <- list(NA)
           } else {
             ans[[nowprop]] <- temp$value
           }
