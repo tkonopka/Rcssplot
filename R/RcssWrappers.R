@@ -148,7 +148,7 @@ Rcssbox <-  function(which = "plot",
 
 ## boxplot(x, ...)
 ##
-##' ##' Draw a styled boxplot
+##' Draw a styled boxplot
 ##' 
 ##' Rcssboxplot is a wrapper for R's boxplot() function.
 ##' See R's documentation for boxplot() for further details.
@@ -172,6 +172,47 @@ Rcssboxplot <-  function(x,
   ## execute R's graphics function with custom properties
   do.call(graphics::boxplot, nowcss)
 }
+
+
+
+## contour(x = seq(0, 1, length.out = nrow(z)),
+##             y = seq(0, 1, length.out = ncol(z)),
+##             z,
+##             nlevels = 10, levels = pretty(zlim, nlevels),
+##             labels = NULL,
+##             xlim = range(x, finite = TRUE),
+##             ylim = range(y, finite = TRUE),
+##             zlim = range(z, finite = TRUE),
+##             labcex = 0.6, drawlabels = TRUE, method = "flattest",
+##             vfont, axes = TRUE, frame.plot = axes,
+##             col = par("fg"), lty = par("lty"), lwd = par("lwd"),
+##             add = FALSE, ...)
+##
+##' Draw a styled contour 
+##'
+##' Rcsscontour is a wrapper for R's contour() function.
+##' See R's documentation for contour() for further details.
+##'
+##' @param x numeric vector; locations of grid lines
+##' @param y numeric vector; locations of grid lines
+##' @param z matrix of values
+##' @param ... Further parameters, see documentation of contour()
+##' 
+##' @export
+Rcsscontour <- function(x = seq(0, 1, length.out = nrow(z)),
+                        y = seq(0, 1, length.out = ncol(z)), z,
+                        Rcss = "default", Rcssclass = NULL, ...) {
+    ## convert between a description of a default Rcss to an actual object
+    if (identical(Rcss, "default")) {
+        Rcss <- getOption("RcssDefaultStyle", default = NULL);
+    }
+    ## get a list of properties
+    nowcss <- RcssGetProperties(Rcss, "contour", Rcssclass = Rcssclass)
+    nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, z=z))
+    ## execute R's graphics function with custom properties
+    do.call(graphics::contour, nowcss)  
+}
+
 
 ## grid(...)
 ##
