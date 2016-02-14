@@ -54,6 +54,37 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 }
 
 
+## arrows(x0, y0, x1 = x0, y1 = y0, length = 0.25, angle = 30,
+##            code = 2, col = par("fg"), lty = par("lty"),
+##            lwd = par("lwd"), ...)
+##
+##' Add styled arrows to a plot
+##'
+##' Rcssarrows is a wrapper for R's arrows() function.
+##' See R's documentation for arrows() for further details.
+##'
+##' @param x0,y0 coordinates of *from* endpoint
+##' @param x1,y1 coordinates of *to* endpoint
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStle()
+##' @param Rcssclass sub class of style sheet
+##' @param ... Futher parameters, see documentation of arrows()
+##' @export
+Rcssarrows <- function(x0, y0, x1=x0, y1=y0,
+                       Rcss = "default", Rcssclass = NULL, ...) {
+  
+  ## convert between a description of a default Rcss to an actual object
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL);
+  }
+  ## get a list of properties
+  nowcss <- RcssGetProperties(Rcss, "arrows", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., x0=x0, y0=y0, x1=x1, y1=y1))
+  ## execute R's graphics function with custom properties
+  do.call(graphics::arrows, nowcss)
+}
+
+
 
 ## axis(side, at = NULL, labels = TRUE, tick = TRUE, line = NA,
 ##          pos = NA, outer = FALSE, font = NA, lty = "solid",
