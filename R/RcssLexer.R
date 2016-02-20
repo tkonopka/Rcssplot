@@ -24,27 +24,43 @@
 
 
 ## Function for the Lexer that is called externally.
-## f - input file
+## f - input file, or vector of input files
 ## returns - a data frame with tokens
 ##
 RcssLexer <- function(f) {
   
-  if (!file.exists(f)) {
-    stopCF("RcssLexer: input file does not exist: ", f, "\n");
-  }
-  
-  ## obtain data from the input file
-  fcon <- file(f, open="r")
-  fdata <- readLines(fcon)
-  close(fcon)
+  ## obtain data from all input files
+  fdata <- lapply(as.list(f), RcssFileCheckRead)
+  fdata <- unlist(fdata)
   
   ## split the files into characters
-  fdata <- paste(fdata, "\n")
   fdata <- unlist(strsplit(fdata, ""))
-
+  
   ## process the characters and output the result
   return(RcssLexChars(fdata))
 }
+
+
+
+
+
+## Checks if a file exists 
+##
+## f - single file name
+##
+## returns - contents of file with " \n" at end of each line added
+## (the space-newline is convenient for lexing)
+RcssFileCheckRead <- function(f) {
+  if (!file.exists(f)) {
+    stopCF("RcssFileCheckRead: input file does not exist: ", f, "\n");
+  }
+  fcon <- file(f, open="r")
+  fdata <- readLines(fcon)
+  close(fcon)
+  return(paste(fdata, "\n"))
+}
+
+
 
 
 

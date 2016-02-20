@@ -11,15 +11,19 @@
 ## Function parses a text file assuming it is in css format.
 ## Function transfers css information into css object 
 ##
-## file - file on disk
+## file - file on disk, or vector of files on disk
 ##
-## returns - a rcss object augmented by setting within the file
+## returns - a rcss object augmented by settings from the file(s)
 ##
 RcssParser <- function(file) {
 
-  if (!file.exists(file)) {
-    stop("Rcssplot: error reading css file (file does not exist)\n")
-  }
+  ## Check here no longer needed because:
+  ##   - Lexer can read multiple files
+  ##   - Lexer checks existence of files anyway
+  ##
+  ## if (!file.exists(file)) {
+  ##   stop("Rcssplot: error reading css file (file does not exist)\n")
+  ## }
   
   ## Load the Rcss file, parse it into a tree
   lex <- RcssLexer(file)

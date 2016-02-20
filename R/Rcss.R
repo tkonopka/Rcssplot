@@ -20,7 +20,8 @@
 ##' See also related functions RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
-##' function returns a basic Rcss object.
+##' function returns a basic Rcss object. If multiple files, function
+##' reads each one and produces a joint style.
 ##' @param default (logical) Should the style object be used as a default
 ##' style ? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
 ##' @export 
