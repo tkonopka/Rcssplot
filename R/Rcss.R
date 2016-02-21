@@ -301,10 +301,10 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 
   ## handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL)
+    Rcss <- getOption("RcssDefaultStyle", default = RcssConstructor())
   }
   if (is.null(Rcss)) {    
-    return (NULL)
+    Rcss <- RcssConstructor()
   }
   
   ## sanity check, function only works to modify valid Rcss objects
