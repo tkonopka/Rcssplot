@@ -298,6 +298,14 @@ RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
 RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL, 
                                     propertylist = NULL,
                                     property = NULL, value = NULL) {
+
+  ## handling special case when Rcss is not set or set at default
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL)
+  }
+  if (is.null(Rcss)) {    
+    return (NULL)
+  }
   
   ## sanity check, function only works to modify valid Rcss objects
   if (class(Rcss) != "Rcss") {
@@ -411,16 +419,16 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
 
-  ## check handling case when Rcss is not set or set at default
+  ## handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
     Rcss <- getOption("RcssDefaultStyle", default = NULL)
   }
   if (is.null(Rcss)) {
     ans <- list(defined = FALSE, value = NULL)
-    return(ans)
+    return (ans)
   }
 
-  ## special case when the selector is not specified (avoids work)
+  ## case when the selector is not specified (avoids work)
   if (!(selector %in% names(Rcss))) {
     warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
     ans <- list(defined = FALSE, value = NULL)
