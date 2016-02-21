@@ -410,7 +410,17 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 ##' @export 
 RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
-  
+
+  ## check handling case when Rcss is not set or set at default
+  if (identical(Rcss, "default")) {
+    Rcss <- getOption("RcssDefaultStyle", default = NULL)
+  }
+  if (is.null(Rcss)) {
+    ans <- list(defined = FALSE, value = NULL)
+    return(ans)
+  }
+
+  ## special case when the selector is not specified (avoids work)
   if (!(selector %in% names(Rcss))) {
     warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
     ans <- list(defined = FALSE, value = NULL)
@@ -419,7 +429,7 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
   
   ## get properties for the selector
   bestvalue <- RcssHelperGetPropertyValue(Rcss[[selector]],
-                                     property, Rcssclass = Rcssclass)
+                                          property, Rcssclass = Rcssclass)
   
   ## check if the property was defined and what its value was
   ans <- list(defined = FALSE, value = NULL)
