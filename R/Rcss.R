@@ -481,7 +481,13 @@ RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
   
   ans <- RcssGetPropertyValue(Rcss, selector, property, Rcssclass = Rcssclass);
   if (ans$defined) {
-    return (ans$value)
+    if (identical(ans$value, "NULL")) {
+      return (NULL)
+    } else if (identical(ans$value, "NA")) {
+      return (NA)
+    } else {
+      return (ans$value)
+    }
   } else {
     return (default)
   }    
@@ -597,7 +603,9 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
                                  Rcssclass = Rcssclass)
     if (temp$level >= 0) {
       if (is.null(temp$value)) {
-        ans[nowprop] <- list()
+        ans[nowprop] <- list(NULL)
+      } else if (is.na(temp$value)) {
+        ans[nowprop] <- list(NA)
       } else {
         if (length(temp$value)==1) {
           if (temp$value == "NULL") {
