@@ -443,7 +443,7 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
   ans <- list(defined = FALSE, value = NULL)
   if (bestvalue$level >= 0) {
     ans$defined <- TRUE
-    if (!is.null(bestvalue$value)) {
+    if (!identical(bestvalue$value, NULL)) {
       ans[["value"]] <- bestvalue$value
     }
   }
@@ -517,7 +517,7 @@ RcssHelperGetPropertyValue <- function(RcssProperties, property,
     if (length(inclass) >= bestvalue$level) {
       ## replace the current best value with this one here
       bestvalue$level <- length(inclass)
-      if (is.null(RcssProperties$base[[property]])) {
+      if (identical(RcssProperties$base[[property]], NULL)) {
         bestvalue["value"] <- list(NULL)      
       } else {
         bestvalue[["value"]] <- RcssProperties$base[[property]]
@@ -602,9 +602,9 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
       RcssHelperGetPropertyValue(nowProperties, nowprop,
                                  Rcssclass = Rcssclass)
     if (temp$level >= 0) {
-      if (is.null(temp$value)) {
+      if (identical(temp$value, NULL)) {
         ans[nowprop] <- list(NULL)
-      } else if (is.na(temp$value)) {
+      } else if (identical(temp$value, NA)) {
         ans[nowprop] <- list(NA)
       } else {
         if (length(temp$value)==1) {
@@ -646,7 +646,7 @@ RcssUpdateProperties <- function(nowcss, changelist) {
     ## when a property is set to null
     ## need to leave it as null in the newcss object
     ## (To avoid removing the property from the list, need to handle special)
-    if (is.null(changelist[[nowprop]])) {
+    if (identical(changelist[[nowprop]], NULL)) {
       newcss[nowprop] <- list(NULL)
     } else {
       newcss[[nowprop]] <- changelist[[nowprop]]
