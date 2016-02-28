@@ -430,7 +430,7 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
 
   ## case when the selector is not specified (avoids work)
   if (!(selector %in% names(Rcss))) {
-    warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
+    ##warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
     ans <- list(defined = FALSE, value = NULL)
     return(ans)
   }
@@ -608,9 +608,9 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
         ans[nowprop] <- list(NA)
       } else {
         if (length(temp$value)==1) {
-          if (temp$value == "NULL") {
+          if (identical(temp$value, "NULL")) {
             ans[nowprop] <- list(NULL)
-          } else if (temp$value == "NA") {
+          } else if (identical(temp$value, "NA")) {
             ans[nowprop] <- list(NA)
           } else {
             ans[[nowprop]] <- temp$value
