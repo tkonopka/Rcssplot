@@ -1,0 +1,12 @@
+/**
+ * Rcss for Rcssplot vignette, barplot part 1
+ */
+
+barplot.typeB {
+  col: #449944;
+  space: 0.5;
+}
+mtext.typeB.main {
+  cex: 1.1;
+  font: 2;
+}
