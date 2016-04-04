@@ -4,14 +4,18 @@
 \alias{Rcss}
 \title{Create an Rcss style object}
 \usage{
-Rcss(file = NULL, default = FALSE)
+Rcss(file = NULL, default = FALSE, overload = FALSE)
 }
 \arguments{
 \item{file}{filename containing Rcss definitions. If set to NULL,
-function returns a basic Rcss object.}
+function returns a basic Rcss object. If multiple files, function
+reads each one and produces a joint style.}
 
 \item{default}{(logical) Should the style object be used as a default
-style ? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()}
+style? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()}
+
+\item{overload}{(logical) Should the standard graphics functions be
+overloaded by their Rcss wrappers? See also RcssOverload()}
 }
 \description{
 Creates a style sheet object using definition specified in an
@@ -19,6 +23,7 @@ Rcss file. When a file is not specified, creates a base object
 object without any styling.
 }
 \details{
-See also related functions RcssGetDefaultStyle() and RcssSetDefaultStyle()
+See also related functions RcssGetDefaultStyle(), RcssSetDefaultStyle(),
+and RcssOverload()
 }
 

@@ -2,9 +2,9 @@
  * Rcss for Rcssplot vignette, barplot part 3
  */
 
-barplot.typeB {
+ barplot.typeB {
   col: #449944;
-  space: 0.5;
+  space: 0.6;
 }
 mtext.typeB.main {
   cex: 1.0;

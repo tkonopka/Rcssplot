@@ -17,15 +17,19 @@
 ##' Rcss file. When a file is not specified, creates a base object
 ##' object without any styling.
 ##'
-##' See also related functions RcssGetDefaultStyle() and RcssSetDefaultStyle()
+##' See also related functions RcssGetDefaultStyle(), RcssSetDefaultStyle(),
+##' and RcssOverload()
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
 ##' function returns a basic Rcss object. If multiple files, function
 ##' reads each one and produces a joint style.
 ##' @param default (logical) Should the style object be used as a default
-##' style ? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
+##' style? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
+##' @param overload (logical) Should the standard graphics functions be
+##' overloaded by their Rcss wrappers? See also RcssOverload()
+##' 
 ##' @export 
-Rcss <- function(file = NULL, default = FALSE) {
+Rcss <- function(file = NULL, default = FALSE, overload = FALSE) {
   
   ## create the css object
   ans <- RcssConstructor()
@@ -33,8 +37,14 @@ Rcss <- function(file = NULL, default = FALSE) {
   ## if user does not specify a css file, return bare-bones object
   if (is.null(file)) {
     return(ans)
+    if (default) {
+      RcssSetDefaultStyle(NULL, overload = FALSE)
+    }
+    if (overload) {
+      eval(parse(text = "RcssOverload()"), envir = parent.frame())
+    }
   }
-
+  
   ## get a parsetree for the input file
   parsetree <- RcssParser(file)
 
@@ -80,11 +90,14 @@ Rcss <- function(file = NULL, default = FALSE) {
   }
   
   ## perhaps record this style sheet as a default
-  if (default) {
-    options(RcssDefaultStyle=ans)
+  if (default) {    
+    RcssSetDefaultStyle(ans, overload = FALSE)
+  }
+  ## perhaps also overload base graphics functions
+  if (overload) {
+    eval(parse(text = "RcssOverload()"), envir = parent.frame())
   }
   
-  ## if user specifies file, parse it 
   return(ans)  
 }
 
@@ -98,11 +111,19 @@ Rcss <- function(file = NULL, default = FALSE) {
 ##' function RcssGetDefaultStyle()
 ##' 
 ##' @param Rcss style sheet object (set NULL to remove default style)
+##' @param overload logical. Should base graphics function be overloaded
+##' by the Rcssplot wrappers?
+##' 
 ##' @export
-RcssSetDefaultStyle <- function(Rcss) {
+RcssSetDefaultStyle <- function(Rcss, overload = FALSE) {
   ## default style is remembered using the options/getOption system
   if (class(Rcss)=="Rcss") {
     options(RcssDefaultStyle=Rcss)
+  } else if (class(Rcss)=="NULL") {
+    options(RcssDefaultStyle=NULL)
+  }
+  if (overload) {
+    eval(parse(text="RcssOverload()"), envir=parent.frame())
   }
 }
 
@@ -659,4 +680,34 @@ RcssUpdateProperties <- function(nowcss, changelist) {
 
 
 
+
+#########################################################
+## Functions to overload base graphics
+
+
+##' Overloads base graphics functions by their Rcssplot wrappers
+##' 
+##' Rcssplot graphics functions are defined using Rcss prefixes,
+##' e.g Rcsstext(). This function can be invoked to overload the
+##' existing functions by their Rcss wrappers. i.e. After executing
+##' this function, the user can write execute e.g. text() and
+##' automatically use the Rcss capabilities.
+##' 
+##' @export 
+RcssOverload = function() {
+
+  ## a vector with all the wrappers
+  overload <- c("abline", "arrows", "axis", "barplot", "box",
+                "boxplot", "contour", "grid", "hist", "jpeg", "legend",
+                "lines", "matplot", "mtext", "text", "par", "pdf", "plot",
+                "png", "points", "polygon", "rect", "stripchart", "text",
+                "title")
+  
+  ## create and evaluate commands to overload standard functions by Rcss
+  for (x in overload) {
+    eval(parse(text=paste0(x, " = function(...) { Rcss", x, "(...) }")),
+         envir=parent.frame())
+  }
+  
+}
 

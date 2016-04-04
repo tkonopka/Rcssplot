@@ -269,6 +269,7 @@ Rcssgrid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
   do.call(graphics::grid, nowcss)
 }
 
+
 ## hist(x, ...)
 ##
 ##' ##' Draw a styled histogram
@@ -403,6 +404,7 @@ Rcsslines <- function(x, y = NULL,
   do.call(graphics::lines, nowcss)
 }
 
+
 ##' Add styled line segments to a plot
 ##' 
 ##' Rcssmatplot is a wrapper for R's \code{\link{matplot}()} function.
@@ -434,6 +436,7 @@ Rcssmatplot <- function(x, y,
   }
   eval(parse(text = cmd))
 }
+
 
 ## mtext(text, side = 3, line = 0, outer = FALSE, at = NA,
 ##           adj = NA, padj = NA, cex = NA, col = NA, font = NA, ...)

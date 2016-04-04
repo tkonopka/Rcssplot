@@ -2,33 +2,8 @@
  * Rcss for Rcssplot vignette, barplot part 1
  */
 
-barplot {
+ barplot {
   border: NA;
   col: #000080;	
   space: 0.35;
 }
-axis.x {
-  cex.axis: 1.35;
-  col: #111111;
-  line: -0.35;
-  lwd: 0;
-}
-axis.y {
-  col: #555555;
-  col.axis: #555555;
-  las: 1;
-  lwd: 1.2;
-  lwd.ticks: 1.2;
-  tck: -0.035;
-}
-mtext.main {
-  adj: 0;
-  line: 1.3;
-  cex: 1.2;
-}
-mtext.ylab {
-  cex: 1;
-  line: 3;
-  col: #555555;
-}
-

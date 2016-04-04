@@ -1,0 +1,17 @@
+/**
+ * Rcss for Rcssplot vignette, barplot part 4
+ */
+
+abline {
+  lwd: 3;
+  col: #ee0000;
+}
+barplot {
+  col: #00008055;
+}
+barthreshold {
+  q: 0.25; 
+}
+barthreshold.strict {
+  q: 0.05;
+}

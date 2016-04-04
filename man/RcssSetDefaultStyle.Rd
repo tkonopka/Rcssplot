@@ -4,10 +4,13 @@
 \alias{RcssSetDefaultStyle}
 \title{Set default Rcssplot style sheet}
 \usage{
-RcssSetDefaultStyle(Rcss)
+RcssSetDefaultStyle(Rcss, overload = FALSE)
 }
 \arguments{
 \item{Rcss}{style sheet object (set NULL to remove default style)}
+
+\item{overload}{logical. Should base graphics function be overloaded
+by the Rcssplot wrappers?}
 }
 \description{
 Set a default Rcssplot style sheet. This style sheet will be

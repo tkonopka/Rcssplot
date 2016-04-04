@@ -1,12 +1,38 @@
 /**
- * Rcss for Rcssplot vignette, barplot part 1
+ * Rcss for Rcssplot vignette, barplot part 2
  */
 
-barplot.typeB {
-  col: #449944;
-  space: 0.5;
+ axis {
+  cex.axis: 1.2;
 }
-mtext.typeB.main {
+axis.x {
+  col.axis: #111111;
+  line: -0.35;
+  lwd: 0;
+}
+mtext.ylab, mtext.submain, axis.y {
+  col: #444444;
+}
+axis.y {
+  col.axis: #444444;
+  col.ticks: #444444;
+  las: 1;
+  lwd: 1.2;
+  lwd.ticks: 1.2;
+  tck: -0.03;
+}
+mtext {
+  cex: 0.8;
+  adj: 0;
+}
+mtext.main {
+  line: 2.2;
   cex: 1.1;
-  font: 2;
+}
+mtext.ylab {
+  line: 3;
+  adj: 0.5;
+}
+mtext.submain {
+  line: 0.9;
 }
