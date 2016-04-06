@@ -428,10 +428,10 @@ Rcssmatplot <- function(x, y,
   nowcss <- RcssGetProperties(Rcss, "matplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
   if (!missing(y)) {
-    cmd <- paste0("matplot (x, y",
+    cmd <- paste0("graphics::matplot (x, y",
                   RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   } else {
-    cmd <- paste0("matplot (x,",
+    cmd <- paste0("graphics::matplot (x,",
                   RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   }
   eval(parse(text = cmd))
@@ -549,10 +549,10 @@ Rcssplot <- function(x, y,
   nowcss <- RcssUpdateProperties(nowcss, list(...))
   ## execute R's graphics function with custom properties
   if (!missing(y)) {
-    cmd <- paste0("plot (x, y",
+    cmd <- paste0("graphics::plot (x, y",
                   RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   } else {
-    cmd <- paste0("plot (x,",
+    cmd <- paste0("graphics::plot (x,",
                   RcssMakeCallCodeString(names(nowcss), "nowcss"), ")")
   }
   eval(parse(text = cmd))
