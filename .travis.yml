@@ -1,0 +1,11 @@
+language: r
+
+sudo: required
+
+warnings_are_errors: true
+
+r-packages:
+- knitr
+
+r_check_args: --no-vignettes --no-build-vignettes
+
