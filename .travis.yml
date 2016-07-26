@@ -6,6 +6,7 @@ warnings_are_errors: true
 
 r-packages:
 - knitr
+- rmarkdown
 
 r_check_args: --no-vignettes --no-build-vignettes
 

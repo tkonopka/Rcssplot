@@ -4,7 +4,11 @@ Version: 0.0.1.0
 Authors@R: person("Tomasz", "Konopka", , "tokonopka@gmail.com", role = c("aut", "cre"))
 Author: Tomasz Konopka <tokonopka@gmail.com>
 Maintainer: Tomasz Konopka <tokonopka@gmail.com>
-Description: Rcssplot brings cascading style sheets to the R graphical environment. It provides a means to separate the aesthetics from the data crunching in plots and charts.
-Depends: R (>= 3.1.2)
+Description: Rcssplot brings cascading style sheets to the R graphical
+    environment. It provides a means to separate the aesthetics from the data
+    crunching in plots and charts.
+Depends:
+    R (>= 3.1.2)
 License: GPL-2
 LazyData: true
+RoxygenNote: 5.0.1

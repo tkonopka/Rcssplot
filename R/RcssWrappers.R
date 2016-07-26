@@ -227,6 +227,9 @@ Rcssboxplot <-  function(x,
 ##' @param x numeric vector; locations of grid lines
 ##' @param y numeric vector; locations of grid lines
 ##' @param z matrix of values
+##' @param Rcss style sheet object. Leave "default" to use a style
+##' defined via RcssSetDefaultStyle()
+##' @param Rcssclass sub class of style sheet
 ##' @param ... Further parameters, see documentation of contour()
 ##' 
 ##' @export
