@@ -2,6 +2,8 @@
 
 ## For github checks
 .travis.yml
+.gitignore
+.git
 
 ## Temporary files for vignette compilation
 ^vignettes/fig.+$
@@ -9,3 +11,4 @@
 ^vignettes/.+log$
 ^vignettes/.+out$
 ^vignettes/.+~$
+
