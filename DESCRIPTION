@@ -9,6 +9,10 @@ Description: Rcssplot brings cascading style sheets to the R graphical
     crunching in plots and charts.
 Depends:
     R (>= 3.1.2)
+Imports:
+    graphics,
+    stats,
+    utils
 License: GPL-2
 LazyData: true
 RoxygenNote: 5.0.1

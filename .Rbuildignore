@@ -1,0 +1,11 @@
+## Files to ignore when building package
+
+## For github checks
+.travis.yml
+
+## Temporary files for vignette compilation
+^vignettes/fig.+$
+^vignettes/.+aux$
+^vignettes/.+log$
+^vignettes/.+out$
+^vignettes/.+~$

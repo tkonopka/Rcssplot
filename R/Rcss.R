@@ -1,10 +1,18 @@
 ##
 ## File part of Rcssplot package
-## These functions define and manipualte objects of class Rcss
+## These functions define and manipulate objects of class Rcss
 ##
 ##
 ## Author: Tomasz Konopka
 ##
+
+
+## Package imports
+#' @import stats
+#' @import utils
+#' @import graphics
+NULL
+
 
 
 
