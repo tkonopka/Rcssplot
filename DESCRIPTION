@@ -1,6 +1,6 @@
 Package: Rcssplot
 Title: Customization of plots using cascading style sheets
-Version: 0.0.2.0
+Version: 0.1.0.0
 Authors@R: person("Tomasz", "Konopka", , "tokonopka@gmail.com", role = c("aut", "cre"))
 Author: Tomasz Konopka <tokonopka@gmail.com>
 Maintainer: Tomasz Konopka <tokonopka@gmail.com>
@@ -13,6 +13,10 @@ Imports:
     graphics,
     stats,
     utils
+Suggests:
+    knitr,
+    rmarkdown
 License: GPL-2
 LazyData: true
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1

@@ -1,0 +1,13 @@
+/**
+ * points and text
+ */
+
+points {
+ pch: 19;
+ col: #777777 #ff0000 #00ff00;
+}
+text {
+  cex: 2;
+}
+
+

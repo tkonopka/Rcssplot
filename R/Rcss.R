@@ -25,15 +25,14 @@ NULL
 ##' Rcss file. When a file is not specified, creates a base object
 ##' object without any styling.
 ##'
-##' See also related functions RcssGetDefaultStyle(), RcssSetDefaultStyle(),
-##' and RcssOverload()
+##' See also related functions RcssSetDefaultStyle() and RcssOverload().
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
 ##' function returns a basic Rcss object. If multiple files, function
 ##' reads each one and produces a joint style.
-##' @param default (logical) Should the style object be used as a default
-##' style? See also RcssGetDefaultStyle() and RcssSetDefaultStyle()
-##' @param overload (logical) Should the standard graphics functions be
+##' @param default logical. Should the style object be used as a default
+##' style? See also RcssSetDefaultStyle()
+##' @param overload logical. Should the standard graphics functions be
 ##' overloaded by their Rcss wrappers? See also RcssOverload()
 ##' 
 ##' @export 
@@ -46,7 +45,7 @@ Rcss <- function(file = NULL, default = FALSE, overload = FALSE) {
   if (is.null(file)) {
     return(ans)
     if (default) {
-      RcssSetDefaultStyle(NULL, overload = FALSE)
+      assign("RcssDefaultStyle", NULL, parent.frame())
     }
     if (overload) {
       eval(parse(text = "RcssOverload()"), envir = parent.frame())
@@ -98,70 +97,22 @@ Rcss <- function(file = NULL, default = FALSE, overload = FALSE) {
   }
   
   ## perhaps record this style sheet as a default
-  if (default) {    
-    RcssSetDefaultStyle(ans, overload = FALSE)
+  if (default) {
+    assign("RcssDefaultStyle", ans, parent.frame())
   }
   ## perhaps also overload base graphics functions
   if (overload) {
     eval(parse(text = "RcssOverload()"), envir = parent.frame())
   }
   
-  return(ans)  
+  invisible(ans)  
 }
 
 
 
 
-##' Set default Rcssplot style sheet
-##'
-##' Set a default Rcssplot style sheet. This style sheet will be
-##' applied in all functions of the Rcss family. See also related
-##' function RcssGetDefaultStyle()
-##' 
-##' @param Rcss style sheet object (set NULL to remove default style)
-##' @param overload logical. Should base graphics function be overloaded
-##' by the Rcssplot wrappers?
-##' 
-##' @export
-RcssSetDefaultStyle <- function(Rcss, overload = FALSE) {
-  ## default style is remembered using the options/getOption system
-  if (class(Rcss)=="Rcss") {
-    options(RcssDefaultStyle=Rcss)
-  } else if (class(Rcss)=="NULL") {
-    options(RcssDefaultStyle=NULL)
-  }
-  if (overload) {
-    eval(parse(text="RcssOverload()"), envir=parent.frame())
-  }
-}
-
-
-
-
-##' Get current default Rcssplot style sheet
-##'
-##' Get a copy of the current default Rcssplot style sheet. See also
-##' related RcssSetDefaultStyle()
-##' 
-##' @export
-RcssGetDefaultStyle <- function() {
-  ## Dummy; does the same as a straight call to getOption().
-  ## However, it provides an interface with an "Rcss" feel.
-  ## Also, the user does not need to know the "RcssDeaultsStyle" label
-  return(getOption("RcssDefaultStyle", default = NULL))
-}
-
-
-
-
-## Function from file zzz.R by cuche27 - loads a default style
-## when the package is loaded. Is this really necessary?
-## .onLoad <- function(libname, pkgname) {
-##  options(RcssDefaultStyle=Rcss())
-##}
-
-
-
+#########################################################
+## Displaying information in Rcss object
 
 ##' Show basic information about an Rcss object
 ##'
@@ -255,10 +206,113 @@ print.RcssProperties <- function(RcssProperties,
     cat(paste0(indent, "Defined classes: ",
             paste(names(classesRcss), collapse = ", "), "\n"))   
   }
-  
-  
+    
 }
 
+
+
+
+#########################################################
+## Defaults
+
+##' Default Rcssplot style sheet
+##'
+##' This style sheet will be applied in all functions of the Rcss family.
+##' 
+##' @export
+RcssDefaultStyle <- NULL
+
+
+
+
+##' Set default Rcssplot style sheet
+##'
+##' This style sheet will be applied in all functions of the Rcss family.
+##'
+##' @param Rcss Rcss object, use NA to reset the default
+##' 
+##' @export
+RcssSetDefaultStyle <- function(Rcss=NA) {
+  if (class(Rcss) == "Rcss" | is.null(Rcss)) {
+    assign("RcssDefaultStyle", Rcss, parent.frame())
+  } else if (is.na(Rcss)) {
+    assign("RcssDefaultStyle", NULL, parent.frame())
+  } else if (!identical(Rcss, "default")) {
+    warning("RcssSetDefaultStyle: ignored");
+  }
+  ## Rcss="default" goes past the block - no changes
+}
+
+
+
+
+##' Vector holding set a compulsory Rcssclass
+##'
+##' These style class (or classes) are applied in all functions of
+##' the Rcss family.
+##' 
+##' @export
+RcssCompulsoryClass <- c()
+
+
+
+
+##' Set compulsory Rcssclass
+##'
+##' These style classes are applied in all functions of the Rcss family.
+##' See also related function RcssGetCompulsoryClass()
+##'
+##' @param Rcssclass character vector, set of compulsary classes.
+##' Setting this to c() does not affect the current value. Set to
+##' NA to reset, i.e. remove all compulsory classes.
+##' @param add logical, set TRUE to add Rcssclass to an existing
+##' set of classes
+##' 
+##' @export
+RcssSetCompulsoryClass <- function(Rcssclass=NA, add=TRUE) {
+  if (!is.null(Rcssclass)) {
+    if (is.na(Rcssclass)) {
+      assign("RcssCompulsoryClass", c(), parent.frame())
+    } else {
+      nowclass <- c()
+      if (add) {
+        nowclass <- RcssGetDefault("RcssCompulsoryClass")
+      } 
+      newclass <- unique(c(nowclass, Rcssclass))
+      assign("RcssCompulsoryClass", newclass, parent.frame())
+    } 
+  } 
+}
+
+
+
+
+## Internal function:
+## - gets an object from a calling environment (recursively)
+## - note: automatic object fetching uses chain of binding environments,
+##         while this uses parent.frame() chain
+## 
+## what - use either "RcssDefaultStyle" or "RcssCompulsoryClass"
+RcssGetDefault <- function(what) {
+  whatsub = substitute(what)
+
+  ## parent frame counter
+  n <- 0
+  parent <- parent.frame()
+  
+  ## recurse all parents
+  empty <- emptyenv()
+  glob <- globalenv()    
+  while (n==0 | (!identical(parent, empty) & !identical(parent, glob))) {
+    n <- n+1
+    parent <- parent.frame(n)
+    if (exists(what, parent, inherits=F)) {
+      return(get(what, parent, inherits=F))
+    }
+  }
+  ## if reached here, not found
+  return(NULL)
+}
 
 
 
@@ -330,7 +384,7 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 
   ## handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = RcssConstructor())
+    Rcss <- RcssGetDefault("RcssDefaultStyle")
   }
   if (is.null(Rcss)) {    
     Rcss <- RcssConstructor()
@@ -381,6 +435,7 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 
 
 
+
 ## Helper function to RcssChangePropertyValue (very similar name...)
 ##
 ##
@@ -425,11 +480,6 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 
 
 
-
-
-
-
-
 ## Extracts a value for one property in one selector
 ## (Used internally, but also useful for user)
 ##' Extracts a value for an Rcss property
@@ -447,23 +497,26 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 ##' @export 
 RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
-
+ 
   ## handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL)
+    Rcss <- RcssGetDefault("RcssDefaultStyle")
   }
   if (is.null(Rcss)) {
     ans <- list(defined = FALSE, value = NULL)
-    return (ans)
+    return(ans)
   }
 
   ## case when the selector is not specified (avoids work)
   if (!(selector %in% names(Rcss))) {
-    ##warning("RcssGetPropertyValue: absent selector: ",selector,"\n")
     ans <- list(defined = FALSE, value = NULL)
     return(ans)
   }
   
+  ## augment Rcssclass with a compulsory class
+  Rcsscompulsory <- RcssGetDefault("RcssCompulsoryClass")
+  Rcssclass <- unique(c(Rcsscompulsory, Rcssclass))
+
   ## get properties for the selector
   bestvalue <- RcssHelperGetPropertyValue(Rcss[[selector]],
                                           property, Rcssclass = Rcssclass)
@@ -503,11 +556,18 @@ RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
                                           default=NULL,
                                           Rcssclass = NULL) {
 
-  ## deal with case where input is not specified
+  ## deal with case where input Rcss is not specified/default
+  if (identical(Rcss, "default")) {
+    Rcss <- RcssGetDefault("RcssDefaultStyle")
+  }
   if (is.null(Rcss)) {
     return(default)
   }
-  
+
+  ## augment Rcssclass with a compulsory class
+  Rcsscompulsory <- RcssGetDefault("RcssCompulsoryClass") 
+  Rcssclass <- unique(c(Rcsscompulsory, Rcssclass))
+
   ans <- RcssGetPropertyValue(Rcss, selector, property, Rcssclass = Rcssclass);
   if (ans$defined) {
     if (identical(ans$value, "NULL")) {
@@ -604,7 +664,7 @@ getAllProperties <- function(RcssProperties) {
 
 ##
 ## get a list of properties relevant for a given selector and Rcssclasses
-## (Used internally)
+## (Used internally, 2 frames down from user interaction)
 ##
 RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
 
@@ -612,7 +672,15 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
   if (is.null(Rcss)) {
     return(list())
   }
-
+  
+  ## if Rcss is default string, fetch the default style
+  if (identical(Rcss, "default")) {
+    Rcss <- RcssGetDefault("RcssDefaultStyle")
+  }
+  if (is.null(Rcss)) {
+    Rcss <- RcssConstructor()
+  }
+  
   ## get the RcssProperties object for this selector
   nowProperties <- Rcss[[selector]]
 
@@ -620,6 +688,10 @@ RcssGetProperties <- function(Rcss, selector, Rcssclass = NULL) {
   if (is.null(nowProperties)) {
     return(list());
   }
+
+  ## adjust Rcssclass with a compulsory class
+  Rcsscompulsory = RcssGetDefault("RcssCompulsoryClass")
+  Rcssclass = unique(c(Rcsscompulsory, Rcssclass))
   
   ## get a vector with all the property codes associated with the selector
   allproperties <- getAllProperties(nowProperties)

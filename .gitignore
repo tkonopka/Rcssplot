@@ -1,10 +1,23 @@
 ## ignoring temporary files from emacs/knitr/tex
 
-*/*.*~
-*/*/*.*~
-*/*.tex
+*/*~
+*/*/*~
 */*.aux
+*/*.bbl
+*/*.blg
 */*.log
-*/*.pdf
 */*.out
+*/*.pdf
+*/*.tex
+
+## ignoring intermediate vignette data
 vignettes/figure/
+
+## ignoring output of tests
+tests/*.pdf
+tests/*.png
+tests/*.jpg
+tests/figures/*pdf
+tests/figures/*png
+tests/figures/*jpeg
+

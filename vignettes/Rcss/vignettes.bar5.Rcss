@@ -1,7 +1,0 @@
-/**
- * Rcss for Rcssplot vignette, barplot part 4
- */
-
- colorscheme {
-  col: #000080 #800000;
-}

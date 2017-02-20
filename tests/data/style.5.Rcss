@@ -1,0 +1,249 @@
+/**
+ * A test style (has entries for all standard wrappers)
+ */
+
+
+/** abline **/
+abline {
+  col: #777777;
+  lwd: 4;
+}
+abline.abc {
+  col: #dd0000;
+  lwd: 3;
+  lty: 2;
+}
+
+
+/** arrows **/
+arrows {
+  col: #777777;
+  lwd: 4;
+  length: 0.15;
+}
+arrows.abc {
+  col: #dd0000;
+  length: 0.4;
+  angle: 15;
+}
+
+
+/** axis **/
+axis {
+  lwd: 3;
+  las: 1;
+}
+axis.abc {
+  col: #dd0000;
+  tck: 0.05;
+}
+
+
+/** barplot **/
+barplot {
+  col: #777777;
+  lwd: 2;
+}
+barplot.abc {
+  col: #dd0000;
+  border: NA;
+}
+
+
+/** box **/
+box {    
+  lwd: 2;
+}
+box.abc {
+  col: #dd0000;
+  lty: 2;
+}
+
+
+/** boxplot **/
+boxplot {
+  col: #777777 #dd7777 #7777dd;
+  lwd: 2;
+}
+boxplot.abc {
+  range: 1;
+}
+
+
+/** contour **/
+contour {
+  lwd: 1.5;
+}
+contour.abc {
+  col: #dd0000;
+  nlevels: 6;
+}
+
+
+/** grid **/
+grid {
+  lwd: 2;
+  lty: 1;
+}
+grid.abc {
+  col: #ddaaaa;
+}
+
+
+/** hist **/
+hist {
+  border: #dd0000;
+}
+hist.abc {
+  col: #ddaaaa;
+  breaks: 30;
+}
+
+
+/** jpeg **/
+jpeg {
+  width: 200;
+  height: 200;
+}
+jpeg.abc {
+  width: 400;
+  height: 400;
+}
+
+
+/** legend **/
+legend {
+  lwd: 2;
+  bty: n;
+}
+legend.abc {
+  col: #dd0000 #dd4444 #dd8888 #ddbbbb;
+  cex: 1.4;
+}
+
+
+/** lines **/
+lines {
+  lwd: 2;
+}
+lines.abc {
+  col: #dd0000;
+  lty: 2;
+}
+
+
+/** mtext **/
+mtext {
+  line: 0.6;
+  font: 3;
+  cex: 1.2;
+}
+mtext.abc {
+  col: #dd0000;
+  line: -1.5;
+}
+
+
+/** par **/
+par {
+  mar: 2 2 2 2;
+}
+par.abc {
+  mar: 1 1 3 1;
+}
+
+
+/** pdf **/
+pdf {
+  width: 2;
+  height: 2;
+}
+pdf.abc {
+  width: 4;
+  height: 4;
+}
+
+/** plot **/
+plot {
+  pch: 21;
+  cex: 4;
+  lwd: 2;
+  col: #777777;
+}
+plot.abc {
+  pch: 19;
+  col: #dd0000;
+  cex: 2;
+}
+
+
+/** png **/
+png {
+  width: 200;
+  height: 200;
+}
+png.abc {
+  width: 400;
+  height: 400;
+}
+
+
+/** points **/
+points {
+ pch: 19;
+ cex: 2.5;
+ col: #777777;
+}
+points.abc {
+  pch: 20;
+  col: #dd0000;
+}
+
+
+/** polygon **/
+polygon {
+ lwd: 2;
+ border: #000000;
+ col: #777777;
+}
+polygon.abc {
+  col: #dd4444;
+}
+
+
+/** rect **/
+rect {
+  col: #777777;
+  lwd: 2;
+}
+rect.abc {
+  col: #dd0000;
+  lwd: 3;
+}
+
+
+/** stripchart **/
+stripchart {
+  col: #777777 #dd7777 #7777dd;
+  pch: 19;
+  cex: 2;
+}
+stripchart.abc {
+  method: jitter;
+  vertical: 1
+}
+
+
+/** text **/
+text {
+  cex: 2;
+}
+text.abc {
+  cex: 1;
+  col: #dd0000;
+  font: 2;
+}
+
+
+/** title **/
+/** title is "broken" because graphics::title uses par **/

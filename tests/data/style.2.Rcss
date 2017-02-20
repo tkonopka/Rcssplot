@@ -1,0 +1,13 @@
+/** One-line comment **/
+
+/**
+ * Multiline
+ * comments
+ */
+
+plot {
+ cex: 2;
+}
+
+/** Another one-line **/
+

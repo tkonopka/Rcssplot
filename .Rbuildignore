@@ -5,10 +5,15 @@
 .gitignore
 .git
 
+## For testing
+tests
+
 ## Temporary files for vignette compilation
 ^vignettes/fig.+$
 ^vignettes/.+aux$
 ^vignettes/.+log$
 ^vignettes/.+out$
+^vignettes/.+blg$
+^vignettes/.+bbl$
 ^vignettes/.+~$
 

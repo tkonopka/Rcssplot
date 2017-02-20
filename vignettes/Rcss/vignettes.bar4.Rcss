@@ -2,16 +2,17 @@
  * Rcss for Rcssplot vignette, barplot part 4
  */
 
-abline {
-  lwd: 3;
-  col: #ee0000;
+ baraxis {
+  stripe: 1;  
 }
-barplot {
-  col: #00008055;
+barplot.dotted {
+  col: #9999cc;
 }
-barthreshold {
-  q: 0.25; 
+baraxis.dotted {
+  stripe: 1;
+  ylim: 0 101;
 }
-barthreshold.strict {
-  q: 0.05;
+abline.dotted {
+  col: #666666;
+  lty: 2;
 }

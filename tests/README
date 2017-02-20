@@ -1,0 +1,17 @@
+# Rcssplot tests
+
+The tests in this directory mainly test that commands finish successfully, i.e. without errors.
+
+Some tests perform validations on output. However, validating graphics
+is not straightforward. Thus, even when the tests finish without errors, it is important to ensure that the generated output is actually as expected.
+
+To run individual tests:
+
+source("01.parsing.R")
+source("02.wrappers.R")
+etc.
+
+To run all tests
+
+source("00.all.R")
+

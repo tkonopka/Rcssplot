@@ -39,11 +39,8 @@
 ##' @export
 Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
                         reg = NULL, coef = NULL,
-                        Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+                        Rcss = "default", Rcssclass = NULL, ...) {  
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "abline", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss,
@@ -71,12 +68,8 @@ Rcssabline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 ##' @param ... Futher parameters, see documentation of arrows()
 ##' @export
 Rcssarrows <- function(x0, y0, x1=x0, y1=y0,
-                       Rcss = "default", Rcssclass = NULL, ...) {
-  
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+                       Rcss = "default", Rcssclass = NULL, ...) {  
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "arrows", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x0=x0, y0=y0, x1=x1, y1=y1))
@@ -106,17 +99,14 @@ Rcssarrows <- function(x0, y0, x1=x0, y1=y0,
 ##' @export 
 Rcssaxis <-  function(side,
                       Rcss = "default", Rcssclass = NULL, ...) {
-
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+  
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "axis", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., side=side))
   ## execute R's graphics function with custom properties
   do.call(graphics::axis, nowcss)
 }
+
 
 
 
@@ -134,11 +124,8 @@ Rcssaxis <-  function(side,
 ##' @param ... Further parameters, see documentation of barplot()
 ##' @export 
 Rcssbarplot <- function(height,
-                        Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+                        Rcss = "default", Rcssclass = NULL, ...) {  
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "barplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., height=height))
@@ -164,10 +151,7 @@ Rcssbarplot <- function(height,
 ##' @export 
 Rcssbox <-  function(which = "plot",
                      Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+  
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "box", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., which=which))
@@ -193,10 +177,7 @@ Rcssbox <-  function(which = "plot",
 ##' @export 
 Rcssboxplot <-  function(x,
                          Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "boxplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
@@ -236,10 +217,7 @@ Rcssboxplot <-  function(x,
 Rcsscontour <- function(x = seq(0, 1, length.out = nrow(z)),
                         y = seq(0, 1, length.out = ncol(z)), z,
                         Rcss = "default", Rcssclass = NULL, ...) {
-    ## convert between a description of a default Rcss to an actual object
-    if (identical(Rcss, "default")) {
-        Rcss <- getOption("RcssDefaultStyle", default = NULL);
-    }
+
     ## get a list of properties
     nowcss <- RcssGetProperties(Rcss, "contour", Rcssclass = Rcssclass)
     nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y, z=z))
@@ -261,10 +239,7 @@ Rcsscontour <- function(x = seq(0, 1, length.out = nrow(z)),
 ##' @param ... Further parameters, see documentation of grid()
 ##' @export 
 Rcssgrid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "grid", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
@@ -288,10 +263,7 @@ Rcssgrid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
 ##' @export 
 Rcsshist <- function(x,
                      Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "hist", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
@@ -322,10 +294,7 @@ Rcsshist <- function(x,
 ##' @export 
 Rcssjpeg <- function(file,
                     Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "jpeg", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
@@ -361,10 +330,7 @@ Rcssjpeg <- function(file,
 ##' @export 
 Rcsslegend <- function(x, y = NULL, legend,
                        Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "legend", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x=x))
@@ -373,9 +339,7 @@ Rcsslegend <- function(x, y = NULL, legend,
   } else {
     nowcss <- RcssUpdateProperties(nowcss, list(legend=y))
   }
-  ## execute R's graphics function with custom properties
-  # There is a confusion between the arg "legend" and the function
-  # "legend". This is why we use "graphics::"
+  ## execute R's graphics function with custom properties 
   do.call(graphics::legend, nowcss)
 }
 
@@ -396,10 +360,7 @@ Rcsslegend <- function(x, y = NULL, legend,
 ##' @export 
 Rcsslines <- function(x, y = NULL,
                       Rcss = "default", Rcssclass = NULL, ...) {   
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "lines", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., x=x, y=y))
@@ -423,10 +384,7 @@ Rcsslines <- function(x, y = NULL,
 ##' @export 
 Rcssmatplot <- function(x, y,
                         Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "matplot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
@@ -457,10 +415,7 @@ Rcssmatplot <- function(x, y,
 ##' @export 
 Rcssmtext <- function(text,
                       Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "mtext", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., text=text))
@@ -484,10 +439,7 @@ Rcssmtext <- function(text,
 ##' @export 
 ##' 
 Rcsspar <- function(Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "par", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
@@ -515,10 +467,7 @@ Rcsspar <- function(Rcss = "default", Rcssclass = NULL, ...) {
 ##' @export 
 Rcsspdf <- function(file,
                     Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(..., file=file))
@@ -543,10 +492,7 @@ Rcsspdf <- function(file,
 ##' @export 
 Rcssplot <- function(x, y,
                      Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "plot", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(...))
@@ -581,10 +527,7 @@ Rcssplot <- function(x, y,
 ##' @export 
 Rcsspng <- function(file,
                     Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "png", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(file=file, ...))
@@ -609,10 +552,7 @@ Rcsspng <- function(file,
 ##' @export 
 Rcsspoints <- function(x, y = NULL,
                        Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "points", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
@@ -639,10 +579,7 @@ Rcsspoints <- function(x, y = NULL,
 ##' @export 
 Rcsspolygon <- function(x, y = NULL,
                         Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "polygon", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, ...))
@@ -670,10 +607,7 @@ Rcsspolygon <- function(x, y = NULL,
 ##' @export 
 Rcssrect <- function(xleft, ybottom, xright, ytop, 
                      Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "rect", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss,
@@ -699,10 +633,7 @@ Rcssrect <- function(xleft, ybottom, xright, ytop,
 ##' @export 
 Rcssstripchart <- function(x,
                            Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "stripchart", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
@@ -730,10 +661,7 @@ Rcssstripchart <- function(x,
 ##' @export 
 Rcsstext <- function(x, y=NULL, labels=seq_along(x),
                      Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "text", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, y=y, labels=labels, ...))
@@ -761,10 +689,7 @@ Rcsstext <- function(x, y=NULL, labels=seq_along(x),
 ##' @export 
 Rcsstitle <- function(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
                       Rcss = "default", Rcssclass = NULL, ...) {
-  ## convert between a description of a default Rcss to an actual object
-  if (identical(Rcss, "default")) {
-    Rcss <- getOption("RcssDefaultStyle", default = NULL);
-  }
+
   ## get a list of properties
   nowcss <- RcssGetProperties(Rcss, "title", Rcssclass = Rcssclass)
   nowcss <- RcssUpdateProperties(nowcss,
