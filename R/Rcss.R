@@ -25,31 +25,21 @@ NULL
 ##' Rcss file. When a file is not specified, creates a base object
 ##' object without any styling.
 ##'
-##' See also related functions RcssSetDefaultStyle() and RcssOverload().
+##' See also related functions RcssGetDefaultStyle() and RcssOverload().
 ##' 
 ##' @param file filename containing Rcss definitions. If set to NULL,
 ##' function returns a basic Rcss object. If multiple files, function
 ##' reads each one and produces a joint style.
-##' @param default logical. Should the style object be used as a default
-##' style? See also RcssSetDefaultStyle()
-##' @param overload logical. Should the standard graphics functions be
-##' overloaded by their Rcss wrappers? See also RcssOverload()
 ##' 
 ##' @export 
-Rcss <- function(file = NULL, default = FALSE, overload = FALSE) {
+Rcss <- function(file = NULL) {
   
   ## create the css object
   ans <- RcssConstructor()
   
   ## if user does not specify a css file, return bare-bones object
   if (is.null(file)) {
-    return(ans)
-    if (default) {
-      assign("RcssDefaultStyle", NULL, parent.frame())
-    }
-    if (overload) {
-      eval(parse(text = "RcssOverload()"), envir = parent.frame())
-    }
+    return(ans)    
   }
   
   ## get a parsetree for the input file
@@ -95,16 +85,7 @@ Rcss <- function(file = NULL, default = FALSE, overload = FALSE) {
                                      propertylist = nowdecset)
     }
   }
-  
-  ## perhaps record this style sheet as a default
-  if (default) {
-    assign("RcssDefaultStyle", ans, parent.frame())
-  }
-  ## perhaps also overload base graphics functions
-  if (overload) {
-    eval(parse(text = "RcssOverload()"), envir = parent.frame())
-  }
-  
+      
   invisible(ans)  
 }
 
@@ -225,22 +206,28 @@ RcssDefaultStyle <- NULL
 
 
 
-##' Set default Rcssplot style sheet
+##' Get default Rcssplot style object
 ##'
-##' This style sheet will be applied in all functions of the Rcss family.
+##' Fetches the value of the RcssDefaultStyle object defined in
+##' parent environments. 
 ##'
-##' @param Rcss Rcss object, use NA to reset the default
+##' @param Rcss Rcss object, replacement default style object. When
+##' set to "default", the function returns a copy of the default object
+##' defined in parent environment. When set to Rcss object, the function
+##' ignores the default and returns the set object back.
 ##' 
 ##' @export
-RcssSetDefaultStyle <- function(Rcss=NA) {
-  if (class(Rcss) == "Rcss" | is.null(Rcss)) {
-    assign("RcssDefaultStyle", Rcss, parent.frame())
-  } else if (is.na(Rcss)) {
-    assign("RcssDefaultStyle", NULL, parent.frame())
-  } else if (!identical(Rcss, "default")) {
-    warning("RcssSetDefaultStyle: ignored");
+RcssGetDefaultStyle <- function(Rcss="default") {
+  ## perhaps ignore the current default and return the new object
+  if (class(Rcss) == "Rcss") {
+    return(Rcss)    
   }
-  ## Rcss="default" goes past the block - no changes
+  if (is.na(Rcss) | is.null(Rcss) >0) {
+    return(Rcss)  
+  }
+  ## if here, the user is not asking to reset the default.
+  ## So fetch current default object from parent environments
+  RcssGetDefault("RcssDefaultStyle")  
 }
 
 
@@ -257,31 +244,20 @@ RcssCompulsoryClass <- c()
 
 
 
-##' Set compulsory Rcssclass
+##' Get current state of compulsory Rcssclass
 ##'
-##' These style classes are applied in all functions of the Rcss family.
-##' See also related function RcssGetCompulsoryClass()
-##'
-##' @param Rcssclass character vector, set of compulsary classes.
-##' Setting this to c() does not affect the current value. Set to
-##' NA to reset, i.e. remove all compulsory classes.
-##' @param add logical, set TRUE to add Rcssclass to an existing
-##' set of classes
+##' Fetches the value of the RcssCompulsoryClass object defined in
+##' parent environments. 
+##' 
+##' @param Rcssclass character vector, set of additional compulsory classes.
+##' When NULL, function returns the current set of compulsory classes
+##' defined in parent environments. When non-NULL, functions returns
+##' the concatentation of the current set and new set. 
 ##' 
 ##' @export
-RcssSetCompulsoryClass <- function(Rcssclass=NA, add=TRUE) {
-  if (!is.null(Rcssclass)) {
-    if (is.na(Rcssclass)) {
-      assign("RcssCompulsoryClass", c(), parent.frame())
-    } else {
-      nowclass <- c()
-      if (add) {
-        nowclass <- RcssGetDefault("RcssCompulsoryClass")
-      } 
-      newclass <- unique(c(nowclass, Rcssclass))
-      assign("RcssCompulsoryClass", newclass, parent.frame())
-    } 
-  } 
+RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
+    nowclass <- RcssGetDefault("RcssCompulsoryClass")      
+    unique(c(nowclass, Rcssclass))    
 }
 
 
@@ -294,13 +270,16 @@ RcssSetCompulsoryClass <- function(Rcssclass=NA, add=TRUE) {
 ## 
 ## what - use either "RcssDefaultStyle" or "RcssCompulsoryClass"
 RcssGetDefault <- function(what) {
-  whatsub = substitute(what)
-
+  if (!what %in% c("RcssDefaultStyle", "RcssCompulsoryClass")) {
+    stop("RcssGetDefault called with unintended argument")
+  }
   ## parent frame counter
   n <- 0
-  parent <- parent.frame()
-  
-  ## recurse all parents
+  parent <- parent.frame()  
+  ## check all parents
+  ## what is the implementation of parent.frame(n)? and is this a
+  ## performance O(n^2) issue? In practice the depth of the environment
+  ## stack is not large, so should not be significant
   empty <- emptyenv()
   glob <- globalenv()    
   while (n==0 | (!identical(parent, empty) & !identical(parent, glob))) {

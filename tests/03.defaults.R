@@ -17,6 +17,9 @@ style6 = Rcss("data/style.6.Rcss")
 x0 = 1:5
 names(x0) = letters[1:5]
 
+## Book-keeping (in case test is run multiple times in one session)
+RcssCompulsoryClass = NULL
+RcssDefaultStyle = NULL
 
 
 ## ##################
@@ -57,8 +60,8 @@ testplot3 <- function(x, main="Testplot3", submain="",
 testplot4 <- function(x, main="Testplot4", submain="",
                       Rcss="default", Rcssclass=c()) {
     RcssOverload()
-    RcssSetDefaultStyle(Rcss)
-    RcssSetCompulsoryClass(Rcssclass)
+    RcssDefaultStyle = RcssGetDefaultStyle(Rcss)
+    RcssCompulsoryClass = RcssGetCompulsoryClass(Rcssclass)
     barpos <- barplot(x, axes=FALSE, axisnames=FALSE)
     axis(1, at=barpos[,1], labels=names(x), Rcssclass="x")
     axis(2, Rcssclass="y")  
@@ -68,7 +71,7 @@ testplot4 <- function(x, main="Testplot4", submain="",
 ## assumes global overloading
 testplot5 <- function(x, main="Custom Rcss plot", submain="",
                       Rcssclass="typeB") {
-    RcssSetCompulsoryClass(Rcssclass)
+    RcssCompulsoryClass = RcssGetCompulsoryClass(Rcssclass)
     barpos <- barplot(x, axes=FALSE, axisnames=FALSE)
     axis(1, at=barpos[,1], labels=names(x), Rcssclass="x")
     axis(2, Rcssclass="y")  
@@ -93,10 +96,10 @@ testplot4(x0, main="Loc overL, defaults, abc",  subm="... new color",
           Rcss=style6, Rcssclass="abc")
 
 RcssOverload()
-RcssSetDefaultStyle(style6)
+RcssDefaultStyle = style6
 testplot5(x0, main="Glob overL, Glob style", ".. back to normal")
 testplot5(x0, main="Glob overL, Glob style", subm="..should be same")
-RcssSetCompulsoryClass("abc")
+RcssCompulsoryClass = "abc"
 testplot5(x0, main="Glob overL, Glob style class",
           submain="..should change color")
 
@@ -108,7 +111,3 @@ dev.off()
 checkcat(1,1, "figures/Rcss-defaults.pdf")
 cat("\n")
 
-
-## Book-keeping (in case test is run multiple times in one session)
-RcssSetCompulsoryClass(NA)
-RcssSetDefaultStyle(NA)

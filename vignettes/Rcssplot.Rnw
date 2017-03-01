@@ -303,8 +303,8 @@ rcss.barplot.1(a, main="Rcss style3, class typeC", Rcss=style3, Rcssclass="typeC
 par(mfrow = c(1, 3), mar = c(2, 6, 4.8, 2))
 <<rcssbarfun_1>>   
 ## reset
-RcssSetCompulsoryClass()
-RcssSetDefaultStyle()
+RcssCompulsoryClass = NULL
+RcssDefaultStyle = NULL
   <<rcssbar_3A>>
 text(-2, 104, "A", cex=2, xpd=TRUE)
 <<rcssbar_3B>>
@@ -361,12 +361,14 @@ rcss.barplot.2 <- function(x, main="Custom Rcss plot", ylab="y label",
 
 \noindent Here, the first step signals that subsequent calls to e.g. {\tt axis} should actually invoke the corresponding wrappers, e.g. {\tt Rcssaxis}. The subsequent code thus omits the {\tt Rcss} prefixes.
 
+Note that the overloading operation masks several commands from base graphics. In principle, this masking could be defined within the package itself, and thus take effect automatically when the package is loaded. Future versions of the package may take this approach. Here, this mechanism is put in place to provide the user a decision when to activate the masking. Furthermore, the masking is active only within a local environment.
+
 
 
 
 \subsection{Using a default style and compulsory classes}
 
-Other repetitive elements are the arguments {\tt Rcss=Rcss} and {\tt Rcssclass=Rcssclasss}. These arguments ensure that the style object and the class specified through the function call are passed on to the individual wrappers. We can avoid this repetition by setting a default style using function {\tt RcssSetDefaultStyle} and a compulsory class using function {\tt RcssSetCompulsoryClass}. 
+Other repetitive elements are the arguments {\tt Rcss=Rcss} and {\tt Rcssclass=Rcssclasss}. These arguments ensure that the style object and the class specified through the function call are passed on to the individual wrappers. We can avoid this repetition by setting a default style and a compulsory class through objects {\tt RcssDefaultStyle} and {\tt RcssCompulsoryClass}. 
 
 <<rbarplot3, eval = TRUE>>=
 ## barplot using Rcssplot, version 3 (using defaults & compulsory classes)
@@ -374,8 +376,8 @@ rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label",
                            Rcss="default", Rcssclass=c()) {
   ## overload base graphics, set defaults and compulsory classes
   RcssOverload()
-  RcssSetDefaultStyle(Rcss)
-  RcssSetCompulsoryClass(Rcssclass)
+  RcssDefaultStyle <- RcssGetDefaultStyle(Rcss)
+  RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass)
   ## create a barplot (without Rcss prefixes)
   barpos <- barplot(x, axes=FALSE, axisnames=FALSE)
   axis(1, at=barpos[,1], labels=names(x), Rcssclass="x")
@@ -388,6 +390,8 @@ rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label",
 
 \noindent The preparation steps here perform overloading, and then set a default style and compulsory class. Subsequent calls to graphics functions do not need to refer to object {\tt Rcss} or the class {\tt Rcssclass}. Note, however, that calls to {\tt axis} and {\tt mtext} must still carry {\tt Rcssclass} arguments; these are necessary to distinguish styling for those components.
 
+Note that definitions of {\tt RcssDefaultStyle} and {\tt RcssCompulsoryClass} are achieved using function calls. Those functions are helpers that help preserve current default in certain cases. This will become more clear in the next section. 
+
 
 
 
@@ -397,7 +401,8 @@ In the previous two examples, {\tt rcss.barplot.2} and {\tt rcss.barplot.3}, we 
 
 <<global, eval=FALSE>>=
 RcssOverload()
-RcssSetDefaultStyle(style3)
+RcssDefaultStyle <- style3
+RcssCompulsoryClass <- c()
 @
 
 \noindent Subsequent to this, the custom function can be simplified further.
@@ -407,7 +412,7 @@ RcssSetDefaultStyle(style3)
 rcss.barplot.4 <- function(x, main="Custom Rcss plot", ylab="y label", 
                            Rcssclass="typeB") {
   ## leave feature to set class within custom function  
-  RcssSetCompulsoryClass(Rcssclass)
+  RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass) 
   ## create a barplot (without Rcss prefixes)
   barpos <- barplot(x, axes=FALSE, axisnames=FALSE)
   axis(1, at=barpos[,1], labels=names(x), Rcssclass="x")
@@ -426,27 +431,38 @@ rcss.barplot.4 <- function(x, main="Custom Rcss plot", ylab="y label",
     
 \item The function definition no longer carries an argument {\tt Rcss}. The style is assumed to come entirely from the default style.
   
-\item The function still carries an argument {\tt Rcssclass}. This is a design choice and might also be eliminated. Keeping the argument is a mechanism that allows multiple functions within a project use different sub-classes without the need to repeatedly redefine the compulsory class in the global environment. 
+\item The function still carries an argument {\tt Rcssclass}. Keeping the argument is a mechanism that allows functions within a project to use different sub-classes without the need to repeatedly redefine the compulsory class in the global environment. 
   
 \end{itemize}
 
-Sometimes, we may want to reset the default style and/or the compulsory style class(es).
+Sometimes, we may want to reset the default style and/or the compulsory style class(es). This is simply achieved by setting those objects to {\tt NULL}. 
 
 <<reset, eval=TRUE>>=
-RcssSetDefaultStyle()
-RcssSetCompulsoryClass()
+RcssDefaultStyle <- NULL
+RcssCompulsoryClass <- NULL
 @ 
 
-\noindent After the reset, we can check the current defaults.
+Now that we've adjusted default settings within custom functions as well as in the global environment, let's revisit revisit the functions {\tt RcssGetDefaultStyle} and {\tt RcssGetCompulsoryClass}. Consider the following snippet.
 
-<<afterreset, eval=TRUE>>=
-RcssDefaultStyle
+<<snippet1>>=
+RcssCompulsoryClass = "foo0"
+RcssCompulsoryClass
+foo1 <- function() {
+    RcssCompulsoryClass <- "foo1"
+    RcssCompulsoryClass
+}
+foo1()
+foo2 <- function() {
+   RcssCompulsoryClass <- RcssGetCompulsoryClass("foo2")
+   RcssCompulsoryClass
+}
+foo2()
 RcssCompulsoryClass
 @ 
 
-\noindent The {\tt NULL} values for these objects are indicators of a tabula-rasa.
+\noindent The first result is {\tt foo0}; let's think of this as a css class that we wish to employ at a global level. In the first function {\tt foo1}, the compulsory class is set with a naive assignment. The return value reveals that within that function, the compulsory class becomes {\tt foo1} and the label {\tt foo0} is lost. The second function uses the {\tt RcssGetCompulsoryClass} function. This function looks up the compulsory class set in parent environments and augments it with the new label. This better reflects our intended behavior - i.e. to use the class {\tt foo0} in all cases. The final command displays that {\tt RcssCompulsoryClass} in the global environment is unaffected by the previous assignments. The use of the labels {\tt foo1} and {\tt foo2} are thus localized to the custom functions.
 
-As an aside, note that it is not possible to undo overloading. However, overloading should not be a problem; it should always be possible to use base graphicsthrough the wrappers without default style and without a style class.
+The function {\tt RcssGetDefaultStyle} fulfills an analogous role to {\tt RcssGetCompulsoryClass}. 
 
 
 
@@ -483,8 +499,8 @@ rcss.barplot.5 <- function(x, main="", ylab="Proportion (%)",
     Rcss="default", Rcssclass=c()) {
   ## use overloading, custom style, compulsary class
   RcssOverload()
-  RcssSetDefaultStyle(Rcss)
-  RcssSetCompulsoryClass(Rcssclass)
+  RcssDefaultStyle <- RcssGetDefaultStyle(Rcss)
+  RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass)
   ## extract custom properties - show axis? force ylim?
   stripes <- RcssGetPropertyValueOrDefault(Rcss, selector="baraxis",
     property="stripe", default=0)
@@ -581,6 +597,13 @@ The \textbf{Rcssplot} package is intended to provide a straightforward and famil
   
 \end{thebibliography}
 
+
+\appendix
+\section{Appendix}
+
+<<>>=
+sessionInfo()
+@ 
 
 
 \end{document}
