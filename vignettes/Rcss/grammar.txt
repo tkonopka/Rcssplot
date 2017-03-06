@@ -1,0 +1,30 @@
+/**
+ * Grammar inspiration for Rcssplot
+ */
+
+stylesheet
+  : [ ruleset ]*
+  ;
+ruleset
+  : simple_selector [ ',' simple_selector ]*
+    '{' declaration? [ ';' declaration? ]* '}'
+  ;
+simple_selector
+  : IDENT [ class ]*
+  | [ class ]+
+  ;
+class
+  : '.' IDENT
+  ;
+declaration
+  : property ':' expr 
+  ;
+property
+  : IDENT 
+  ;
+expr
+  : term [ term ]*
+  ;
+term
+  : NUMBER | STRING | IDENT | HEXCOLOR 
+  ;

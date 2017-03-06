@@ -369,6 +369,7 @@ Rcsslines <- function(x, y = NULL,
 }
 
 
+
 ##' Add styled line segments to a plot
 ##' 
 ##' Rcssmatplot is a wrapper for R's \code{\link{matplot}()} function.
@@ -397,6 +398,7 @@ Rcssmatplot <- function(x, y,
   }
   eval(parse(text = cmd))
 }
+
 
 
 ## mtext(text, side = 3, line = 0, outer = FALSE, at = NA,

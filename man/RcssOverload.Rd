@@ -7,10 +7,15 @@
 RcssOverload()
 }
 \description{
-Rcssplot graphics functions are defined using Rcss prefixes,
-e.g Rcsstext(). This function can be invoked to overload the
-existing functions by their Rcss wrappers. i.e. After executing
-this function, the user can write execute e.g. text() and
+Rcssplot graphics functions have 'Rcss' prefixes,
+e.g Rcsstext(). This function can be invoked to overload 
+base-graphics functions by their Rcss wrappers. i.e. After executing
+this function, you can execute e.g. text() and
 automatically use the Rcss capabilities.
+}
+\details{
+Warning: this function creates masking objects in your current
+environment for many base-graphics functions. See documentation
+for details.
 }
 
