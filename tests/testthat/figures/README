@@ -1,0 +1,4 @@
+# Rcssplot figures output
+
+This folder holds output produced by unit tests. 
+After executing the tests, inspect this folder to check output is appropriate.
