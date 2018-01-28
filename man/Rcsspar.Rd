@@ -18,4 +18,3 @@ defined via RcssSetDefaultStyle()}
 Rcsspar is a wrapper for R's par() function.
 See R's documentation for par() for further details.
 }
-

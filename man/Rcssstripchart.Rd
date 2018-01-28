@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcssstripchart is a wrapper for R's stripchart() function.
 See R's documentation for stripchart() for further details.
 }
-

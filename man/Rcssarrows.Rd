@@ -23,4 +23,3 @@ defined via RcssSetDefaultStle()}
 Rcssarrows is a wrapper for R's arrows() function.
 See R's documentation for arrows() for further details.
 }
-

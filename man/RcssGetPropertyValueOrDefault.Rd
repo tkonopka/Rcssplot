@@ -27,4 +27,3 @@ defined, the function returns a default value that can be passed
 into the function and is set NULL otherwise. See also related function
 RcssGetPropertyValue()
 }
-

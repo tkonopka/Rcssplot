@@ -16,21 +16,9 @@
 ## returns - a rcss object augmented by settings from the file(s)
 ##
 RcssParser <- function(file) {
-
-  ## Check here no longer needed because:
-  ##   - Lexer can read multiple files
-  ##   - Lexer checks existence of files anyway
-  ##
-  ## if (!file.exists(file)) {
-  ##   stop("Rcssplot: error reading css file (file does not exist)\n")
-  ## }
-  
-  ## Load the Rcss file, parse it into a tree
   lex <- RcssLexer(file)
   parsetree <- RcssMakeParseTree(lex)
-  
-  ## That's it, return the parsetree
-  return(parsetree)  
+  parsetree
 }
 
 
@@ -70,11 +58,8 @@ RcssMakeParseTree <- function(lextab) {
     n <- ruleset$n
   }
   
-  return(parsetree)
+  parsetree
 }
-
-
-
 
 
 
@@ -91,14 +76,12 @@ RcssMakeParseTree <- function(lextab) {
 ##
 ##
 RcssParseRuleSet <- function(lextab, n) {
-  ## This is straightforward as it requires a SelectorSet and a DeclarationSet
   selectors = RcssParseSelectorSet(lextab, n)
   declarations = RcssParseDeclarationSet(lextab, selectors$n)
-  return(list(n = declarations$n,
-              RuleSet = list(SelectorSet = selectors$SelectorSet,
-                DeclarationSet = declarations$DeclarationSet)))
+  list(n = declarations$n,
+       RuleSet = list(SelectorSet = selectors$SelectorSet,
+                      DeclarationSet = declarations$DeclarationSet))
 }
-
 
 
 ##
@@ -119,7 +102,7 @@ RcssParseSelector <- function(lextab, n) {
     ans[1] <- lextab[n, "token"]
     n <- n + 1
   } else {
-    RcssParseError(lextab, n, "AA RcssParseSelector", ".")
+    RcssParseError(lextab, n, "RcssParseSelector", ".")
   }
   
   ## after the first ident, can have classes
@@ -134,9 +117,8 @@ RcssParseSelector <- function(lextab, n) {
   }
 
   ## at this point, collected all IDENT and classes
-  return(list(n = n, Selector = ans))  
+  list(n = n, Selector = ans)
 }
-
 
 
 ##
@@ -161,9 +143,8 @@ RcssParseSelectorSet <- function(lextab, n) {
     n <- sel$n
   }
 
-  return(list(n = n, SelectorSet = ans));  
+  list(n = n, SelectorSet = ans)
 }
-
 
 
 ##
@@ -198,9 +179,8 @@ RcssParseDeclarationSet <- function(lextab, n) {
 
   ## when the loop ends, the current state is a "}"
   n <- n + 1
-  return(list(n = n, DeclarationSet = ans));
+  list(n = n, DeclarationSet = ans)
 }
-
 
 
 ##
@@ -250,11 +230,8 @@ RcssParseDeclaration <- function(lextab, n) {
   
   ## return an object with the property/expr pair, but also
   ## the number of the next non-trivial token
-  ans <- list(n = n, Property = property, Expr = expr)
-  return(ans)
+  list(n = n, Property = property, Expr = expr)
 }
-
-
 
 
 ## parse the name of a property
@@ -284,6 +261,7 @@ RcssParseProperty <- function(lextab, n) {
   
   ## build a unified property
   property <- paste(property, collapse = "")
-
-  return(list(n = n, Property = property))
+  
+  list(n = n, Property = property)
 }
+

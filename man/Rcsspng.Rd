@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsspng is a wrapper for R's png() function.
 See R's documentation for png() for further details
 }
-

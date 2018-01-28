@@ -26,4 +26,3 @@ defined via RcssSetDefaultStyle().}
 \description{
 Add a style straight line to a plot
 }
-

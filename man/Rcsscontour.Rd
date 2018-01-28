@@ -25,4 +25,3 @@ defined via RcssSetDefaultStyle()}
 Rcsscontour is a wrapper for R's contour() function.
 See R's documentation for contour() for further details.
 }
-

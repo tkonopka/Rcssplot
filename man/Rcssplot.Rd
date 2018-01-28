@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcssplot is a wrapper for R's plot() function.
 See R's documentation for plot() for further details.
 }
-

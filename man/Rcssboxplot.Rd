@@ -21,4 +21,3 @@ defined via RcssSetDefaultStyle()}
 Rcssboxplot is a wrapper for R's boxplot() function.
 See R's documentation for boxplot() for further details.
 }
-

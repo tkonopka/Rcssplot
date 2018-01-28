@@ -44,8 +44,6 @@ Rcss <- function(file = NULL) {
   
   ## get a parsetree for the input file
   parsetree <- RcssParser(file)
-
-  ## use the parse tree to change the basic Rcss
   if (length(parsetree) < 1) {
     return(ans)
   }
@@ -103,7 +101,10 @@ Rcss <- function(file = NULL) {
 ##' @param x style sheet object
 ##' @param ... Further parameters are ignored
 ##' @export 
-print.Rcss <- function(x, ...) {  
+print.Rcss <- function(x, ...) {
+  if (class(x) != "Rcss") {
+    stopCF("print.Rcss: input object is not Rcss\n")
+  }
   cat("Rcssplot:\n")
   cat("Defined selectors: ", paste(names(x), collapse = ", "), "\n")
   cat("Use function printRcss() to view details for individual selectors\n")
@@ -270,9 +271,11 @@ RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
 ## 
 ## what - use either "RcssDefaultStyle" or "RcssCompulsoryClass"
 RcssGetDefault <- function(what) {
-  if (!what %in% c("RcssDefaultStyle", "RcssCompulsoryClass")) {
-    stop("RcssGetDefault called with unintended argument")
-  }
+
+  #if (!what %in% c("RcssDefaultStyle", "RcssCompulsoryClass")) {
+  #  stop("RcssGetDefault called with unintended argument")
+  #}
+  
   ## parent frame counter
   n <- 0
   parent <- parent.frame()  
@@ -386,7 +389,12 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
   ## For useability, allow user not to specify either a property list
   ## or one property/value at a time.
   ## 
-  ## For implementation, reduce both cases to a property list  
+  ## For implementation, reduce both cases to a property list
+  if (!is.null(propertylist)) {
+    if (is.null(names(propertylist))) {
+      stopCF("RcssChangePropertyValue: property list must have names \n")
+    }
+  }
   if (is.null(propertylist)) {
     propertylist <- list()
     if (is.null(property)) {

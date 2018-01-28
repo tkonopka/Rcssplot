@@ -25,4 +25,3 @@ defined via RcssSetDefaultStyle()}
 Rcsstitle is a wrapper for R's title() function.
 See R's documentation for title() for further details.
 }
-

@@ -12,4 +12,3 @@ RcssDefaultStyle
 This style sheet will be applied in all functions of the Rcss family.
 }
 \keyword{datasets}
-

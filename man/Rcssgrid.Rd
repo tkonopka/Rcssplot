@@ -18,4 +18,3 @@ defined via RcssSetDefaultStyle()}
 Rcssgrid is a wrapper for R's \code{\link{grid}}() function.
 See R's documentation for \code{\link{grid}}() for further details.
 }
-

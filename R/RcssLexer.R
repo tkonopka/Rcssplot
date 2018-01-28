@@ -43,7 +43,6 @@ RcssLexer <- function(f) {
 
 
 
-
 ## Checks if a file exists 
 ##
 ## f - single file name
@@ -63,10 +62,6 @@ RcssFileCheckRead <- function(f) {
 
 
 
-
-
-
-
 ## ################################################################
 ## Functions that handle organization of the Lexer
 
@@ -81,23 +76,19 @@ RcssFileCheckRead <- function(f) {
 ##
 ## returns - a data frame with pairs (token, tokentype)
 RcssLexChars <- function(cc, pos = 1) {
-
-  cclen <- length(cc)
-  
-  ## create a list with temporary values (placeholders)
-  ## to avoid growing 
-  ans <- list(rep(NA, cclen))
-
+    
   ## bookkeeping
+  cclen <- length(cc)
+  ans <- list()
   nowpos <- pos  
   numtokens <- 0
-
+  
   ## loop to fill list of tokens
   while(nowpos <= cclen) {
     ## obtain information about next token
     thistoken <- RcssLexNextToken(cc, nowpos)
     ## record token, but not if it is a space
-    if (thistoken[3] != "SPACE" & thistoken[3] != "COMMENT") {
+    if (!thistoken[3] %in% c("SPACE", "COMMENT")) {
       ans[[numtokens+1]] <- thistoken[2:3]      
       numtokens <- numtokens + 1
     }
@@ -105,13 +96,15 @@ RcssLexChars <- function(cc, pos = 1) {
     nowpos <- as.integer(thistoken[1])
   }
 
-  ## trim the ans list to only those entries that actually have tokens
-  ans <- ans[1:numtokens]
-  ans <- data.frame(do.call(rbind, ans), stringsAsFactors = F)
-  colnames(ans) <- c("token", "type")  
-  return (ans)
+  ## create a data frame 
+  if (numtokens>0) {
+    result <- data.frame(do.call(rbind, ans), stringsAsFactors = F)
+    colnames(result) <- c("token", "type")
+  } else {
+    result <- data.frame(token=NA, type=NA)[c(),]
+  }
+  return (result)
 }
-
 
 
 
@@ -121,7 +114,6 @@ RcssLexChars <- function(cc, pos = 1) {
 RcssGetToken <- function(cc, pos, newpos) {
   paste(cc[pos:(newpos - 1)], collapse = "")
 }
-
 
 
 
@@ -186,13 +178,8 @@ RcssLexNextToken <- function(cc, pos,
 
 
 
-
-
-
-
 ## ################################################################
 ## Functions that handle individual token types
-
 
 
 ## parses a comment
@@ -203,10 +190,10 @@ RcssLexNextToken <- function(cc, pos,
 RcssParseComment <- function(cc, pos) {
 
   ## check one more time that this is a comment
-  if (cc[pos] != "/" | cc[pos + 1] != "*") {
-    stopCF("RcssParseComment: expecting /*, got ",
-           paste(cc[pos:(pos + 1)], collapse=""),"\n");
-  }
+  #if (cc[pos] != "/" | cc[pos + 1] != "*") {
+  #  stopCF("RcssParseComment: expecting /*, got ",
+  #         paste(cc[pos:(pos + 1)], collapse=""),"\n");
+  #}
   
   ## cclen avoids reading beyond the vector length
   cclen <- length(cc)
@@ -226,7 +213,6 @@ RcssParseComment <- function(cc, pos) {
   ## for the return value, either case is fine
   return(nowpos + 2)  
 }
-
 
 
 
@@ -251,7 +237,6 @@ RcssIsEscaped <- function(cc, pos) {
   
   
   
-  
 ## parses a number
 ## cc - vector of characters
 ## pos - current position (expects '-' or 0-9)
@@ -264,20 +249,25 @@ RcssParseNumber <- function(cc, pos, exponent = FALSE, decimal = FALSE) {
   digits = seq(0, 9)  
   
   nowpos <- pos
+  ## avoid running over the length of the input
+  if (nowpos>length(cc)) return(nowpos)
+  
   ## skip a minus sign or plus sign if there is one
   if (cc[pos] == "-" | cc[pos] == "+") {
     nowpos <- nowpos + 1
   }
-
+  if (nowpos>length(cc)) return(nowpos)
+  
   ## a number must have at least one digit
   if (!(cc[nowpos] %in% digits)) {
     stopCF("RcssParseNumber: expecting number, got ", cc[pos], "\n");
   }
   
   ## loop to skip over the digits
-  while (cc[nowpos] %in% digits) {
+  while (nowpos<=length(cc) & cc[nowpos] %in% digits) {
     nowpos <- nowpos + 1
   }
+  if (nowpos>length(cc)) return(nowpos)
   
   ## after the first digits, can have a dot or an exponent
   if (cc[nowpos]==".") {
@@ -310,7 +300,6 @@ RcssParseNumber <- function(cc, pos, exponent = FALSE, decimal = FALSE) {
 
 
 
-
 ## parses a string
 ## cc - vector of characters
 ## pos - current position (expects '/' followed by '*')
@@ -320,9 +309,9 @@ RcssParseNumber <- function(cc, pos, exponent = FALSE, decimal = FALSE) {
 RcssParseString <- function(cc, pos, delimiter="\"") {
 
   ## check one more time for string
-  if (cc[pos] != "'" & cc[pos] != "\"") {
-    stopCF("RcssParseString: expecting string, got ", cc[pos], "\n")
-  }
+  #if (cc[pos] != "'" & cc[pos] != "\"") {
+  #  stopCF("RcssParseString: expecting string, got ", cc[pos], "\n")
+  #}
 
   cclen <- length(cc)  
   nowpos <- pos + 1
@@ -345,7 +334,6 @@ RcssParseString <- function(cc, pos, delimiter="\"") {
 
 
 
-
 ## parses a hex color
 ## cc - vector of characters
 ## pos - current position (this function expects a hash sign)
@@ -354,9 +342,9 @@ RcssParseString <- function(cc, pos, delimiter="\"") {
 RcssParseHexToken <- function(cc, pos) {
 
   ## check one more time start of a hex color
-  if (cc[pos] != "#") {
-    stopCF("parseHexToken: expecting #, got ", cc[pos], "\n")
-  }
+  #if (cc[pos] != "#") {
+  #  stopCF("parseHexToken: expecting #, got ", cc[pos], "\n")
+  #}
   
   ## find all subsequent characters that are consistent with a color
   nowpos <- pos + 1
@@ -380,7 +368,6 @@ RcssParseHexToken <- function(cc, pos) {
 
 
 
-
 ## parser for a generic token
 ## cc - vector of characters
 ## pos - current position
@@ -399,3 +386,4 @@ RcssParseGeneric <- function(cc, pos, delimiters) {
   
   return(nowpos)
 }
+

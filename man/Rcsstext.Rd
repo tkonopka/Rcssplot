@@ -23,4 +23,3 @@ defined via RcssSetDefaultStyle()}
 Rcsstext is a wrapper for R's text() function.
 See R's documentation for text() for further details.
 }
-

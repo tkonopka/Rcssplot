@@ -22,4 +22,3 @@ a list with two items. "Defined" is a boolean that indicates the
 property is defined in the style sheet. "Value" gives the actual value
 of the property.
 }
-

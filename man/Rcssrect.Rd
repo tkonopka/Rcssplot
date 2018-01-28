@@ -22,4 +22,3 @@ defined via RcssSetDefaultStyle()}
 Rcssrect is a wrapper for R's rect() function.
 See R's documentation for rect() for further details.
 }
-

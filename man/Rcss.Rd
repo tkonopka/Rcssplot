@@ -19,4 +19,3 @@ object without any styling.
 \details{
 See also related functions RcssGetDefaultStyle() and RcssOverload().
 }
-

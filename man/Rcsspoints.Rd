@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsspoints is a wrapper for R's points() function.
 See R's documentation for points() for further details.
 }
-

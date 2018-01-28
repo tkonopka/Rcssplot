@@ -20,4 +20,7 @@ tests/*.jpg
 tests/figures/*pdf
 tests/figures/*png
 tests/figures/*jpeg
+tests/testthat/figures/*pdf
+tests/testthat/figures/*png
+tests/testthat/figures/*jpeg
 

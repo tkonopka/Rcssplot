@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcssjpeg is a wrapper for R's jpeg() function.
 See R's documentation for jpeg() for further details
 }
-

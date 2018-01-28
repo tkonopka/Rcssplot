@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcssmtext is a wrapper for R's mtext() function.
 See R's documentation for mtext() for further details.
 }
-

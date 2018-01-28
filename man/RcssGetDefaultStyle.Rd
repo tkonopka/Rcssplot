@@ -16,4 +16,3 @@ ignores the default and returns the set object back.}
 Fetches the value of the RcssDefaultStyle object defined in
 parent environments.
 }
-

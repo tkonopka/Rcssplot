@@ -22,4 +22,3 @@ defined via RcssSetDefaultStyle()}
 Rcsslegend is a wrapper for R's legend() function.
 See R's documentation for legend() for further details.
 }
-

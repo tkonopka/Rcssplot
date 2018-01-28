@@ -22,4 +22,3 @@ defined via RcssSetDefaultStyle()}
 Rcssmatplot is a wrapper for R's \code{\link{matplot}()} function.
 See R's documentation for \code{\link{matplot}()} for further details.
 }
-

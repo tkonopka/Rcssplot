@@ -16,4 +16,3 @@ the concatentation of the current set and new set.}
 Fetches the value of the RcssCompulsoryClass object defined in
 parent environments.
 }
-

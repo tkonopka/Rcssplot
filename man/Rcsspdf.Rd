@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsspdf is a wrapper for R's pdf() function.
 See R's documentation for pdf() for further details
 }
-

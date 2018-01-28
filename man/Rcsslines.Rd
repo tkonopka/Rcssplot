@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsslines is a wrapper for R's lines() function.
 See R's documentation for lines() for further details.
 }
-

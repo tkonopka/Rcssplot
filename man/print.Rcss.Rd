@@ -15,4 +15,3 @@
 Display selectors encoded in an Rcss object.
 For more detailed information about the object, see function printRcss()
 }
-

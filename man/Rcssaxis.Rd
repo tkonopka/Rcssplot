@@ -22,4 +22,3 @@ defined via RcssSetDefaultStyle()}
 Rcssaxis is a wrapper for R's axis() function.
 See R's documentation for axis() for further details.
 }
-

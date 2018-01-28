@@ -28,4 +28,3 @@ only used propertylist is set to NULL}
 Creates a new Rcss style sheet object from the input, modifying
 one or more properties.
 }
-

@@ -18,4 +18,3 @@ detailed information about subclasses.}
 \description{
 Display properties encoded in an Rcss object, including any subclasses.
 }
-

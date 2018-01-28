@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcssbarplot is a wrapper for R's barplot() function.
 See R's documentation for barplot() for further details.
 }
-

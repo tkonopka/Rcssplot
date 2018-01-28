@@ -13,4 +13,3 @@ These style class (or classes) are applied in all functions of
 the Rcss family.
 }
 \keyword{datasets}
-

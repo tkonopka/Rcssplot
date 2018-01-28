@@ -21,4 +21,3 @@ defined via RcssSetDefaultStyle()}
 Rcssbox is a wrapper for R's box() function.
 See R's documentation for box() for further details.
 }
-

@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsshist is a wrapper for R's hist() function.
 See R's documentation for hist() for further details.
 }
-

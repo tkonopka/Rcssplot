@@ -20,4 +20,3 @@ defined via RcssSetDefaultStyle()}
 Rcsspolygon is a wrapper for R's polygon() function.
 See R's documentation for polygon() for further details.
 }
-
