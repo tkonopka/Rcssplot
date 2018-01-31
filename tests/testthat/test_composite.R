@@ -61,7 +61,7 @@ metaplot <- function(filename) {
     axis(1, at=barpos[,1], labels=names(x), Rcssclass="x")
     axis(2, Rcssclass="y")  
     mtext(main, Rcssclass="main")
-    mtext(submain, Rcssclass="submain")
+    mtext(submain, Rcss=NULL, Rcssclass="submain")
   }
   ## assumes global overloading
   testplot5 <- function(x, main="Custom Rcss plot", submain="",

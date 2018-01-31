@@ -14,7 +14,7 @@ style = Rcss(tofile(styletext))
 
 
 ###############################################################################
-## updating values manually in a style
+## using a default Rcss style
 
 test_that("can set default style", {
   RcssDefaultStyle = NULL
@@ -34,6 +34,28 @@ test_that("can unset a default style", {
   RcssDefaultStyle = style
   mystyle = RcssGetDefaultStyle("default")
   expect_equal(style, mystyle)
+})
+
+
+
+###############################################################################
+## using a compulsory class
+
+test_that("can set compulsory class", {
+  before = RcssGetCompulsoryClass(NULL)
+  expect_equal(before, NULL)
+  after = RcssGetCompulsoryClass("abc")
+  expect_equal(after, "abc")
+})
+
+test_that("using a compulsory class in a function", {
+  RcssCompulsoryClass = RcssGetCompulsoryClass("abc")
+  myfun = function() {
+    inner = RcssGetCompulsoryClass("xyz")
+    inner
+  }
+  inner = myfun()
+  expect_equal(inner, c("abc", "xyz"))
 })
 
 

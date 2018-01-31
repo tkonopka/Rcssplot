@@ -90,6 +90,7 @@ RcssParseRuleSet <- function(lextab, n) {
 ## lextab - data frame with tokens
 ## n - the current row in the data frame
 ##
+## return - new n after parsed selectors, list of selectors
 RcssParseSelector <- function(lextab, n) {
 
   ## the output here will be an object name followed by classes
@@ -109,7 +110,8 @@ RcssParseSelector <- function(lextab, n) {
   while (n <= nrow(lextab) & lextab[n,"token"] == ".") {
     n <- n + 1
     if (lextab[n,"type"] == "IDENT") {
-      ans[length(ans)+1] = paste0(lextab[n, "token"])
+      ##ans[length(ans)+1] = paste0(lextab[n, "token"]) ## ****
+      ans[length(ans)+1] = lextab[n, "token"]
       n <- n +1
     } else {
       RcssParseError(lextab, n, "RcssParseSelector", "IDENT")
@@ -168,18 +170,34 @@ RcssParseDeclarationSet <- function(lextab, n) {
   while(n <= nrow(lextab) & lextab[n, "token"] != "}") {
     ## parse a property/expr pair
     exprprop = RcssParseDeclaration(lextab, n)
-
-    ## format and store in a list
-    ans[[length(ans) + 1]] <- exprprop$Expr    
-    names(ans)[length(ans)] <- exprprop$Property
+    if (is.null(exprprop$Expr)) {
+      ans[length(ans)+1] = list(NULL)
+    } else {
+      ans[[length(ans) + 1]] <- exprprop$Expr    
+    }
+    names(ans)[length(ans)] = exprprop$Property
     
     ## advance the n counter over this property/expr pair
     n <- exprprop$n
   }
 
-  ## when the loop ends, the current state is a "}"
+  ## when the loop ends, the current state is a "}". Move over, finish.
   n <- n + 1
   list(n = n, DeclarationSet = ans)
+}
+
+
+## helper to parse special strings into R primitives
+##
+## tok - one string
+## return - an R primitive for that string, "NULL" gives an empt list
+parseIDENT <- function(tok) {
+  if (tok == "NULL") {
+    return(list())
+  } else if (tok %in% c("TRUE", "FALSE", "NA")) {
+    return(as.logical(tok))
+  } 
+  tok
 }
 
 
@@ -198,23 +216,24 @@ RcssParseDeclaration <- function(lextab, n) {
     RcssParseError(lextab, n, "RcssParseDeclaration", ":");
   }
   n <- n + 1
-  
+
   ## keep reading the declarations until hit a ';' or a '}'
   expr <- c()
-  while (n <= nrow(lextab) &
-         lextab[n,"token"] != ";" & lextab[n, "token"] != "}") {
+  exprlen <- 0
+  while (n <= nrow(lextab) & !lextab[n,"token"] %in% c(";", "}")) {
     
     ## allowed tokens are IDENT, NUMBER, HEXCOLOR, STRING
     if (lextab[n, "type"] %in% c("IDENT", "STRING", "HEXCOLOR")) {
-      expr[length(expr) + 1] <- lextab[n,"token"]
+      expr[exprlen + 1] <- parseIDENT(lextab[n, "token"])
     } else if (lextab[n, "type"]=="NUMBER") {
-      expr[length(expr)+1] <- as.numeric(lextab[n,"token"])
+      expr[exprlen+1] <- as.numeric(lextab[n,"token"])
     } else {
       RcssParseError(lextab, n, "RcssParseDeclaration",
                      "IDENT|NUMBER|HEXCOLOR|STRING")
     }
-
-    n <- n + 1    
+    
+    n <- n + 1
+    exprlen <- exprlen + 1
   }
 
   ## if current token is an end of declaration, skip over it
@@ -224,10 +243,10 @@ RcssParseDeclaration <- function(lextab, n) {
 
   ## when the user leaves the expression blank, assume that means ""
   ## e.g. this can be used to set xlab=""
-  if (is.null(expr)) {
+  if (exprlen==0) {
     expr <- ""
   }
-  
+
   ## return an object with the property/expr pair, but also
   ## the number of the next non-trivial token
   list(n = n, Property = property, Expr = expr)

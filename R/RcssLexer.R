@@ -146,9 +146,11 @@ RcssLexNextToken <- function(cc, pos,
     return(c(newpos, token, "COMMENT"))
     
   } else if (nowchar %in% c("\"", "\'")) {
-      ## start of a string
+    ## start of a string
     newpos <- RcssParseString(cc, pos, nowchar)
     token <- RcssGetToken(cc, pos, newpos)
+    ## strip the token of it's closing and opening delimiters
+    token <- substr(token, 2, nchar(token)-1)
     return(c(newpos, token, "STRING"))
     
   } else if (nowchar == "#") {
@@ -308,14 +310,9 @@ RcssParseNumber <- function(cc, pos, exponent = FALSE, decimal = FALSE) {
 ## returns - position of first character outside the string
 RcssParseString <- function(cc, pos, delimiter="\"") {
 
-  ## check one more time for string
-  #if (cc[pos] != "'" & cc[pos] != "\"") {
-  #  stopCF("RcssParseString: expecting string, got ", cc[pos], "\n")
-  #}
-
   cclen <- length(cc)  
   nowpos <- pos + 1
-  while ((nowpos < cclen) & !(cc[nowpos] == delimiter)) {
+  while ((nowpos < cclen) & cc[nowpos] != delimiter) {
     nowpos <- nowpos + 1
   }
 

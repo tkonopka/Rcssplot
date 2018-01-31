@@ -27,6 +27,7 @@ mtext {
   line: 2.2;
   cex: 1.1;
   adj: 0;
+  pos: NULL;
 }
 mtext.submain {
   line: 0.7;

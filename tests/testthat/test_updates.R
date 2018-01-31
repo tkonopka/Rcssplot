@@ -107,6 +107,28 @@ test_that("update on default style", {
 })
 
 
+###############################################################################
+## updating with special values (i.e. NA, NULL)
+
+test_that("update can insert NA", {
+  style2 = RcssChangePropertyValue(style, "text", property="cex", value=NA)
+  cex0 = RcssValue("text", "cex", default=5, Rcss=style)
+  cex1 = RcssValue("text", "cex", default=5, Rcss=style2)
+  expect_identical(cex0, 1.5)
+  expect_identical(cex1, NA)
+})
+
+
+test_that("update can insert NULL", {
+  style2 = RcssChangePropertyValue(style, "text", property="cex", value=NULL)
+  cex0 = RcssValue("text", "cex", default=5, Rcss=style)
+  cex1 = RcssValue("text", "cex", default=5, Rcss=style2)
+  expect_identical(cex0, 1.5)
+  expect_identical(cex1, NULL)
+})
+
+
+
 
 ## cleanup
 unlink(tofile(""))
