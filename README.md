@@ -16,7 +16,7 @@ See the package vignette and the [github wiki](http://github.com/tkonopka/Rcsspl
 
 &nbsp;
 
-Copyright (c) 2015-2017 Tomasz Konopka
+Copyright (c) 2015-2018 Tomasz Konopka
 
 Many thanks to contributors: FrancoisGuillem, nfultz
 

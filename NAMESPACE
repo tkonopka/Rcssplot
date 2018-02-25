@@ -2,6 +2,7 @@
 
 S3method(print,Rcss)
 export(Rcss)
+export(RcssChange)
 export(RcssChangePropertyValue)
 export(RcssCompulsoryClass)
 export(RcssDefaultStyle)

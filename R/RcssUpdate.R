@@ -19,7 +19,9 @@
 ##' 
 ##' Creates a new Rcss style sheet object from the input, modifying
 ##' one or more properties.
-##' 
+##'
+##' Equivallent to RcssChange: use RcssChange instead
+##'
 ##' @param Rcss style sheet object
 ##' @param selector name of one selector ("text", "plot", "axis", etc.)
 ##' @param Rcssclass subclass of style sheet. Leave NULL to change
@@ -35,6 +37,44 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
                                     propertylist = NULL,
                                     property = NULL, value = NULL) {
 
+  RcssChange(selector, propertylist=propertylist,
+             property=property, value=value,
+             Rcssclass=Rcssclass,
+             Rcss=Rcss)
+}
+
+
+
+
+##' Modify an Rcss style sheet object
+##' 
+##' Creates a new Rcss style sheet object from the input, modifying
+##' one or more properties.
+##' 
+##' @param selector name of one selector ("text", "plot", "axis", etc.)
+##' @param propertylist list with property/value pairs to update
+##' @param property name of a single property. This is only used
+##' when propertylist is set to NULL
+##' @param value new values associated with property above. This is
+##' only used propertylist is set to NULL
+##' @param Rcssclass subclass of style sheet. Leave NULL to change
+##' base property. Provide one character value to edit one subclass.
+##' Provide a vector to edit a subclass of a subclass of a ...
+##' @param Rcss style sheet object
+##'
+##' @return always returns an Rcss object. Note: when changing
+##' the default style, this will return a new style without
+##' actually affecting the default style. To change how the
+##' default works in practice, assign this return value to
+##' RcssDefaultStyle
+##'
+##' @export 
+RcssChange <- function(selector,  
+                       propertylist = NULL,
+                       property = NULL, value = NULL,
+                       Rcssclass = NULL,
+                       Rcss="default") {
+  
   ## handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
     Rcss <- RcssGetDefault("RcssDefaultStyle")
@@ -62,7 +102,7 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
   ## 
   ## For implementation, reduce both cases to a property list
   if (!is.null(propertylist)) {
-    if (is.null(names(propertylist))) {
+    if (length(propertylist)>0 & is.null(names(propertylist))) {
       stopCF("RcssChangePropertyValue: property list must have names \n")
     }
   }

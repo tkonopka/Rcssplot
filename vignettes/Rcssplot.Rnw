@@ -233,7 +233,7 @@ showrcss("Rcss/vignettes.bar2.Rcss")
 \noindent The definitions are again arranged into blocks that correspond to R's base graphics commands. It is worth noting a few features.
 
 \begin{itemize}
-\item The values in the style sheet match the settings hard-coded into function {\tt base.barplot.1}. The format of the style sheet makes it easy to identify property/value pairs. (As an aside, it is possible to format the style sheet in a more compact horizontal fashion following the usual conventions of css files).
+\item The values in the style sheet match the settings hard-coded into function {\tt base.barplot.1}. The format of the style sheet makes it easy to identify property/value pairs. 
   
 \item Some blocks contain names with dots followed by a string, e.g. {\tt axis.x}. This notation defines property/value pairs that are activated only in particular circumstances. In the case of {\tt axis.x}, the definitions pertain to function {\tt Rcssaxis}, but only when accompanied by class label {\tt x}. This will become clearer below.
 
@@ -631,7 +631,13 @@ showrcss("Rcss/grammar.txt")
 
 \subsection*{{v0.3.0}}
 
-New functions for fetching values from Rcss objects: {\tt RcssValue}. The new functions are meant to reduce verbosity, especially when fetching values from a default style. 
+\begin{itemize}
+  
+ \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously exisitng functions, but are less verbose, epsecially forfetching values from a default style. 
+
+ \item Better parsing and handling of special values in css files, e.g. TRUE/FALSE, NA, NULL.
+
+\end{itemize}
 
 \subsection*{{v0.2.0}}
 

@@ -98,6 +98,18 @@ test_that("update style only takes a named list", {
 })
 
 
+test_that("update style can take an empty list", {
+  style2 = RcssChangePropertyValue(style, "text", propertylist=list())
+  expect_equal(style, style2)
+})
+
+
+test_that("update style with empty list creates selector", {
+  style2 = RcssChangePropertyValue(style, "points", propertylist=list())
+  expect_equal(length(style2), length(style)+1)
+})
+
+
 test_that("update on default style", {
   RcssDefaultStyle = style
   style2 = RcssChangePropertyValue("default", "text", property="col", value="#f0f")
