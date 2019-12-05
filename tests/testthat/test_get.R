@@ -1,10 +1,10 @@
-## Tests for getting values from Rcss objects
-##
+# Tests for getting values from Rcss objects
+#
 
 cat("\ntest_get.R ")
 source("helpers.R")
 
-## create a style for testing
+# create a style for testing
 styletext = "
 points {
   cex: 2 4;
@@ -43,7 +43,7 @@ style = Rcss(tofile(styletext))
 
 
 ###############################################################################
-## extracting data types from style sheets
+# extracting data types from style sheets
 
 
 test_that("get from empty style", {
@@ -152,10 +152,8 @@ test_that("get multiple values from style", {
 })
 
 
-
-
 ###############################################################################
-## using common properties for several selectors
+# using common properties for several selectors
 
 
 test_that("get multiple values from style", {
@@ -165,10 +163,8 @@ test_that("get multiple values from style", {
 })
 
 
-
-
 ###############################################################################
-## using default values
+# using default values
 
 
 test_that("get value, default not necessary", {
@@ -206,7 +202,7 @@ test_that("get value, using default style, default value necessary", {
 
 
 ###############################################################################
-## using subclasses
+# using subclasses
 
 
 test_that("get using subclass", {
@@ -234,7 +230,7 @@ test_that("get when subclass modifies all selectors", {
 
 
 test_that("global subclass does not modify non-explicit selectors", {
-  ## selector "custom" does not exist in the style
+  # selector "custom" does not exist in the style
   xpd0 = RcssProperty("custom", "xpd", Rcssclass="all", Rcss=style)
   expect_false(xpd0$defined)
 })
@@ -243,7 +239,7 @@ test_that("global subclass does not modify non-explicit selectors", {
 
 
 ###############################################################################
-## legacy functions with long names
+# legacy functions with long names
 
 
 test_that("get using Rcss-first function, single integer", {
@@ -259,7 +255,5 @@ test_that("get using Rcss-first function, using default", {
 })
 
 
-
-
-## clean up any temporary file
+# clean up any temporary file
 unlink(tofile(""))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcssWrappers.R
 \name{Rcssgrid}
 \alias{Rcssgrid}
-\title{##' Draw a styled grid}
+\title{#' Draw a styled grid}
 \usage{
 Rcssgrid(Rcss = "default", Rcssclass = NULL, ...)
 }

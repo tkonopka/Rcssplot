@@ -1,13 +1,10 @@
-## tests for helper functions R/RcssHelpers.R
+# tests for helper functions R/RcssHelpers.R
 
 
 cat("\ntest_helpers.R ")
 
 
-
-
 ###############################################################################
-## unit tests
 
 
 test_that("raise error", {

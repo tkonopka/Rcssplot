@@ -1,4 +1,4 @@
-## tests for lexer
+# tests for lexer
 
 
 cat("\ntest_lexer.R ")
@@ -6,7 +6,7 @@ source("helpers.R")
 
 
 ###############################################################################
-## test lexing small components
+# lexing small components
 
 
 test_that("Lex on missing file", {
@@ -28,10 +28,12 @@ test_that("parse a comment", {
   expect_equal(result, length(fdata)+1)
 })
 
+
 test_that("parse a string", {
   fdata = tochars("comment")
   expect_equal(RcssParseString(fdata, 1), length(fdata)+1)
 })
+
 
 test_that("parse a string with escaped", {
   fdata = tochars("comment\'with\'")
@@ -44,50 +46,60 @@ test_that("parse a number", {
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
 
+
 test_that("parse a positive number", {
   fdata = tochars("+34")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
+
 
 test_that("parse a negative number", {
   fdata = tochars("-34")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
 
+
 test_that("parse a real number", {
   fdata = tochars("-3.4")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
+
 
 test_that("parse a real number with positive exponent", {
   fdata = tochars("1.4e3")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
 
+
 test_that("parse a real number with positive exponent 2", {
   fdata = tochars("1.4e+3")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
+
 
 test_that("parse a real number with negative exponent", {
   fdata = tochars("1.4e-3")
   expect_equal(RcssParseNumber(fdata, 1), length(fdata)+1)
 })
 
+
 test_that("cannot parse a misformed negative", {
   fdata = tochars("-e3")
   expect_error(RcssParseNumber(fdata, 1))
 })
+
 
 test_that("cannot parse with multiple dots", {
   fdata = tochars("3.4.5.6")
   expect_error(RcssParseNumber(fdata, 1))
 })
 
+
 test_that("cannot parse with multiple exponents", {
   fdata = tochars("3e4e5e6")
   expect_error(RcssParseNumber(fdata, 1))
 })
+
 
 test_that("cannot parse without leading digit", {
   fdata = tochars("+.34")
@@ -95,9 +107,8 @@ test_that("cannot parse without leading digit", {
 })
 
 
-
-
-
+###############################################################################
+# lexing colors
 
 
 test_that("parse hex tokens", {

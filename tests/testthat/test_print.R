@@ -1,8 +1,7 @@
-## Tests printing information to summarize from Rcss objects
-##
+# Tests printing information to summarize from Rcss objects
+#
 
 cat("\ntest_print.R ")
-
 source("helpers.R")
 
 
@@ -28,9 +27,8 @@ points.abc.qq {
 style = Rcss(tofile(styletext))
 
 
-
 ###############################################################################
-## printing of style summary
+# printing of style summary
 
 
 test_that("print summary gives error on wrong input", {
@@ -52,7 +50,7 @@ test_that("print summary shows all selectors", {
 
 
 ###############################################################################
-## printing style details
+# printing style details
 
 
 test_that("print details gives error on non-Rcss", {
@@ -61,7 +59,7 @@ test_that("print details gives error on non-Rcss", {
 
 
 test_that("print details gives error on non-existent selector", {
-  ## error should give hint of those selectors that are specified
+  # error should give hint of those selectors that are specified
   expect_error(printRcss(style), "points")
 })
 
@@ -85,7 +83,7 @@ test_that("print details shows all subclasses", {
 test_that("print verbose details shows all subclasses", {
   expect_output(printRcss(style, "points"), "abc")
   expect_output(printRcss(style, "points"), "xyz")
-  ## should display level-2 subclasses in verbose mode, but not in regular
+  # should display level-2 subclasses in verbose mode, but not in regular
   expect_failure(expect_output(printRcss(style, "points", verbose=F), "qq"))
   expect_success(expect_output(printRcss(style, "points", verbose=T), "qq"))
   # nested print should display properties defined in subclass
@@ -96,6 +94,5 @@ test_that("print verbose details shows all subclasses", {
 })
 
 
-
-## cleanup temporary files
+# cleanup temporary files
 unlink(tofile(""))

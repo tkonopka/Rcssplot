@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcssGet.R
 \name{RcssGetPropertyValueOrDefault}
 \alias{RcssGetPropertyValueOrDefault}
-\title{Extracts a value for an Rcss property}
+\title{Extract a value for an Rcss property}
 \usage{
 RcssGetPropertyValueOrDefault(Rcss, selector, property, default = NULL,
   Rcssclass = NULL)

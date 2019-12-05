@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcssGet.R
 \name{RcssGetPropertyValue}
 \alias{RcssGetPropertyValue}
-\title{Extracts a value for an Rcss property}
+\title{Extract a value for an Rcss property}
 \usage{
 RcssGetPropertyValue(Rcss, selector, property, Rcssclass = NULL)
 }
@@ -17,7 +17,7 @@ RcssGetPropertyValue(Rcss, selector, property, Rcssclass = NULL)
 \item{Rcssclass}{subclass of style sheet}
 }
 \description{
-Extracts a value for a property from an Rcss style sheet object. Returns
+Extract a value for a property from an Rcss style sheet object. Returns
 a list with two items. "Defined" is a boolean that indicates the
 property is defined in the style sheet. "Value" gives the actual value
 of the property.

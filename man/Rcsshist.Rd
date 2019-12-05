@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcssWrappers.R
 \name{Rcsshist}
 \alias{Rcsshist}
-\title{##' Draw a styled histogram}
+\title{#' Draw a styled histogram}
 \usage{
 Rcsshist(x, Rcss = "default", Rcssclass = NULL, ...)
 }

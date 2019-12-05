@@ -1,14 +1,14 @@
-## test wrappers
+# test wrappers
 
 cat("\ntest_wrappers.R ")
-
 source("helpers.R")
 
-## some working styles
+
+# some working styles
 style0 = Rcss()
 style5 = Rcss(file.path("data","style.5.Rcss"))
 
-## some data objects
+# some data objects
 set.seed(12345)
 x0 = 1:5
 x1a = sort(sample(40:80, 10, replace=F))
@@ -17,9 +17,8 @@ x2 = rnorm(200)
 x3 = list(A=rnorm(20), B=c(rnorm(20,1)), C=c(rnorm(20,3),0.4, 0,-0.4))
 
 
-
 ###############################################################################
-## unit tests
+# unit tests
 
 
 test_that("abline wrapper", {
@@ -499,6 +498,4 @@ test_that("title wrapper", {
   expect_silent(myplot(filename))
   expect_true(file.exists(filename))
 })
-
-
 

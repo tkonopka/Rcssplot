@@ -4,8 +4,8 @@
 \alias{Rcssrect}
 \title{Draw styled rectangles on a plot}
 \usage{
-Rcssrect(xleft, ybottom, xright, ytop, Rcss = "default", Rcssclass = NULL,
-  ...)
+Rcssrect(xleft, ybottom, xright, ytop, Rcss = "default",
+  Rcssclass = NULL, ...)
 }
 \arguments{
 \item{xleft, ybottom, xright, ytop}{vector of coordinates for rectangles'

@@ -1,10 +1,10 @@
-## Tests for setting default styles and compulsory classes
-##
+# Tests for setting default styles and compulsory classes
+#
 
 cat("\ntest_defaults.R ")
 
 
-## create a style for testing
+# create a style for testing
 styletext = "
 text {
   cex: 1.5;
@@ -14,7 +14,7 @@ style = Rcss(tofile(styletext))
 
 
 ###############################################################################
-## using a default Rcss style
+# using a default Rcss style
 
 test_that("can set default style", {
   RcssDefaultStyle = NULL
@@ -37,9 +37,9 @@ test_that("can unset a default style", {
 })
 
 
-
 ###############################################################################
-## using a compulsory class
+# using a compulsory class
+
 
 test_that("can set compulsory class", {
   before = RcssGetCompulsoryClass(NULL)
@@ -47,6 +47,7 @@ test_that("can set compulsory class", {
   after = RcssGetCompulsoryClass("abc")
   expect_equal(after, "abc")
 })
+
 
 test_that("using a compulsory class in a function", {
   RcssCompulsoryClass = RcssGetCompulsoryClass("abc")
@@ -59,8 +60,6 @@ test_that("using a compulsory class in a function", {
 })
 
 
-
-
-## cleanup
+# cleanup
 unlink(tofile(""))
 

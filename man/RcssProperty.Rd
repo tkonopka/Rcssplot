@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcssGet.R
 \name{RcssProperty}
 \alias{RcssProperty}
-\title{Extracts information about property and its value}
+\title{Extract information about property and its value}
 \usage{
 RcssProperty(selector, property, Rcssclass = NULL, Rcss = "default")
 }

@@ -1,10 +1,10 @@
-## Tests for getting values from Rcss objects
-##
+# Tests for getting values from Rcss objects
+#
 
 cat("\ntest_updates.R ")
 
 
-## create a style for testing
+# create a style for testing
 styletext = "
 text {
   cex: 1.5;
@@ -14,7 +14,7 @@ style = Rcss(tofile(styletext))
 
 
 ###############################################################################
-## updating values manually in a style
+# updating values manually in a style
 
 
 test_that("update fails on non-Rcss input", {
@@ -32,9 +32,9 @@ test_that("update on null style creates a new object", {
 test_that("update of style can add new selector", {
   style2 = RcssChangePropertyValue(style, "points", property="cex", value=2)
   expect_equal(class(style2), "Rcss")
-  ## new style should have old data
+  # new style should have old data
   expect_equal(RcssGetPropertyValue(style2, "text", "cex")$value, 1.5)
-  ## new style should have new data
+  # new style should have new data
   expect_equal(RcssGetPropertyValue(style2, "points", "cex")$value, 2)
 })
 
@@ -42,9 +42,9 @@ test_that("update of style can add new selector", {
 test_that("update of style returns style object with new property:value", {
   style2 = RcssChangePropertyValue(style, "text", property="pos", value=2)
   expect_equal(class(style2), "Rcss")
-  ## new style should have old properties
+  # new style should have old properties
   expect_equal(RcssGetPropertyValue(style2, "text", "cex")$value, 1.5)
-  ## new style should have new property
+  # new style should have new property
   expect_equal(RcssGetPropertyValue(style2, "text", "pos")$value, 2)
 })
 
@@ -113,7 +113,7 @@ test_that("update style with empty list creates selector", {
 test_that("update on default style", {
   RcssDefaultStyle = style
   style2 = RcssChangePropertyValue("default", "text", property="col", value="#f0f")
-  ## new style should have old as well as new data
+  # new style should have old as well as new data
   expect_equal(RcssGetPropertyValue(style2, "text", "cex")$value, 1.5)
   expect_equal(RcssGetPropertyValue(style2, "text", "col")$value, "#f0f")
 })
@@ -140,8 +140,6 @@ test_that("update can insert NULL", {
 })
 
 
-
-
-## cleanup
+# cleanup
 unlink(tofile(""))
 

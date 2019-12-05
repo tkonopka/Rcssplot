@@ -1,19 +1,17 @@
-## Tests for parsing files
-##
+# Tests for parsing files
+#
 
 cat("\ntest_parsing.R ")
 source("helpers.R")
 
 
-## files with misc style sheets
+# files with misc style sheets
 style.files = file.path("data", paste0("style.", seq(1, 3), ".Rcss"))
 style13 = Rcss(style.files[1:3])
 
 
-
-
 ###############################################################################
-## loading styles from files
+# loading styles from files
 
 
 test_that("can initializae a blank style", {
@@ -70,9 +68,8 @@ test_that("load composite style from multiple files", {
 })
 
 
-
 ###############################################################################
-## reporing errors on misformed data
+# reporing errors on misformed data
 
 
 test_that("report error; missing selector", {
@@ -196,6 +193,6 @@ text,,mtext {
 })
 
 
-## clean up any temporary file
+# clean up any temporary file
 unlink(tofile(""))
 

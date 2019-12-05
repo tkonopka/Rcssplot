@@ -30,21 +30,20 @@ library("Rcssplot")
 library("knitr")
 opts_chunk$set(fig.pos = "", fig.align = "center")
 
-## helper function to display contents of css files
-## f - filename
-## remove - number of header lines to remove before displaying
+# helper function to display contents of css files
+# f - filename
+# remove - number of header lines to remove before displaying
 showrcss = function(f, remove=4) {
   fcon = file(f, open="r")
   flines = readLines(fcon)
-  close(fcon)
-  
-  ## remove the first few lines
+  close(fcon) 
+  # remove the first few lines
   flines = flines[(remove+1):length(flines)]
-  ## remove the last line if empty
+  # remove the last line if empty
   if (flines[length(flines)]=="") {
     flines = flines[1:(length(flines)-1)]
   }
-  ## output the contents of the file on screen
+  # output the contents of the file on screen
   flines = paste(flines, "\n")
   cat(flines)
 }

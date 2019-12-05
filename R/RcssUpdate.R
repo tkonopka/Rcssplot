@@ -1,42 +1,37 @@
-##
-## File part of Rcssplot package
-## These functions define and display objects of class Rcss
-##
-##
-## Author: Tomasz Konopka
-##
-
+# File part of Rcssplot package
+# These functions define and display objects of class Rcss
+#
+#
+# Author: Tomasz Konopka
 
 
 
 #########################################################
-## Functions to modify the structure of one Rcss object
-## or one RcssProperties object
-##
+# Modify the structure of Rcss and RcssProperties objects
 
 
-##' Modify an Rcss style sheet object
-##' 
-##' Creates a new Rcss style sheet object from the input, modifying
-##' one or more properties.
-##'
-##' Equivallent to RcssChange: use RcssChange instead
-##'
-##' @param Rcss style sheet object
-##' @param selector name of one selector ("text", "plot", "axis", etc.)
-##' @param Rcssclass subclass of style sheet. Leave NULL to change
-##' base property. Provide one character value to edit one subclass.
-##' Provide a vector to edit a subclass of a subclass of a ...
-##' @param propertylist list with property/value pairs to update
-##' @param property name of a single property. This is only used
-##' when propertylist is set to NULL
-##' @param value new values associated with property above. This is
-##' only used propertylist is set to NULL
-##' @export 
+#' Modify an Rcss style sheet object
+#' 
+#' Creates a new Rcss style sheet object from the input, modifying
+#' one or more properties.
+#'
+#' Equivallent to RcssChange: use RcssChange instead
+#'
+#' @param Rcss style sheet object
+#' @param selector name of one selector ("text", "plot", "axis", etc.)
+#' @param Rcssclass subclass of style sheet. Leave NULL to change
+#' base property. Provide one character value to edit one subclass.
+#' Provide a vector to edit a subclass of a subclass of a ...
+#' @param propertylist list with property/value pairs to update
+#' @param property name of a single property. This is only used
+#' when propertylist is set to NULL
+#' @param value new values associated with property above. This is
+#' only used propertylist is set to NULL
+#' @export 
 RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL, 
                                     propertylist = NULL,
                                     property = NULL, value = NULL) {
-
+  
   RcssChange(selector, propertylist=propertylist,
              property=property, value=value,
              Rcssclass=Rcssclass,
@@ -46,36 +41,36 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 
 
 
-##' Modify an Rcss style sheet object
-##' 
-##' Creates a new Rcss style sheet object from the input, modifying
-##' one or more properties.
-##' 
-##' @param selector name of one selector ("text", "plot", "axis", etc.)
-##' @param propertylist list with property/value pairs to update
-##' @param property name of a single property. This is only used
-##' when propertylist is set to NULL
-##' @param value new values associated with property above. This is
-##' only used propertylist is set to NULL
-##' @param Rcssclass subclass of style sheet. Leave NULL to change
-##' base property. Provide one character value to edit one subclass.
-##' Provide a vector to edit a subclass of a subclass of a ...
-##' @param Rcss style sheet object
-##'
-##' @return always returns an Rcss object. Note: when changing
-##' the default style, this will return a new style without
-##' actually affecting the default style. To change how the
-##' default works in practice, assign this return value to
-##' RcssDefaultStyle
-##'
-##' @export 
+#' Modify an Rcss style sheet object
+#' 
+#' Creates a new Rcss style sheet object from the input, modifying
+#' one or more properties.
+#' 
+#' @param selector name of one selector ("text", "plot", "axis", etc.)
+#' @param propertylist list with property/value pairs to update
+#' @param property name of a single property. This is only used
+#' when propertylist is set to NULL
+#' @param value new values associated with property above. This is
+#' only used propertylist is set to NULL
+#' @param Rcssclass subclass of style sheet. Leave NULL to change
+#' base property. Provide one character value to edit one subclass.
+#' Provide a vector to edit a subclass of a subclass of a ...
+#' @param Rcss style sheet object
+#'
+#' @return always returns an Rcss object. Note: when changing
+#' the default style, this will return a new style without
+#' actually affecting the default style. To change how the
+#' default works in practice, assign this return value to
+#' RcssDefaultStyle
+#'
+#' @export 
 RcssChange <- function(selector,  
                        propertylist = NULL,
                        property = NULL, value = NULL,
                        Rcssclass = NULL,
                        Rcss="default") {
   
-  ## handling special case when Rcss is not set or set at default
+  # handling special case when Rcss is not set or set at default
   if (identical(Rcss, "default")) {
     Rcss <- RcssGetDefault("RcssDefaultStyle")
   }
@@ -83,11 +78,11 @@ RcssChange <- function(selector,
     Rcss <- RcssConstructor()
   }
   
-  ## sanity check, function only works to modify valid Rcss objects
+  # sanity check, function only works to modify valid Rcss objects
   if (class(Rcss) != "Rcss") {
     stopCF("RcssChangePropertyValue: input is not Rcss \n")
   }
-  ## check that the selector is one of the accepted ones
+  # check that the selector is one of the accepted ones
   if (length(selector) != 1) {
     stopCF("RcssChangePropertyValue: specify one selector\n")
   }
@@ -95,12 +90,12 @@ RcssChange <- function(selector,
     Rcss[[selector]] <- RcssPropertiesConstructor()
   }
 
-  ## Handle property/value pairs
-  ##
-  ## For useability, allow user not to specify either a property list
-  ## or one property/value at a time.
-  ## 
-  ## For implementation, reduce both cases to a property list
+  # Handle property/value pairs
+  #
+  # For useability, allow user not to specify either a property list
+  # or one property/value at a time.
+  # 
+  # For implementation, reduce both cases to a property list
   if (!is.null(propertylist)) {
     if (length(propertylist)>0 & is.null(names(propertylist))) {
       stopCF("RcssChangePropertyValue: property list must have names \n")
@@ -114,39 +109,40 @@ RcssChange <- function(selector,
     propertylist <- setNames(list(value), property)
   }
   
-  ## if selector is blank, apply to all selector
+  # if selector is blank, apply to all selector
   if (selector == "") {
     selector <- names(Rcss)
   }  
   
-  ## after all the checks,
-  ## call the helper function that edits RcssProperties objects
+  # after all the checks,
+  # call the helper function that edits RcssProperties objects
   for (nowselector in selector) {    
     Rcss[[nowselector]] <-
       RcssPropertiesChangeValue(Rcss[[nowselector]],
                                 Rcssclass = Rcssclass,
                                 propertylist = propertylist)
   }
-  return (Rcss)
+  Rcss
 }
 
 
-
-
-## Helper function to RcssChangePropertyValue (very similar name...)
-##
-##
+#' Helper to RcssChangePropertyValue (very similar name...)
+#'
+#' @param RcssProperties object
+#' @param Rcssclass character, style class
+#' @param propertylist list
+#'
 RcssPropertiesChangeValue <- function(RcssProperties,
                                       Rcssclass = NULL,
                                       propertylist = NULL) {      
   
-  ## When multiple classes/subclasses, need to apply recursion
+  # When multiple classes/subclasses, need to apply recursion
   if (length(Rcssclass) > 1) {
     firstclass <- Rcssclass[1]
     if (!RcssPropertiesContainsClass(RcssProperties, firstclass)) {
       RcssProperties$classes[[firstclass]] <- RcssPropertiesConstructor()
     }
-    ## update the properties of the subclass recursively
+    # update the properties of the subclass recursively
     RcssProperties$classes[[firstclass]] <-
       RcssPropertiesChangeValue(RcssProperties$classes[[firstclass]],
                                 Rcssclass[2:length(Rcssclass)],
@@ -154,23 +150,12 @@ RcssPropertiesChangeValue <- function(RcssProperties,
     return(RcssProperties)
   }
   
-  ## Add all the properties to this selector
+  # Add all the properties to this selector
   if (is.null(Rcssclass)) {
-    ## add to the base properties
-    #cat("-------------\nbefore\n")
-    #print(propertylist)
+    # add to the base properties
     RcssProperties$base[names(propertylist)] = propertylist
-    #for (nowprop in names(propertylist)) {
-    #  RcssProperties$base[[nowprop]] <- propertylist[[nowprop]]
-    #  if (is.null(propertylist[[nowprop]])) {
-    #    RcssProperties$base[nowprop] <- list(NULL)
-    #  }
-    #}
-    #cat("after\n")
-    #print(RcssProperties$base)
-    #cat("-------------\n\n")
   } else {
-    ## create a subclass if it does not exist
+    # create a subclass if it does not exist
     if (is.null(RcssProperties$classes[[Rcssclass]])) {
       RcssProperties$classes[[Rcssclass]] <- RcssPropertiesConstructor()
     }
@@ -180,31 +165,27 @@ RcssPropertiesChangeValue <- function(RcssProperties,
     }      
   }    
     
-  return(RcssProperties)
+  RcssProperties
 }
 
 
-
-
-
-
-##
-## This updates a current set of properties and values
-## nowcss - a starting list of properties
-## changelist - a list of properties to update 
-##
-## returns - a list similar to nowcss, but with values updated according
-##           to changelist
-##
+#' update a current set of properties and values
+#'
+#' @param nowcss - a starting list of properties
+#' @param changelist - a list of properties to update 
+#'
+#' @return a list similar to nowcss, but with values updated according
+#' to changelist
+#'
 RcssUpdateProperties <- function(nowcss, changelist) {
-  ## start with an updated css list that is equal to the first
+  # start with an updated css list that is equal to the first
   newcss <- nowcss
   
-  ## supercede any existing values with values from userlist
+  # supercede any existing values with values from userlist
   for (nowprop in names(changelist)) {
-    ## when a property is set to null
-    ## need to leave it as null in the newcss object
-    ## (To avoid removing the property from the list, need to handle special)
+    # when a property is set to null
+    # need to leave it as null in the newcss object
+    # (To avoid removing the property from the list, need to handle special)
     if (identical(changelist[[nowprop]], NULL)) {
       newcss[nowprop] <- list(NULL)
     } else {
@@ -212,8 +193,7 @@ RcssUpdateProperties <- function(nowcss, changelist) {
     }
   }
   
-  ## return the updated css list
-  return(newcss)  
+  # return the updated css list
+  newcss
 }
-
 
