@@ -6,14 +6,12 @@
 Technically, this keeps track of the lexed tokens.
 Dispatches to other tokens to parse the next tokens.}
 \usage{
-RcssLexChars(cc, pos = 1)
+RcssLexChars(chardata, pos = 1)
 }
 \arguments{
-\item{cc}{a vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
-\item{position}{current position in the character vector}
-
-\item{terminals}{vector with characters for terminal characters}
+\item{pos}{integer, current position in the character vector}
 }
 \value{
 data frame with pairs (token, tokentype)
@@ -23,3 +21,4 @@ The root of the actual lexer.
 Technically, this keeps track of the lexed tokens.
 Dispatches to other tokens to parse the next tokens.
 }
+\keyword{internal}

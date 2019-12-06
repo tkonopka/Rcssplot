@@ -15,3 +15,4 @@ Rcss object augmented by settings from the file(s)
 \description{
 parse a text file assuming it is in css format.
 }
+\keyword{internal}

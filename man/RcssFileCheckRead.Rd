@@ -10,9 +10,10 @@ RcssFileCheckRead(f)
 \item{f}{character, single file name}
 }
 \value{
-contents of file with " \n" at end of each line added
-(the space-newline is convenient for lexing)
+contents of file with a space and a newline character
+added at end of each line (these characters are convenient for lexing)
 }
 \description{
 check if a file exists, then read it
 }
+\keyword{internal}

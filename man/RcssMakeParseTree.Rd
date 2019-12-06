@@ -15,3 +15,4 @@ tree
 \description{
 convert lexed tokens into a tree with selectors and declarations
 }
+\keyword{internal}

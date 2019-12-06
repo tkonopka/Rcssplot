@@ -11,3 +11,4 @@ RcssPropertiesConstructor()
 make Rcss structure for one Rcss selector
 (includes space for base properties and for subclasses)
 }
+\keyword{internal}

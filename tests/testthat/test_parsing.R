@@ -77,7 +77,7 @@ test_that("report error; missing selector", {
 {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -86,7 +86,7 @@ test_that("report error; missing semicolon", {
 points {
   cex 2
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 3")
 })
 
 
@@ -95,17 +95,19 @@ test_that("report error; missing property", {
 points {
   2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 3")
 })
 
 
-test_that("report error; missing colon", {
+test_that("report error; missing semicolon", {
   data = "
 points {
   pch: 18
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  # traditionally, the semicolon should be after "10"
+  # but the error may be thrown from the following line. That's ok.
+  expect_error(Rcss(tofile(data)), "line 4")
 })
 
 
@@ -114,19 +116,21 @@ test_that("report error; missing opening brace", {
 points 
  cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  # traditionally, the opening brace should be on line 2
+  # but the error may be throw from line 3. That's ok.
+  expect_error(Rcss(tofile(data)), "line 3")
 })
 
 
 test_that("report error; missing closing brace", {
   data = "
 points {
-  cex 2;
+  cex: 2;
 
 lines {
   lwd: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 5")
 })
 
 
@@ -135,7 +139,7 @@ test_that("report error; missing class name after dot", {
 points. {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -144,7 +148,7 @@ test_that("report error; missing second selector name after comma", {
 points, {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -153,7 +157,7 @@ test_that("report error; missing comma between selectors", {
 points lines {
   lwd: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -162,7 +166,7 @@ test_that("report error; selector is not a string", {
 points, 123 {
   lwd: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -171,7 +175,7 @@ test_that("report error; class is not a string", {
 points.123 {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -180,7 +184,7 @@ test_that("report error; too many dots between classes", {
 points..abc {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 
@@ -189,7 +193,7 @@ test_that("report error; too many commas between selectors", {
 text,,mtext {
   cex: 2;
 }"
-  expect_error(Rcss(tofile(data)))
+  expect_error(Rcss(tofile(data)), "line 2")
 })
 
 

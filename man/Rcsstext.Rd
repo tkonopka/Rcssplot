@@ -4,8 +4,14 @@
 \alias{Rcsstext}
 \title{Add styled text to a plot}
 \usage{
-Rcsstext(x, y = NULL, labels = seq_along(x), Rcss = "default",
-  Rcssclass = NULL, ...)
+Rcsstext(
+  x,
+  y = NULL,
+  labels = seq_along(x),
+  Rcss = "default",
+  Rcssclass = NULL,
+  ...
+)
 }
 \arguments{
 \item{x, y}{coordinates where to write labels}

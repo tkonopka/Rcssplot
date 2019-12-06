@@ -4,8 +4,15 @@
 \alias{Rcsstitle}
 \title{Add styled annotation to a plot}
 \usage{
-Rcsstitle(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-  Rcss = "default", Rcssclass = NULL, ...)
+Rcsstitle(
+  main = NULL,
+  sub = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  Rcss = "default",
+  Rcssclass = NULL,
+  ...
+)
 }
 \arguments{
 \item{main}{plot title}

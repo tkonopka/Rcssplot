@@ -243,15 +243,12 @@ test_that("global subclass does not modify non-explicit selectors", {
 
 
 test_that("get using Rcss-first function, single integer", {
-  pch1 = RcssGetPropertyValue(style, "points", "pch")
-  pch2 = RcssProperty("points", "pch", Rcss=style)
-  expect_equal(pch1, pch2)
+  expect_warning(RcssGetPropertyValue(style, "points", "pch"))
 })
 
 
 test_that("get using Rcss-first function, using default", {
-  cx = RcssGetPropertyValueOrDefault(style, "text", "cx", default=3)
-  expect_equal(cx, 3)
+  expect_warning(RcssGetPropertyValueOrDefault(style, "text", "cx", default=3))
 })
 
 

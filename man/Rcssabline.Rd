@@ -4,8 +4,17 @@
 \alias{Rcssabline}
 \title{Add a style straight line to a plot}
 \usage{
-Rcssabline(a = NULL, b = NULL, h = NULL, v = NULL, reg = NULL,
-  coef = NULL, Rcss = "default", Rcssclass = NULL, ...)
+Rcssabline(
+  a = NULL,
+  b = NULL,
+  h = NULL,
+  v = NULL,
+  reg = NULL,
+  coef = NULL,
+  Rcss = "default",
+  Rcssclass = NULL,
+  ...
+)
 }
 \arguments{
 \item{a, b}{coefficient (intercet and slope) for line}

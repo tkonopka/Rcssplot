@@ -4,10 +4,10 @@
 \alias{RcssParseString}
 \title{parse a string}
 \usage{
-RcssParseString(cc, pos, delimiter = "\\"")
+RcssParseString(chardata, pos, delimiter = "\\"")
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{integer, current position (expects '/' followed by '*')}
 
@@ -19,3 +19,4 @@ RcssParseString(cc, pos, delimiter = "\\"")
 \description{
 parse a string
 }
+\keyword{internal}

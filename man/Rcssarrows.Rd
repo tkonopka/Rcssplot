@@ -4,8 +4,7 @@
 \alias{Rcssarrows}
 \title{Add styled arrows to a plot}
 \usage{
-Rcssarrows(x0, y0, x1 = x0, y1 = y0, Rcss = "default",
-  Rcssclass = NULL, ...)
+Rcssarrows(x0, y0, x1 = x0, y1 = y0, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x0, y0}{coordinates of *from* endpoint}

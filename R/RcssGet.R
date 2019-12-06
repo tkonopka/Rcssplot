@@ -7,8 +7,6 @@
 #
 
 
-
-
 # Extracts a value for one property in one selector
 # (Used internally, but also useful for user)
 #
@@ -21,31 +19,30 @@
 #' 
 #' Equivalent to RcssProperty; use RcssProperty instead. 
 #' 
+#' @export 
 #' @param Rcss style sheet object
 #' @param selector name of selector of interest (e.g. "plot", "axis",
 #' "text", etc.)
 #' @param property name of property of interest (e.g. "col", "pch", etc.)
 #' @param Rcssclass subclass of style sheet
-#' @export 
 RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
-
+  warning("RcssGetPropertyValue is deprecated. Use RcssProperty instead.")
   RcssProperty(selector, property, Rcssclass=Rcssclass, Rcss=Rcss)
 }
 
 
-
-
 #' Extract information about property and its value
 #'
-#' See also RcssGetPropertyValue.
-#'
+#' @export 
 #' @param selector character, name of selector, e.g. 'points'
 #' @param property character, name of property, e.g. 'col'
 #' @param Rcssclass character or vector, subclass in Rcss
 #' @param Rcss Rcss object
 #'
-#' @export
+#' @return list with two ites. Component "defined" is a boolean that indicates
+#' whether the property is defined in the style. Component "value" gives
+#' the actual value associated to the property. 
 RcssProperty <- function(selector, property,
                          Rcssclass=NULL, Rcss="default") {
   
@@ -95,6 +92,7 @@ RcssProperty <- function(selector, property,
 #'
 #' Equivalent to RcssValue(); use RcssValue() instead
 #' 
+#' @export
 #' @param Rcss style sheet object
 #' @param selector name of selector of interest (e.g. "plot", "axis",
 #' "text", etc.)
@@ -102,11 +100,10 @@ RcssProperty <- function(selector, property,
 #' @param default value to return if the desired property is not defined
 #' in Rcss
 #' @param Rcssclass subclass of style sheet
-#' @export 
 RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
                                           default=NULL,
                                           Rcssclass = NULL) {
-  
+  warning("RcssGetPropertyValueOrDefault is depreacted. Use RcssValue instead.")
   RcssValue(selector, property, default=default, Rcssclass=Rcssclass, Rcss=Rcss)
 }
 
@@ -120,17 +117,17 @@ RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
 #' is the same, except that RcssValue is shorter to write and takes
 #' the Rcss object as its last argument.
 #'
+#' @export 
 #' @param selector character, name of selector, e.g. 'points'
 #' @param property character, name of property to get, e.g. 'col'
 #' @param default value to return if selector/property are not defined
 #' @param Rcssclass character or vector, subclass in Rcss
 #' @param Rcss Rcss object
 #'
-#' @export
+#' @return a value from the Rcss object
 RcssValue <- function(selector, property,
                       default=NULL, Rcssclass=NULL, Rcss="default") {
-
-
+  
   # deal with case where input Rcss is not specified/default
   if (identical(Rcss, "default")) {
     Rcss <- RcssGetDefault("RcssDefaultStyle")
@@ -142,8 +139,8 @@ RcssValue <- function(selector, property,
   # augment Rcssclass with a compulsory class
   Rcsscompulsory <- RcssGetDefault("RcssCompulsoryClass") 
   Rcssclass <- unique(c(Rcsscompulsory, Rcssclass))
-
-  ans <- RcssGetPropertyValue(Rcss, selector, property, Rcssclass = Rcssclass);
+  
+  ans <- RcssProperty(selector, property, Rcss=Rcss, Rcssclass = Rcssclass);
   if (!ans$defined) {
     ans$value <- default
   }
@@ -155,6 +152,7 @@ RcssValue <- function(selector, property,
 #'
 #' This is a helper function for RcssGetPropertyValue
 #'
+#' @keywords internal
 #' @param RcssProperties object
 #' @param property character
 #' @param Rcssclass character, style class
@@ -213,7 +211,9 @@ RcssHelperGetPropertyValue <- function(RcssProperties, property,
 
 #' get properties, recursively
 #'
+#' @keywords internal
 #' @param RcssProperties object
+#'
 #' @return character vector
 getAllProperties <- function(RcssProperties) {
 
@@ -234,6 +234,7 @@ getAllProperties <- function(RcssProperties) {
 #' get a list of properties relevant for a given selector and Rcssclasses
 #' (Used internally, 2 frames down from user interaction)
 #'
+#' @keywords internal
 #' @param Rcss object
 #' @param selector character
 #' @param Rcssclass character, style class

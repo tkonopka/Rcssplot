@@ -19,3 +19,4 @@ character
 produces code of the type
 "col=VALUE, lty=VALUE, " (with comma at the end)
 }
+\keyword{internal}

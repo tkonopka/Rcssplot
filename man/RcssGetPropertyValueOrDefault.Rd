@@ -4,8 +4,13 @@
 \alias{RcssGetPropertyValueOrDefault}
 \title{Extract a value for an Rcss property}
 \usage{
-RcssGetPropertyValueOrDefault(Rcss, selector, property, default = NULL,
-  Rcssclass = NULL)
+RcssGetPropertyValueOrDefault(
+  Rcss,
+  selector,
+  property,
+  default = NULL,
+  Rcssclass = NULL
+)
 }
 \arguments{
 \item{Rcss}{style sheet object}

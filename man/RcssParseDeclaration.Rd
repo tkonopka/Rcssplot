@@ -7,8 +7,11 @@
 RcssParseDeclaration(lextab, n)
 }
 \arguments{
-\item{lexta}{data frame}
+\item{lextab}{data frame}
+
+\item{n}{integer, row identifier in lextab}
 }
 \description{
 Parse one declaration (expects an IDENT)
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ RcssParseError(lextab, n, parsefunction, expecting)
 \description{
 wrapper to produce generic errors
 }
+\keyword{internal}

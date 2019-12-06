@@ -4,8 +4,13 @@
 \alias{RcssValue}
 \title{Extracts a value from an Rcss object}
 \usage{
-RcssValue(selector, property, default = NULL, Rcssclass = NULL,
-  Rcss = "default")
+RcssValue(
+  selector,
+  property,
+  default = NULL,
+  Rcssclass = NULL,
+  Rcss = "default"
+)
 }
 \arguments{
 \item{selector}{character, name of selector, e.g. 'points'}
@@ -17,6 +22,9 @@ RcssValue(selector, property, default = NULL, Rcssclass = NULL,
 \item{Rcssclass}{character or vector, subclass in Rcss}
 
 \item{Rcss}{Rcss object}
+}
+\value{
+a value from the Rcss object
 }
 \description{
 If the selector and property are defined in the Rcss object,

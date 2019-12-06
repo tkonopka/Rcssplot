@@ -6,6 +6,10 @@
 \usage{
 stopCF(...)
 }
+\arguments{
+\item{...}{arguments passed to stop()}
+}
 \description{
 stop with call. = FALSE
 }
+\keyword{internal}

@@ -14,3 +14,4 @@ RcssParseRuleSet(lextab, n)
 \description{
 parse one rule set (Selectors { Declarations })
 }
+\keyword{internal}

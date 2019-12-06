@@ -4,8 +4,11 @@
 \alias{RcssPropertiesChangeValue}
 \title{Helper to RcssChangePropertyValue (very similar name...)}
 \usage{
-RcssPropertiesChangeValue(RcssProperties, Rcssclass = NULL,
-  propertylist = NULL)
+RcssPropertiesChangeValue(
+  RcssProperties,
+  Rcssclass = NULL,
+  propertylist = NULL
+)
 }
 \arguments{
 \item{RcssProperties}{object}
@@ -17,3 +20,4 @@ RcssPropertiesChangeValue(RcssProperties, Rcssclass = NULL,
 \description{
 Helper to RcssChangePropertyValue (very similar name...)
 }
+\keyword{internal}

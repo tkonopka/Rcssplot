@@ -22,11 +22,12 @@ NULL
 #'
 #' See also related functions RcssGetDefaultStyle() and RcssOverload().
 #' 
+#' @export
 #' @param file filename containing Rcss definitions. If set to NULL,
 #' function returns a basic Rcss object. If multiple files, function
 #' reads each one and produces a joint style.
-#' 
-#' @export 
+#'
+#' @return Rcss object
 Rcss <- function(file = NULL) {
   
   # create the css object
@@ -72,9 +73,10 @@ Rcss <- function(file = NULL) {
         nowRcssclass <- nowselset2[-1]
       } 
       # record cascading classes into the Rcss object      
-      ans <- RcssChangePropertyValue(ans, selector = nowselset2[1],
-                                     Rcssclass = nowRcssclass,
-                                     propertylist = nowdecset)
+      ans <- RcssChange(selector = nowselset2[1],
+                        Rcssclass = nowRcssclass,
+                        propertylist = nowdecset,
+                        Rcss=ans)
     }
   }
       
@@ -91,9 +93,9 @@ Rcss <- function(file = NULL) {
 #' Display selectors encoded in an Rcss object.
 #' For more detailed information about the object, see function printRcss()
 #' 
+#' @export
 #' @param x style sheet object
 #' @param ... Further parameters are ignored
-#' @export 
 print.Rcss <- function(x, ...) {
   if (class(x) != "Rcss") {
     stopCF("print.Rcss: input object is not Rcss\n")
@@ -108,12 +110,12 @@ print.Rcss <- function(x, ...) {
 #'
 #' Display properties encoded in an Rcss object, including any subclasses.
 #' 
+#' @export
 #' @param Rcss style sheet object
 #' @param selector character string with name of selector to print
 #' @param verbose logical. If TRUE, function prints all information
 #' about the selector, including subclasses. If FALSE, function omits
 #' detailed information about subclasses. 
-#' @export 
 printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
   
   # some basic checks
@@ -144,6 +146,7 @@ printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
 
 #' print a set of property key/value pairs
 #' 
+#' @keywords internal
 #' @param RcssProperties object
 #' @param verbose logical
 #' @param indent integer, prefix capturing spaces for indentation
@@ -197,12 +200,11 @@ RcssDefaultStyle <- NULL
 #' Fetches the value of the RcssDefaultStyle object defined in
 #' parent environments. 
 #'
+#' @export 
 #' @param Rcss Rcss object, replacement default style object. When
 #' set to "default", the function returns a copy of the default object
 #' defined in parent environment. When set to Rcss object, the function
 #' ignores the default and returns the set object back.
-#' 
-#' @export
 RcssGetDefaultStyle <- function(Rcss="default") {
   # perhaps ignore the current default and return the new object
   if (class(Rcss) == "Rcss") {
@@ -231,12 +233,11 @@ RcssCompulsoryClass <- c()
 #' Fetches the value of the RcssCompulsoryClass object defined in
 #' parent environments. 
 #' 
+#' @export
 #' @param Rcssclass character vector, set of additional compulsory classes.
 #' When NULL, function returns the current set of compulsory classes
 #' defined in parent environments. When non-NULL, functions returns
 #' the concatentation of the current set and new set. 
-#' 
-#' @export
 RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
   nowclass <- RcssGetDefault("RcssCompulsoryClass")      
   unique(c(nowclass, Rcssclass))    
@@ -248,6 +249,7 @@ RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
 #' note: automatic object fetching uses chain of binding environments,
 #' while this uses parent.frame() chain
 #' 
+#' @keywords internal
 #' @param what character, use either "RcssDefaultStyle" or "RcssCompulsoryClass"
 RcssGetDefault <- function(what) {
   # parent frame counter
@@ -280,6 +282,8 @@ RcssGetDefault <- function(what) {
 
 #' make Rcss structure for one Rcss selector
 #' (includes space for base properties and for subclasses)
+#'
+#' @keywords internal
 RcssPropertiesConstructor <- function() {
   # RcssProperties object will contain two lists,
   # one list for basic properties
@@ -292,6 +296,8 @@ RcssPropertiesConstructor <- function() {
 
 #' creates an empty Rcss object (i.e. just a list with a class name)
 #' the items inserted into this list/object will be called "selectors"
+#'
+#' @keywords internal
 RcssConstructor <- function() {  
   result <- list()
   class(result) <- "Rcss"  
@@ -301,12 +307,13 @@ RcssConstructor <- function() {
 
 #' object maintenance
 #'
+#' @keywords internal
 #' @param RcssProperties object
 #' @param Rcssclass character, style class
 #'
 #' @return true if the Rcssclass has been defined for all the selectors
 RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
-  return (Rcssclass %in% names(RcssProperties$classes))  
+  (Rcssclass %in% names(RcssProperties$classes))  
 }
 
 

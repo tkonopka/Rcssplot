@@ -15,6 +15,11 @@ RcssProperty(selector, property, Rcssclass = NULL, Rcss = "default")
 
 \item{Rcss}{Rcss object}
 }
+\value{
+list with two ites. Component "defined" is a boolean that indicates
+whether the property is defined in the style. Component "value" gives
+the actual value associated to the property.
+}
 \description{
-See also RcssGetPropertyValue.
+Extract information about property and its value
 }

@@ -15,3 +15,4 @@ character vector
 \description{
 get properties, recursively
 }
+\keyword{internal}

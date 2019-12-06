@@ -17,3 +17,4 @@ true if the Rcssclass has been defined for all the selectors
 \description{
 object maintenance
 }
+\keyword{internal}

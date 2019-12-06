@@ -4,8 +4,7 @@
 \alias{print.RcssProperties}
 \title{print a set of property key/value pairs}
 \usage{
-\method{print}{RcssProperties}(RcssProperties, verbose = FALSE,
-  indent = "   ")
+\method{print}{RcssProperties}(RcssProperties, verbose = FALSE, indent = "   ")
 }
 \arguments{
 \item{RcssProperties}{object}
@@ -17,3 +16,4 @@
 \description{
 print a set of property key/value pairs
 }
+\keyword{internal}

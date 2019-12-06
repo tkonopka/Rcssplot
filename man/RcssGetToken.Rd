@@ -19,3 +19,4 @@ a string containing characters in the interval
 \description{
 concatenate a subset of characters
 }
+\keyword{internal}

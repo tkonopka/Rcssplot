@@ -16,3 +16,4 @@ This is usually one token,
 but if a property has dots (e.g. cex.axis) this function
 will concatenate the text together
 }
+\keyword{internal}

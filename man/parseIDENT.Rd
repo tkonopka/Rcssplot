@@ -15,3 +15,4 @@ R primitive for that string, "NULL" gives an empty list
 \description{
 parse special strings into R primitives
 }
+\keyword{internal}

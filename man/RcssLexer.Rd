@@ -15,3 +15,4 @@ data frame with tokens
 \description{
 start the Lexer
 }
+\keyword{internal}

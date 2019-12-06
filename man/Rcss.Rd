@@ -11,6 +11,9 @@ Rcss(file = NULL)
 function returns a basic Rcss object. If multiple files, function
 reads each one and produces a joint style.}
 }
+\value{
+Rcss object
+}
 \description{
 Creates a style sheet object using definition specified in an
 Rcss file. When a file is not specified, creates a base object

@@ -16,6 +16,11 @@ tochars = function(x) {
 }
 
 
+# convert a string into a chardata data frame
+tochardata = function(x) {
+  data.frame(char=tochars(x), line=1, stringsAsFactors=FALSE)
+}
+
 
 ## write some text to a temporary file
 ## removes existing file, writes, returns the filename

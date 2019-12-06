@@ -17,6 +17,7 @@
 #'
 #' Equivallent to RcssChange: use RcssChange instead
 #'
+#' @export
 #' @param Rcss style sheet object
 #' @param selector name of one selector ("text", "plot", "axis", etc.)
 #' @param Rcssclass subclass of style sheet. Leave NULL to change
@@ -27,11 +28,10 @@
 #' when propertylist is set to NULL
 #' @param value new values associated with property above. This is
 #' only used propertylist is set to NULL
-#' @export 
 RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL, 
                                     propertylist = NULL,
                                     property = NULL, value = NULL) {
-  
+  warning("RcssChangePropertyValue is deprecated. Use RcssChange instead.")
   RcssChange(selector, propertylist=propertylist,
              property=property, value=value,
              Rcssclass=Rcssclass,
@@ -46,6 +46,7 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 #' Creates a new Rcss style sheet object from the input, modifying
 #' one or more properties.
 #' 
+#' @export
 #' @param selector name of one selector ("text", "plot", "axis", etc.)
 #' @param propertylist list with property/value pairs to update
 #' @param property name of a single property. This is only used
@@ -62,8 +63,6 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 #' actually affecting the default style. To change how the
 #' default works in practice, assign this return value to
 #' RcssDefaultStyle
-#'
-#' @export 
 RcssChange <- function(selector,  
                        propertylist = NULL,
                        property = NULL, value = NULL,
@@ -80,11 +79,11 @@ RcssChange <- function(selector,
   
   # sanity check, function only works to modify valid Rcss objects
   if (class(Rcss) != "Rcss") {
-    stopCF("RcssChangePropertyValue: input is not Rcss \n")
+    stopCF("RcssChange: input is not Rcss \n")
   }
   # check that the selector is one of the accepted ones
   if (length(selector) != 1) {
-    stopCF("RcssChangePropertyValue: specify one selector\n")
+    stopCF("RcssChange: specify one selector\n")
   }
   if (!(selector %in% names(Rcss)) & selector != "") {
     Rcss[[selector]] <- RcssPropertiesConstructor()
@@ -98,12 +97,12 @@ RcssChange <- function(selector,
   # For implementation, reduce both cases to a property list
   if (!is.null(propertylist)) {
     if (length(propertylist)>0 & is.null(names(propertylist))) {
-      stopCF("RcssChangePropertyValue: property list must have names \n")
+      stopCF("RcssChange: property list must have names \n")
     }
   }
   if (is.null(propertylist)) {
     if (is.null(property)) {
-      stopCF(paste0("RcssChangePropertyValue: ",
+      stopCF(paste0("RcssChange: ",
                  "specify at least one property to change\n"))
     }
     propertylist <- setNames(list(value), property)
@@ -128,10 +127,10 @@ RcssChange <- function(selector,
 
 #' Helper to RcssChangePropertyValue (very similar name...)
 #'
+#' @keywords internal
 #' @param RcssProperties object
 #' @param Rcssclass character, style class
 #' @param propertylist list
-#'
 RcssPropertiesChangeValue <- function(RcssProperties,
                                       Rcssclass = NULL,
                                       propertylist = NULL) {      
@@ -171,12 +170,12 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 
 #' update a current set of properties and values
 #'
+#' @keywords internal
 #' @param nowcss - a starting list of properties
 #' @param changelist - a list of properties to update 
 #'
 #' @return a list similar to nowcss, but with values updated according
 #' to changelist
-#'
 RcssUpdateProperties <- function(nowcss, changelist) {
   # start with an updated css list that is equal to the first
   newcss <- nowcss
@@ -193,7 +192,6 @@ RcssUpdateProperties <- function(nowcss, changelist) {
     }
   }
   
-  # return the updated css list
   newcss
 }
 

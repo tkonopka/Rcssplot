@@ -4,10 +4,10 @@
 \alias{RcssParseGeneric}
 \title{parser for a generic token}
 \usage{
-RcssParseGeneric(cc, pos, delimiters)
+RcssParseGeneric(chardata, pos, delimiters)
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{integer current position}
 
@@ -20,3 +20,4 @@ position of first character beyond the current token
 \description{
 parser for a generic token
 }
+\keyword{internal}

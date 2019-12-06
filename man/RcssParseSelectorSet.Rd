@@ -14,3 +14,4 @@ RcssParseSelectorSet(lextab, n)
 \description{
 parse a set of selectors (i.e. selector [ ',' selector ]*)
 }
+\keyword{internal}

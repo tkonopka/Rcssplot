@@ -16,7 +16,8 @@ See the package [vignette on CRAN](https://cran.r-project.org/web/packages/Rcssp
 
 &nbsp;
 
-Copyright (c) 2015-2018 Tomasz Konopka
 
-Many thanks to contributors: FrancoisGuillem, nfultz
+## Acknowledgments
+
+Many thanks to the CRAN team and contributors: FrancoisGuillem, nfultz
 

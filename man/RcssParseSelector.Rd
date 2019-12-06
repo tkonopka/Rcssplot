@@ -7,7 +7,7 @@
 RcssParseSelector(lextab, n)
 }
 \arguments{
-\item{lextab}{integer, data frame with tokens}
+\item{lextab}{data frame with tokens}
 
 \item{n}{ineger, current row in the data frame}
 }
@@ -17,3 +17,4 @@ integer, new n after parsed selectors, list of selectors
 \description{
 parse one selector (IDENT [ class]* | class)
 }
+\keyword{internal}

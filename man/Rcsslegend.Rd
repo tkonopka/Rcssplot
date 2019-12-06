@@ -4,8 +4,7 @@
 \alias{Rcsslegend}
 \title{Add a styled legend to aplot}
 \usage{
-Rcsslegend(x, y = NULL, legend, Rcss = "default", Rcssclass = NULL,
-  ...)
+Rcsslegend(x, y = NULL, legend, Rcss = "default", Rcssclass = NULL, ...)
 }
 \arguments{
 \item{x, y}{position of the legend}

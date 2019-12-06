@@ -4,11 +4,15 @@
 \alias{RcssLexNextToken}
 \title{process one token starting at position 'pos'}
 \usage{
-RcssLexNextToken(cc, pos, terminals = unlist(strsplit(".,;:{}=", "")),
-  spacechars = unlist(strsplit(" \\t\\r\\n\\f", "")))
+RcssLexNextToken(
+  chardata,
+  pos,
+  terminals = unlist(strsplit(".,;:{}=", "")),
+  spacechars = unlist(strsplit(" \\t\\r\\n\\f", ""))
+)
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{integer, current position in the cc vector}
 
@@ -22,3 +26,4 @@ triple (NEWPOSITION, TOKEN, TOKENTYPE)
 \description{
 process one token starting at position 'pos'
 }
+\keyword{internal}

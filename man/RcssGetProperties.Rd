@@ -18,3 +18,4 @@ RcssGetProperties(Rcss, selector, Rcssclass = NULL)
 get a list of properties relevant for a given selector and Rcssclasses
 (Used internally, 2 frames down from user interaction)
 }
+\keyword{internal}

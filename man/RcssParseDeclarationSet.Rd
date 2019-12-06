@@ -16,3 +16,4 @@ RcssParseDeclarationSet(lextab, n)
 parse a set of declarations
 (expects to start with a '{' and end with a '}')
 }
+\keyword{internal}

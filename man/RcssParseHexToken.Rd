@@ -4,10 +4,10 @@
 \alias{RcssParseHexToken}
 \title{parse a hex color}
 \usage{
-RcssParseHexToken(cc, pos)
+RcssParseHexToken(chardata, pos)
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{integer, current position (this function expects a hash sign)}
 }
@@ -17,3 +17,4 @@ position of the next non-hex character
 \description{
 parse a hex color
 }
+\keyword{internal}

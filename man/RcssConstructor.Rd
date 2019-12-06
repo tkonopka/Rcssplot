@@ -11,3 +11,4 @@ RcssConstructor()
 creates an empty Rcss object (i.e. just a list with a class name)
 the items inserted into this list/object will be called "selectors"
 }
+\keyword{internal}

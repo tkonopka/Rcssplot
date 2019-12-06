@@ -9,6 +9,7 @@
 
 #' parse a text file assuming it is in css format.
 #'
+#' @keywords internal
 #' @param file character, files on disk
 #'
 #' @return Rcss object augmented by settings from the file(s)
@@ -19,17 +20,18 @@ RcssParser <- function(file) {
 }
 
 
-
 #' wrapper to produce generic errors
 #'
+#' @keywords internal
 #' @param lextab data frame with lexed information
 #' @param n integer, row number in lextab
 #' @param parsefunction character, used in error message
 #' @param expecting character, used to hint what the expected token should have been
 RcssParseError <- function(lextab, n, parsefunction, expecting) {
-  stopCF(paste0(parsefunction,": \n",
+  msg = paste0(parsefunction,": \n",
              "   expecting: ", expecting,"\n",
-             "   got: ", lextab[n,"token"],"\n"))
+             "   got: ", lextab[n,"token"])
+  stopAtLine(msg, lextab$line[n])
 }
 
 
@@ -39,7 +41,9 @@ RcssParseError <- function(lextab, n, parsefunction, expecting) {
 
 #' convert lexed tokens into a tree with selectors and declarations 
 #' 
+#' @keywords internal
 #' @param lextab data.frame with lexed tokens
+#'
 #' @return tree 
 RcssMakeParseTree <- function(lextab) {
   
@@ -63,6 +67,7 @@ RcssMakeParseTree <- function(lextab) {
 
 #' parse one rule set (Selectors { Declarations })
 #'
+#' @keywords internal
 #' @param lextab data frame with tokens
 #' @param n inteer, current row in the data frame
 RcssParseRuleSet <- function(lextab, n) {
@@ -76,7 +81,8 @@ RcssParseRuleSet <- function(lextab, n) {
 
 #' parse one selector (IDENT [ class]* | class)
 #' 
-#' @param lextab integer, data frame with tokens
+#' @keywords internal
+#' @param lextab data frame with tokens
 #' @param n ineger, current row in the data frame
 #'
 #' @return integer, new n after parsed selectors, list of selectors
@@ -113,6 +119,7 @@ RcssParseSelector <- function(lextab, n) {
 
 #' parse a set of selectors (i.e. selector [ ',' selector ]*)
 #'
+#' @keywords internal
 #' @param lextab data frame with tokens
 #' @param n integer, current row in the data frame 
 RcssParseSelectorSet <- function(lextab, n) {
@@ -138,6 +145,7 @@ RcssParseSelectorSet <- function(lextab, n) {
 #' parse a set of declarations
 #' (expects to start with a '{' and end with a '}')
 #'
+#' @keywords internal
 #' @param lextab data frame with tokens
 #' @param n integer, current row in the data.frame to process
 RcssParseDeclarationSet <- function(lextab, n) {
@@ -173,7 +181,9 @@ RcssParseDeclarationSet <- function(lextab, n) {
 
 #' parse special strings into R primitives
 #'
+#' @keywords internal
 #' @param tok one string
+#'
 #' @return R primitive for that string, "NULL" gives an empty list
 parseIDENT <- function(tok) {
   if (tok == "NULL") {
@@ -187,7 +197,9 @@ parseIDENT <- function(tok) {
 
 #' Parse one declaration (expects an IDENT)
 #'
-#' @param lexta data frame
+#' @keywords internal
+#' @param lextab data frame
+#' @param n integer, row identifier in lextab
 RcssParseDeclaration <- function(lextab, n) {
   
   # get name of the property, then move over the property
@@ -243,6 +255,7 @@ RcssParseDeclaration <- function(lextab, n) {
 #' but if a property has dots (e.g. cex.axis) this function
 #' will concatenate the text together
 #'
+#' @keywords internal
 #' @param lextab data frame
 #' @param n integer, row number in lextab
 RcssParseProperty <- function(lextab, n) {

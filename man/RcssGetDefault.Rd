@@ -13,3 +13,4 @@ RcssGetDefault(what)
 note: automatic object fetching uses chain of binding environments,
 while this uses parent.frame() chain
 }
+\keyword{internal}

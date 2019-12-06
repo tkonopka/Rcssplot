@@ -4,10 +4,10 @@
 \alias{RcssParseNumber}
 \title{parse a number}
 \usage{
-RcssParseNumber(cc, pos, exponent = FALSE, decimal = FALSE)
+RcssParseNumber(chardata, pos, exponent = FALSE, decimal = FALSE)
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{integer, current position (expects '-' or 0-9)}
 
@@ -21,3 +21,4 @@ RcssParseNumber(cc, pos, exponent = FALSE, decimal = FALSE)
 \description{
 parse a number
 }
+\keyword{internal}

@@ -18,10 +18,10 @@ style = Rcss(tofile(styletext))
 
 test_that("can set default style", {
   RcssDefaultStyle = NULL
-  cex1 = RcssGetPropertyValue("default", "text", "cex")$value
+  cex1 = RcssProperty("text", "cex")$value
   expect_equal(cex1, NULL)
   RcssDefaultStyle = RcssGetDefaultStyle(style)
-  cex2 = RcssGetPropertyValue("default", "text", "cex")$value
+  cex2 = RcssProperty("text", "cex")$value
   expect_equal(cex2, 1.5)
 })
 

@@ -4,16 +4,17 @@
 \alias{RcssParseComment}
 \title{parse a comment}
 \usage{
-RcssParseComment(cc, pos)
+RcssParseComment(chardata, pos)
 }
 \arguments{
-\item{cc}{vector of characters}
+\item{chardata}{data frame with characters and line numbers}
 
 \item{pos}{current position (expects '/' followed by '*')}
 }
 \value{
-- position of first non-comment
+position of first non-comment
 }
 \description{
 parse a comment
 }
+\keyword{internal}

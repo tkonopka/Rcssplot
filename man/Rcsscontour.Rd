@@ -4,8 +4,14 @@
 \alias{Rcsscontour}
 \title{Draw a styled contour}
 \usage{
-Rcsscontour(x = seq(0, 1, length.out = nrow(z)), y = seq(0, 1,
-  length.out = ncol(z)), z, Rcss = "default", Rcssclass = NULL, ...)
+Rcsscontour(
+  x = seq(0, 1, length.out = nrow(z)),
+  y = seq(0, 1, length.out = ncol(z)),
+  z,
+  Rcss = "default",
+  Rcssclass = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{numeric vector; locations of grid lines}

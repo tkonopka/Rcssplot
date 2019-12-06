@@ -4,8 +4,13 @@
 \alias{RcssHelperGetPropertyValue}
 \title{traverses the style sheets breadth first and obtains values for the property}
 \usage{
-RcssHelperGetPropertyValue(RcssProperties, property, Rcssclass = NULL,
-  inclass = c(), bestvalue = NULL)
+RcssHelperGetPropertyValue(
+  RcssProperties,
+  property,
+  Rcssclass = NULL,
+  inclass = c(),
+  bestvalue = NULL
+)
 }
 \arguments{
 \item{RcssProperties}{object}
@@ -25,3 +30,4 @@ list(level, values)
 \description{
 This is a helper function for RcssGetPropertyValue
 }
+\keyword{internal}

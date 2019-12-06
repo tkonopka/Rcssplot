@@ -4,8 +4,14 @@
 \alias{RcssChange}
 \title{Modify an Rcss style sheet object}
 \usage{
-RcssChange(selector, propertylist = NULL, property = NULL,
-  value = NULL, Rcssclass = NULL, Rcss = "default")
+RcssChange(
+  selector,
+  propertylist = NULL,
+  property = NULL,
+  value = NULL,
+  Rcssclass = NULL,
+  Rcss = "default"
+)
 }
 \arguments{
 \item{selector}{name of one selector ("text", "plot", "axis", etc.)}

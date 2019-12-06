@@ -7,9 +7,9 @@
 RcssIsEscaped(cc, pos)
 }
 \arguments{
-\item{cc}{- vector of characters}
+\item{cc}{vector of characters}
 
-\item{nowpos}{- position of character to check escape for (e.g. a " in a string)}
+\item{pos}{integer, position of character to check escape for (e.g. a " in a string)}
 }
 \value{
 true if position  is preceded by an odd number of slashes
@@ -17,3 +17,4 @@ true if position  is preceded by an odd number of slashes
 \description{
 helper for string parsing
 }
+\keyword{internal}
