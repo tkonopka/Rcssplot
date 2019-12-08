@@ -18,3 +18,13 @@ detailed information about subclasses.}
 \description{
 Display properties encoded in an Rcss object, including any subclasses.
 }
+\examples{
+
+# define a custom style
+custom.style <- Rcss(text="points { pch:2; } points.A { pch: 3; }")
+
+# printing details for a selector, concise and verbose
+printRcss(custom.style, "points")
+printRcss(custom.style, "points", verbose=TRUE)
+
+}

@@ -9,6 +9,7 @@ Description: Provides a means to style plots through cascading style sheets.
 Depends:
     R (>= 3.4.0)
 Imports:
+    methods,
     graphics,
     stats,
     utils

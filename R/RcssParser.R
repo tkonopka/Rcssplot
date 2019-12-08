@@ -4,17 +4,17 @@
 # Call RcssParser() - the others are helper functions)
 #
 # Author: Tomasz Konopka
-# 
 
 
 #' parse a text file assuming it is in css format.
 #'
 #' @keywords internal
 #' @param file character, files on disk
+#' @param text character, strings with Rcss
 #'
 #' @return Rcss object augmented by settings from the file(s)
-RcssParser <- function(file) {
-  lex <- RcssLexer(file)
+RcssParser <- function(file=NULL, text=NULL) {
+  lex <- RcssLexer(file=file, text=text)
   parsetree <- RcssMakeParseTree(lex)
   parsetree
 }

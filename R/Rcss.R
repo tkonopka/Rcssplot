@@ -5,6 +5,7 @@
 
 
 # Package imports
+#' @import methods
 #' @import stats
 #' @import utils
 #' @import graphics
@@ -26,20 +27,32 @@ NULL
 #' @param file filename containing Rcss definitions. If set to NULL,
 #' function returns a basic Rcss object. If multiple files, function
 #' reads each one and produces a joint style.
+#' @param text character, a string with Rcss
 #'
 #' @return Rcss object
-Rcss <- function(file = NULL) {
+#'
+#' @examples
+#' # define a custom style
+#' custom.style <- Rcss(text="plot { pch:19; col: 2 }")
+#'
+#' # display the custom style
+#' printRcss(custom.style, "plot")
+#'
+#' # use the custom style in a chart
+#' plot(1:4, 1:4, Rcss=custom.style)
+#'
+Rcss <- function(file=NULL, text=NULL) {
   
   # create the css object
   ans <- RcssConstructor()
   
   # if user does not specify a css file, return bare-bones object
-  if (is.null(file)) {
+  if (is.null(file) & is.null(text)) {
     return(ans)    
   }
   
   # get a parsetree for the input file
-  parsetree <- RcssParser(file)
+  parsetree <- RcssParser(file, text=text)
   if (length(parsetree) < 1) {
     return(ans)
   }
@@ -96,6 +109,13 @@ Rcss <- function(file = NULL) {
 #' @export
 #' @param x style sheet object
 #' @param ... Further parameters are ignored
+#'
+#' @examples
+#'
+#' # define a custom style, display it
+#' custom.style <- Rcss(text="points { cex: 2; }")
+#' custom.style
+#'
 print.Rcss <- function(x, ...) {
   if (class(x) != "Rcss") {
     stopCF("print.Rcss: input object is not Rcss\n")
@@ -115,7 +135,17 @@ print.Rcss <- function(x, ...) {
 #' @param selector character string with name of selector to print
 #' @param verbose logical. If TRUE, function prints all information
 #' about the selector, including subclasses. If FALSE, function omits
-#' detailed information about subclasses. 
+#' detailed information about subclasses.
+#'
+#' @examples
+#'
+#' # define a custom style
+#' custom.style <- Rcss(text="points { pch:2; } points.A { pch: 3; }")
+#'
+#' # printing details for a selector, concise and verbose
+#' printRcss(custom.style, "points")
+#' printRcss(custom.style, "points", verbose=TRUE)
+#'
 printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
   
   # some basic checks
@@ -205,6 +235,12 @@ RcssDefaultStyle <- NULL
 #' set to "default", the function returns a copy of the default object
 #' defined in parent environment. When set to Rcss object, the function
 #' ignores the default and returns the set object back.
+#'
+#' @examples
+#'
+#' # retrieve the current default style
+#' style.now <- RcssGetDefaultStyle()
+#' 
 RcssGetDefaultStyle <- function(Rcss="default") {
   # perhaps ignore the current default and return the new object
   if (class(Rcss) == "Rcss") {
@@ -237,7 +273,24 @@ RcssCompulsoryClass <- c()
 #' @param Rcssclass character vector, set of additional compulsory classes.
 #' When NULL, function returns the current set of compulsory classes
 #' defined in parent environments. When non-NULL, functions returns
-#' the concatentation of the current set and new set. 
+#' the concatentation of the current set and new set.
+#'
+#' @examples
+#'
+#' # retrieve the current compulsory class
+#' class.null <- RcssGetCompulsoryClass()
+#'
+#' # augment the current compulsory class with more labels
+#' class.A <- RcssGetCompulsoryClass("A")
+#' class.A
+#' class.B <- RcssGetCompulsoryClass("B")
+#' class.B
+#'
+#' # when the object RcssCompulsoryClass is set, this augments a vector
+#' RcssCompulsoryClass <- c("X", "Y")
+#' class.XYZ <- RcssGetCompulsoryClass("Z")
+#' class.XYZ
+#'
 RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
   nowclass <- RcssGetDefault("RcssCompulsoryClass")      
   unique(c(nowclass, Rcssclass))    
@@ -333,7 +386,13 @@ RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
 #' environment for many base-graphics functions. See documentation
 #' for details.
 #' 
-#' @export 
+#' @export
+#'
+#' @examples
+#'
+#' # this function is deprecated - do not use it
+#' suppressWarnings(RcssOverload())
+#'
 RcssOverload = function() {
 
   msg = c("RcssOverload is deprecated and redundant.",

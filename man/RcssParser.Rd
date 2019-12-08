@@ -4,10 +4,12 @@
 \alias{RcssParser}
 \title{parse a text file assuming it is in css format.}
 \usage{
-RcssParser(file)
+RcssParser(file = NULL, text = NULL)
 }
 \arguments{
 \item{file}{character, files on disk}
+
+\item{text}{character, strings with Rcss}
 }
 \value{
 Rcss object augmented by settings from the file(s)

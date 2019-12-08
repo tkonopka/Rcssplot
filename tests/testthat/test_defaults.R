@@ -13,6 +13,11 @@ text {
 style = Rcss(tofile(styletext))
 
 
+# for good measure, reset default style and compulsory class here before tests
+RcssDefaultStyle <- NULL
+RcssCompulsoryClass <- NULL
+
+
 ###############################################################################
 # using a default Rcss style
 

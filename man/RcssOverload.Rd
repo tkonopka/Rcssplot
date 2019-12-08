@@ -18,3 +18,9 @@ Warning: this function creates masking objects in your current
 environment for many base-graphics functions. See documentation
 for details.
 }
+\examples{
+
+# this function is deprecated - do not use it
+suppressWarnings(RcssOverload())
+
+}

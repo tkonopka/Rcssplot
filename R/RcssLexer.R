@@ -1,4 +1,3 @@
-#
 # Functions part of Rcssplot package
 #
 # Lexer for Rcssplot.
@@ -23,12 +22,19 @@
 #'
 #' @keywords internal
 #' @param f character, input file, or vector of input files
+#' @param text character, strings with Rcss
 #'
 #' @return data frame with tokens
-RcssLexer <- function(f) {
-  # obtain content from all input files
-  fdata <- lapply(as.list(f), RcssFileCheckRead)
-  fdata <- unlist(fdata)
+RcssLexer <- function(file=NULL, text=NULL) {
+  # obtain content from all input objects
+  fdata <- c()
+  if (!is.null(file)) {
+    fdata <- lapply(as.list(file), RcssFileCheckRead)
+    fdata <- unlist(fdata)
+  }
+  if (!is.null(text)) {
+    fdata <- c(fdata, unlist(strsplit(text, "\n")))
+  }
   # split contnt into character, record line numbers
   flines <- seq_len(length(fdata))
   flen <- sapply(fdata, nchar)

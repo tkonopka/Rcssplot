@@ -4,9 +4,11 @@
 \alias{RcssLexer}
 \title{start the Lexer}
 \usage{
-RcssLexer(f)
+RcssLexer(file = NULL, text = NULL)
 }
 \arguments{
+\item{text}{character, strings with Rcss}
+
 \item{f}{character, input file, or vector of input files}
 }
 \value{

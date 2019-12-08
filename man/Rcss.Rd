@@ -4,12 +4,14 @@
 \alias{Rcss}
 \title{Create an Rcss style object}
 \usage{
-Rcss(file = NULL)
+Rcss(file = NULL, text = NULL)
 }
 \arguments{
 \item{file}{filename containing Rcss definitions. If set to NULL,
 function returns a basic Rcss object. If multiple files, function
 reads each one and produces a joint style.}
+
+\item{text}{character, a string with Rcss}
 }
 \value{
 Rcss object
@@ -21,4 +23,15 @@ object without any styling.
 }
 \details{
 See also related functions RcssGetDefaultStyle() and RcssOverload().
+}
+\examples{
+# define a custom style
+custom.style <- Rcss(text="plot { pch:19; col: 2 }")
+
+# display the custom style
+printRcss(custom.style, "plot")
+
+# use the custom style in a chart
+plot(1:4, 1:4, Rcss=custom.style)
+
 }

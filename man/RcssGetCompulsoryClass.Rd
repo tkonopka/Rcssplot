@@ -16,3 +16,20 @@ the concatentation of the current set and new set.}
 Fetches the value of the RcssCompulsoryClass object defined in
 parent environments.
 }
+\examples{
+
+# retrieve the current compulsory class
+class.null <- RcssGetCompulsoryClass()
+
+# augment the current compulsory class with more labels
+class.A <- RcssGetCompulsoryClass("A")
+class.A
+class.B <- RcssGetCompulsoryClass("B")
+class.B
+
+# when the object RcssCompulsoryClass is set, this augments a vector
+RcssCompulsoryClass <- c("X", "Y")
+class.XYZ <- RcssGetCompulsoryClass("Z")
+class.XYZ
+
+}

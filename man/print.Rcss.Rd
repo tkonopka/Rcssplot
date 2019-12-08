@@ -15,3 +15,10 @@
 Display selectors encoded in an Rcss object.
 For more detailed information about the object, see function printRcss()
 }
+\examples{
+
+# define a custom style, display it
+custom.style <- Rcss(text="points { cex: 2; }")
+custom.style
+
+}
