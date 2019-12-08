@@ -3,8 +3,6 @@
 % \VignetteCompiler{knitr}
 % \VignetteEngine{knitr::knitr}
 
-
-
 \documentclass[10pt]{article}
 
 \usepackage[T1]{fontenc}
@@ -26,7 +24,6 @@
 \maketitle 
 
 <<echo = FALSE>>=
-library("Rcssplot")
 library("knitr")
 opts_chunk$set(fig.pos = "", fig.align = "center")
 
@@ -88,7 +85,7 @@ barplot(a, main="Manual tuning", ylab="y label", col="#000080", border=NA, space
 
 \noindent The function call is now longer, but the output is more complete. 
 
-It is possible to tune the plot a little further using other arguments to {\tt barplot}. However, some aspects of the chart, for example margins, are not accessible in this manner. Furthermore, we may wish to add other custom elements to the chart area, for example a subtitle. To adjust or to create these elements, it is necessary to issue several function calls. In practice it is convenient to encapsulate such commands in a custom function. 
+It is possible to tune the plot further using other arguments to {\tt barplot}. However, some aspects of the chart, for example margins, are not accessible in this manner. Furthermore, we may wish to add other custom elements to the chart area, for example a subtitle. To adjust or to create these elements, it is necessary to issue several function calls. In practice it is convenient to encapsulate such commands in a custom function. 
 
 <<basebarfun_2, eval = FALSE>>=
 ## helper builds a string describing a range
@@ -111,7 +108,7 @@ base.barplot.1 <- function(x, main="Custom plot function", ylab="y label") {
 }
 @
 
-\noindent The first block above is a helper function to construct a subtitle. The second block is a definition of function {\tt base.barplot.1}. It takes as input a data vector {\tt x} and two strings for the title and y-axis label. The first line of the function body creates a chart without excess decorations. Subsequent lines add axes and labels. Each command carries several custom settings. 
+\noindent The first block above is a helper function to construct a subtitle. The second block is a definition of function {\tt base.barplot.1}. It takes as input a data vector and two strings for the title and y-axis label. The first line of the function body creates a chart without excess decorations. Subsequent lines add axes and labels. Each command carries several custom settings. 
 
 We can now apply the custom function on our data (Figure \ref{fig:base_barplot}C).
 
@@ -121,7 +118,7 @@ base.barplot.1(a)
 
 \noindent The function call is concise, yet its output is a bar chart that looks legible and sophisticated. 
 
-<<base_barplot, echo = FALSE, out.width = "0.9\\textwidth", out.height = "0.225\\textwidth", fig.width = 10, fig.height = 2.5, fig.cap = "Charts created with base graphics using: (A) R's {\\tt barplot} function and default settings; (B) R's {\\tt barplot} function and some custom settings; (C) a custom plot function that styles bars, axes, and labels individually. ">>=
+<<base_barplot, echo = FALSE, out.width = "0.9\\textwidth", out.height = "0.225\\textwidth", fig.width = 10, fig.height = 2.5, fig.cap = "Charts created with base graphics using: (A) R's {\\tt barplot} function and default settings; (B) R's {\\tt barplot} function and custom settings; (C) a custom plot function that styles bars, axes, and labels individually. ">>=
 par(mfrow = c(1, 3), mar = c(2, 6, 4.8, 2))
 <<basebarfun_1>>   
   <<basebarfun_2>>    
@@ -138,11 +135,11 @@ Coding custom functions like {\tt base.barplot.1} is the usual way for making co
 
 \begin{itemize}
   
-  \item The custom function is now so specialized that it may only be fit for one-time use. Although we can produce many charts by passing different data vectors and labels, we cannot easily change any visual aspects without updating the function definition. 
+  \item The custom function is now so specialized that it may only be fit for one-time use. We cannot easily change any visual aspects without updating the function definition. 
 
  \item Because the function mixes code that manipulates data with code that adjusts visual appearance, there are opportunities to introduce bugs during tuning or maintenance. 
 
- \item It is rather difficult to create a second function with the same visual style and to maintain these styles consistent throughout the lifetime of a long project. 
+ \item It is rather difficult to create a second function with the same visual style and to keep these styles consistent throughout the lifetime of a long project. 
          
 \end{itemize}
 
@@ -155,23 +152,30 @@ Coding custom functions like {\tt base.barplot.1} is the usual way for making co
 
 The Rcssplot package provides a mechanism to style R's graphics that is inspired by cascading style sheets (css) used in web-page design. In this approach, settings for visual representation are stored in a file that is separate from both the raw data and the code that creates visualizations. 
 
+To use this framework, we load the package.
+
+<<library, eval=TRUE, echo=TRUE, cache=TRUE, comment=NA>>=
+library(Rcssplot)
+@
+
+\noindent This command triggers some messages from the R environment. They convey that the package provides new implementations for functions that are already provided by base graphics. This means that executing commands with one of the listed names, for example {\tt mtext}, will launch implementations provided by Rcssplot rather than by the core package {\tt graphics}.
+
 
 
 
 \subsection{Using \textbf{Rcss} styles}
 
-Let's adopt a convention where style definitions have {\tt Rcss} extensions. Let's begin with a style file called {\tt vignettes.bar1.Rcss}. This file is available in a sub-folder along with the package vignette. 
+Let's adopt a convention whereby files with style definitions have {\tt Rcss} extensions. As an exampe, a file called {\tt vignettes.bar1.Rcss} is available in a sub-folder along with the package vignette. The file is formatted in a similar way to cascading style sheets, {\tt css}, that are ubiquitous in web design.
 
 <<barrcss_1, eval=TRUE, echo = FALSE, comment=NA>>=
 showrcss("Rcss/vignettes.bar1.Rcss")
 @
 
-\noindent The file contains a block with the name {\tt barplot}. This corresponds to R's function for bar charts. Elements within the block are property/value pairs that correspond to the function arguments.
+\noindent The content is a block with the name {\tt barplot}. This corresponds to R's function for bar charts. Elements within the block are property/value pairs that correspond to the function arguments.
 
-We can read the style definition into the R environment using function {\tt Rcss}.
+We can read this style definition into the R environment using function {\tt Rcss}.
 
 <<barrcss_load1, eval = TRUE>>=
-library("Rcssplot")
 style1 <- Rcss("Rcss/vignettes.bar1.Rcss")
 @ 
 
@@ -184,29 +188,29 @@ printRcss(style1, "barplot")
 
 \noindent The first command displays some basic information about the newly loaded style. The second command shows more details for the {\tt barplot} component (called a selector). In this case, we recognize the three property/value pairs from the {\tt Rcss} file.
 
-Next, let's use the style object in a plot. The Rcssplot package provides wrappers for many of R's graphics functions. These wrappers have prefixes {\tt Rcss} and accept the same arguments as their base-graphics parents. For example, to create a barplot, we invoke {\tt Rcssbarplot} (Figure \ref{fig:rcss_barplot}A).
+Next, let's use the style object in a plot. The Rcssplot package provides functions that mask and replicate many of R's graphics functions, but also add some new features. In practice, this means that familiar graphics commands can be used as before, or with additional arguments. For example, we can create a simple barplot (Figure \ref{fig:rcss_barplot}A).
 
 <<rcssbar_2A, eval=FALSE>>=
-Rcssbarplot(a, main="Rcssbarplot, unstyled", ylab="y label")
+barplot(a, main="Rcssbarplot, unstyled", ylab="y label")
 @
 
-\noindent When used in plain form as above, the output of the wrapper is exactly the same as from base graphics {\tt barplot}. But we can add styling by passing our style object as an argument (Figure \ref{fig:rcss_barplot}B).
+\noindent In this plain form, the syntax as well as the output is exactly the same as using base graphics {\tt barplot}. But we can add styling by passing a style object as an argument (Figure \ref{fig:rcss_barplot}B).
 
 <<rcssbar_2B, eval=FALSE>>=
-Rcssbarplot(a, main="Rcssbarplot, styled", ylab="y label", Rcss=style1)
+barplot(a, main="Rcssbarplot, styled", ylab="y label", Rcss=style1)
 @
 
-\noindent The output is analogous to one of the previous examples (c.f. Figure \ref{fig:base_barplot}B). Previously, we achieved the effect by specifying three arguments within a {\tt barplot} function call ({\tt border}, {\tt col}, and {\tt space}). The Rcssplot alternative requires only one argument: custom settings are extracted automatically from the style object, {\tt style1}. 
+\noindent The output is analogous to one of the previous examples (c.f. Figure \ref{fig:base_barplot}B). Previously, we achieved the effect by specifying three arguments ({\tt border}, {\tt col}, and {\tt space}). This alternative requires only one argument: custom settings are extracted automatically from the style object, {\tt style1}. 
 
 In some cases it is useful to override settings defined in a style sheet (Figure \ref{fig:rcss_barplot}C).
 
 <<rcssbar_2C, eval=FALSE>>=
-Rcssbarplot(a, main="Rcssbarplot, override", ylab="y label", space=1, Rcss=style1)
+barplot(a, main="Rcssbarplot, override", ylab="y label", space=1, Rcss=style1)
 @
 
 \noindent Here, the bar width is determined by {\tt space=1} in the function call despite this property being also specified in the style object. Thus, values set manually take precedence over cascading style sheets. 
 
-<<rcss_barplot, echo = FALSE, out.width = "0.9\\textwidth", out.height = "0.225\\textwidth", fig.width = 10, fig.height = 2.5, fig.cap = "Charts created with base graphics and Rcssplot using: (A) the default style; (B) a style determined through a style sheet; (C) a style sheet, but with the bar width over-ridden by a setting within a function call. ">>=
+<<rcss_barplot, echo = FALSE, out.width = "0.9\\textwidth", out.height = "0.225\\textwidth", fig.width = 10, fig.height = 2.5, fig.cap = "Charts created with Rcssplot using: (A) the default style; (B) a style determined through a style sheet; (C) a style sheet, but with the bar width over-ridden by a setting within a function call. ">>=
 par(mfrow = c(1, 3), mar = c(2, 6, 4.8, 2))
 <<rcssbarfun_1>>   
   <<rcssbar_2A>>
@@ -223,40 +227,40 @@ par(mfrow = c(1, 1))
 
 \subsection{Using \textbf{Rcss} classes}
 
-Next, let's implement the entire custom bar plot using style sheets and introduce a new feature, style classes. We need additional css definitions. These are encoded in another file {\tt vignettes.bar2.Rcss}. 
+Next, let's implement the entire custom bar plot using style sheets and introduce a new feature - style classes. We need additional css definitions encoded in another file, {\tt vignettes.bar2.Rcss}. 
 
 <<barrcss_2, eval=TRUE, echo = FALSE, comment=NA>>=
 showrcss("Rcss/vignettes.bar2.Rcss")
 @
 
-\noindent The definitions are again arranged into blocks that correspond to R's base graphics commands. It is worth noting a few features.
+\noindent The definitions are again arranged into blocks that correspond to R's base graphics commands. 
 
 \begin{itemize}
 \item The values in the style sheet match the settings hard-coded into function {\tt base.barplot.1}. The format of the style sheet makes it easy to identify property/value pairs. 
   
-\item Some blocks contain names with dots followed by a string, e.g. {\tt axis.x}. This notation defines property/value pairs that are activated only in particular circumstances. In the case of {\tt axis.x}, the definitions pertain to function {\tt Rcssaxis}, but only when accompanied by class label {\tt x}. This will become clearer below.
+\item Some blocks contain names with dots followed by a string, e.g. {\tt axis.x}. This notation defines property/value pairs that are activated only in particular circumstances. In the case of {\tt axis.x}, the definitions pertain to function {\tt axis}, but only when accompanied by class label {\tt x}. This will become clearer below.
 
 \item Some blocks contain names for several base graphics components separated by commas, e.g. {\tt mtext.ylab, mtext.submain, axis.y}. This syntax defines property/value pairs for several components at once. In this case, it is convenient to specify a common color.
 \end{itemize}
 
-We can now write a new function based on Rcssplot wrappers.
+We can now write a new function that can apply these styles.
 
 <<rcssbarfun_1, eval = FALSE>>=
 ## barplot using Rcssplot, version 1
 rcss.barplot.1 <- function(x, main="Custom Rcss plot", ylab="y label", 
                            Rcss="default", Rcssclass=c()) {
   ## create an empty barplot  
-  barpos <- Rcssbarplot(x, axes=FALSE, axisnames=FALSE, Rcss=Rcss, Rcssclass=Rcssclass)
+  barpos <- barplot(x, axes=FALSE, axisnames=FALSE, Rcss=Rcss, Rcssclass=Rcssclass)
   ## add custom components 
-  Rcssaxis(1, at=barpos[,1], labels=names(x), Rcss=Rcss, Rcssclass=c(Rcssclass,"x"))
-  Rcssaxis(2, Rcss=Rcss, Rcssclass=c(Rcssclass,"y"))  
-  Rcssmtext(main, Rcss=Rcss, Rcssclass=c(Rcssclass,"main"))
-  Rcssmtext(range.string(x), Rcss=Rcss, Rcssclass=c(Rcssclass, "submain"))
-  Rcssmtext(ylab, side=2, Rcss=Rcss, Rcssclass=c(Rcssclass,"ylab"))
+  axis(1, at=barpos[,1], labels=names(x), Rcss=Rcss, Rcssclass=c(Rcssclass,"x"))
+  axis(2, Rcss=Rcss, Rcssclass=c(Rcssclass,"y"))  
+  mtext(main, Rcss=Rcss, Rcssclass=c(Rcssclass,"main"))
+  mtext(range.string(x), Rcss=Rcss, Rcssclass=c(Rcssclass, "submain"))
+  mtext(ylab, side=2, Rcss=Rcss, Rcssclass=c(Rcssclass,"ylab"))
 }
 @
 
-\noindent The structure mirrors {\tt base.barplot.1}, but also accepts an {\tt Rcss} object and a vector {\tt Rcssclass}. Within the function body, all the custom graphical settings are replaced by an {\tt Rcss} argument and a vector for {\tt Rcssclass}. When there are multiple calls to one graphic function (e.g. {\tt Rcssaxis} for the x and y axes), the {\tt Rcssclass} vector contains some distinguishing labels. These labels match the css subclasses we saw previously. 
+\noindent The structure mirrors {\tt base.barplot.1}, but also accepts an {\tt Rcss} object and a vector {\tt Rcssclass}. Within the function body, all the custom graphical settings are replaced by an {\tt Rcss} argument and a vector for {\tt Rcssclass}. When there are multiple calls to one graphic function (e.g. {\tt axis} for the x and y axes), the {\tt Rcssclass} vector contains some distinguishing labels. These labels match the css subclasses we saw previously. 
 
 The output from the new function is a complete plot with all our custom settings (Figure \ref{fig:rcss_custombar}A). 
 
@@ -267,14 +271,14 @@ rcss.barplot.1(a, main="Rcss style2", Rcss=style2)
 
 \noindent The first line creates a new style object, {\tt style2}, using the {\tt Rcss} definitions from both files displayed above. The call to {\tt rcss.barplot.1} then creates the chart.
 
-The advantage of this approach is that we can now change the visual output by replacing the {\tt Rcss} style object by another one without re-coding the custom function. One way to change the style is to edit the {\tt Rcss} files (or use differet files), load the definitions into a new style object, and generate a new figure with the new style. Another way, which we discuss next, is to define multiple styles within one {\tt Rcss} object. 
+The advantage of this approach is that we can now change the visual output by replacing the {\tt Rcss} style object by another one without re-coding the custom function. One way to change the style is to edit the {\tt Rcss} files (or use differet files), load the definitions into a new style object, and generate a new figure with the new style. Another way, covered next, is to define multiple styles within one {\tt Rcss} object. 
 
 
 
 
 \subsection{Using multiple styles}
 
-Let's look at another set {\tt Rcss} file, {\tt vignettes.bar3.Rcss}. 
+Let's look at another {\tt Rcss} file, {\tt vignettes.bar3.Rcss}. 
 
 <<barrcss_3, eval=TRUE, echo = FALSE, comment=NA>>=
 showrcss("Rcss/vignettes.bar3.Rcss")
@@ -332,35 +336,7 @@ In summary, we saw in this section how to use cascading style sheets to determin
 
 \section{Additional features}
 
-This section covers some ``advanced'' features. The first three subsections deal with reducing repetitive code. The last subsection introduces usage of css objects as general data stores.
-
-
-
-
-\subsection{Overloading base graphics \label{sec_overload}}
-
-Although our custom function {\tt rcss.barplot.1} provides us with opportunities to tune the chart, its code has a number of inelegant repetitive elements. One of these is the {\tt Rcss} prefix before each of the plot commands. It is possible to avoid this prefix by overloading the base graphics functions with their Rcssplot wrappers. Overloading is achieved using function {\tt RcssOverload}.
-
-<<rbarplot2, eval = TRUE>>=
-## barplot using Rcssplot, version 2 (using overloading)
-rcss.barplot.2 <- function(x, main="Custom Rcss plot", ylab="y label",
-                           Rcss="default", Rcssclass=c()) {
-  ## overload base graphics function by Rcssplot wrappers
-  RcssOverload()    
-  ## create a barplot (without Rcss prefixes)
-  barpos <- barplot(x, axes=FALSE, axisnames=FALSE, Rcss=Rcss, Rcssclass=Rcssclass)
-  axis(1, at=barpos[,1], labels=names(x), Rcss=Rcss, Rcssclass=c(Rcssclass, "x"))
-  axis(2, Rcss=Rcss, Rcssclass=c(Rcssclass, "y"))  
-  mtext(main, Rcss=Rcss, Rcssclass=c(Rcssclass, "main"))
-  mtext(range.string(x), Rcss=Rcss, Rcssclass=c(Rcssclass, "submain"))  
-  mtext(ylab, side=2, Rcss=Rcss, Rcssclass=c(Rcssclass, "ylab"))
-}
-@
-
-\noindent Here, the first step signals that subsequent calls to e.g. {\tt axis} should actually invoke the corresponding wrappers, e.g. {\tt Rcssaxis}. The subsequent code thus omits the {\tt Rcss} prefixes.
-
-Note that executing {\tt RcssOverload} masks several commands from base graphics; the step carries numerous side effects for the working environment. Such behavior is typically undesirable. In this case, however, the net effect is similar as could be achieved by masking base graphics functions within the package and taking effect automatically when the package is loaded. This implementation with an explicit overload step provides a mechanism to activate the masking only when needed. It is provides a means to use both base graphics and Rcssplot wrappers within a single project.
-
+This section covers some additional features provided by the package. The first two subsections deal with reducing repetitive code. The last subsection introduces usage of css objects as general data stores.
 
 
 
@@ -370,12 +346,10 @@ Other repetitive elements are the constructions {\tt Rcss=Rcss} and {\tt Rcsscla
 
 Handling of default values is achieved through objects {\tt RcssDefaultStyle} and {\tt RcssCompulsoryClass}. These objects can be defined in any environment, for example in the global environment in the console or inside a function. When present, the package wrappers detect them and use information therein to influence plot behavior. Consider, for example, the following custom function.
 
-<<rbarplot3, eval = TRUE>>=
-## barplot using Rcssplot, version 3 (using defaults & compulsory classes)
-rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label", 
+<<rbarplot2, eval = TRUE>>=
+## barplot using Rcssplot, version 2 (using defaults & compulsory classes)
+rcss.barplot.2 <- function(x, main="Custom Rcss plot", ylab="y label", 
                            Rcss="default", Rcssclass=c()) {
-  ## overload base graphics, set defaults and compulsory classes
-  RcssOverload()
   RcssDefaultStyle <- RcssGetDefaultStyle(Rcss)
   RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass)
   ## create a barplot (without Rcss arguments)
@@ -388,7 +362,7 @@ rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label",
 }
 @
 
-\noindent The preparation steps here perform overloading, and then set a default style and compulsory class. Subsequent calls to graphics functions do not to refer to object {\tt Rcss} or the class {\tt Rcssclass}. Nonetheless, the output of the custom function can exhibit styling. 
+\noindent The preparation steps set a default style and compulsory class. Subsequent calls to graphics functions do not to refer to object {\tt Rcss} or the class {\tt Rcssclass}. Nonetheless, the output of the custom function can exhibit styling. 
 
 \begin{itemize}
 
@@ -403,19 +377,18 @@ rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label",
 
 \subsection{Using Rcssplot globally}
 
-In the previous two examples, {\tt rcss.barplot.2} and {\tt rcss.barplot.3}, we used overloading and changes to defaults within those custom functions, i.e. in environments local to those functions. In some cases, it may be reasonable to apply these changes in the global environment instead. This can be achieved by running the preparation outside of the custom function. 
+In the previous example, {\tt rcss.barplot.2}, we changed the default style within the custom functions, i.e. in a local environment. In some cases, it may be reasonable to apply such changes in the global environment instead. This can be achieved by running the preparation outside of the custom function. 
 
 <<global, eval=FALSE>>=
-RcssOverload()
 RcssDefaultStyle <- style3
 RcssCompulsoryClass <- c()
 @
 
 \noindent Subsequent to these commands, the custom function can be simplified further.
 
-<<rbarplot4, eval = TRUE>>=
-## barplot using Rcssplot, version 4 (assumes global use of Rcssplot)
-rcss.barplot.4 <- function(x, main="Custom Rcss plot", ylab="y label", 
+<<rbarplot3, eval = TRUE>>=
+## barplot using Rcssplot, version 3 (assumes global style)
+rcss.barplot.3 <- function(x, main="Custom Rcss plot", ylab="y label", 
                            Rcssclass="typeB") {
   ## adjust compulsory class
   RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass) 
@@ -433,15 +406,13 @@ rcss.barplot.4 <- function(x, main="Custom Rcss plot", ylab="y label",
 
 \begin{itemize}
 
-\item Function {\tt rcss.barplot.4} assumes that overloading has taken place. This is evidenced by calls to, for example, {\tt axis}, with {\tt Rcssclass} arguments. Thus, if this function is ever invoked without a prior overloading step, those calls will generate errors.
-    
 \item The function definition no longer carries an argument {\tt Rcss}. The style is assumed to come entirely from the default style.
   
 \item The function still carries an argument {\tt Rcssclass}. Keeping the argument is a mechanism that allows functions within a project to use different sub-classes without the need to repeatedly redefine the compulsory class in the global environment. 
   
 \end{itemize}
 
-Sometimes, we may want to reset the default style and/or the compulsory style class(es). This is simply achieved by setting those objects to {\tt NULL}. 
+Sometimes, we may want to reset the default style and/or the compulsory style class(es). This can be achieved by setting those objects to {\tt NULL}. 
 
 <<reset, eval=TRUE>>=
 RcssDefaultStyle <- NULL
@@ -489,7 +460,7 @@ In this section, let's switch our focus toward using cascading style sheets as g
 showrcss("Rcss/vignettes.bar4.Rcss")
 @
 
-\noindent The first block is named {\tt baraxis}, but this does not correspond to any of R's base graphics commands. Therefore, this block does not affect any of the Rcssplot wrapper functions. But we can write code to exploit information in {\tt baraxis} by extracting values manually. The package provides two functions for this purpose, {\tt RcssProperty} and {\tt RcssValue}.
+\noindent The first block is named {\tt baraxis}, but this does not correspond to any of R's base graphics commands. Therefore, this block does not affect any Rcssplot functions. But we can write code to exploit information in {\tt baraxis} by extracting values manually. The package provides two functions for this purpose, {\tt RcssProperty} and {\tt RcssValue}.
 
 <<getprop, eval=TRUE>>=
 style4 <- Rcss(paste0("Rcss/vignettes.bar", c(1, 2, 4), ".Rcss"))
@@ -503,16 +474,15 @@ RcssValue("baraxis", "stripe", default=0, Rcss=style4)
 RcssValue("baraxis", "strpe", default=0, Rcss=style4)
 @ 
 
-\noindent The result here is {\tt 1} for {\tt stripe} because we saw this property is defined; the suggestion {\tt default=0} is ignored. The second result is {\tt 0} because the misspelling is not present in the file. 
+\noindent The result here is {\tt 1} for {\tt stripe} because we saw this property is defined; the suggestion {\tt default=0} is ignored. The second result is {\tt 0} because the misspelling {\tt strpe} is not present in the file. 
 
 We can now exploit this feature to augment our bar chart with an option to draw horizontal rules instead of a y-axis.
 
 <<barplot6, eval=TRUE>>=
 ## barplot using Rcssplot, version 5 (uses custom css selectors)
-rcss.barplot.5 <- function(x, main="", ylab="Proportion (%)", 
+rcss.barplot.4 <- function(x, main="", ylab="Proportion (%)", 
     Rcss="default", Rcssclass=c()) {
-  ## use overloading, custom style, compulsary class
-  RcssOverload()
+  ## use custom style, compulsary class
   RcssDefaultStyle <- RcssGetDefaultStyle(Rcss)
   RcssCompulsoryClass <- RcssGetCompulsoryClass(Rcssclass)
   ## extract custom properties - show axis? force ylim?
@@ -538,23 +508,23 @@ rcss.barplot.5 <- function(x, main="", ylab="Proportion (%)",
 @
 
 
-\noindent Two commands near the top fetch values for {\tt stripes} and {\tt ylim}. The subsequent code produces output conditional to these new variables (Figure \ref{fig:fig_stripes}A). 
+\noindent Two commands near the top fetch values for {\tt stripe} and {\tt ylim}. The subsequent code produces output conditional to these new variables (Figure \ref{fig:fig_stripes}A). 
 
 <<stripeA, eval = FALSE>>=
-rcss.barplot.5(a, main="Stripes", Rcss=style4)
+rcss.barplot.4(a, main="Stripes", Rcss=style4)
 @
 
 \noindent The style we loaded also defines a class {\tt dotted} (Figure \ref{fig:fig_stripes}B).
 
 <<stripeB, eval = FALSE>>=
-rcss.barplot.5(a, main="Stripes, y-scale 100", Rcss=style4, Rcssclass="dotted")
+rcss.barplot.4(a, main="Stripes, y-scale 100", Rcss=style4, Rcssclass="dotted")
 @
 
 \noindent In addition to providing styling for the horizontal rules, the class {\tt dotted} also defines a property {\tt ylim}. Its value is used within {\tt rcss.barplot.5} to force limits on the vertical axis. This behavior can be desirable for several reasons. If the plotted values are proportions in percentages, it may be useful to show the full range from $0\%$ to $100\%$. A fixed range can also be useful when displaying plots side-by-side (Figure \ref{fig:fig_stripes}C).
 
 <<stripeC, eval = FALSE>>=
 a2 <- setNames(c(12, 20, 26, 72, 88, 94), tail(letters, 6))
-rcss.barplot.5(a2, main="... new data", Rcss=style4, Rcssclass="dotted")
+rcss.barplot.4(a2, main="... new data", Rcss=style4, Rcssclass="dotted")
 @
 
 \noindent In this example, the new data are easily compared with the old because the vertical scales in the charts are recognizably the same.
@@ -625,23 +595,30 @@ showrcss("Rcss/grammar.txt")
 
 
 
-\subsection{Package versions}
+\subsection{Package version history}
+
+
+\subsection*{{v1.0.0}}
+
+\begin{itemize}
+  \item All Rcss wrappers change name to match the function names from base graphics. They automatically overload base graphics functions. 
+  \item Error messages generated during parsing of Rcss files include line numbers in the original files.
+\end{itemize}
+
 
 
 \subsection*{{v0.3.0}}
 
 \begin{itemize}
-  
  \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously exisitng functions, but are less verbose, epsecially forfetching values from a default style. 
-
  \item Better parsing and handling of special values in css files, e.g. TRUE/FALSE, NA, NULL.
-
 \end{itemize}
 
 \subsection*{{v0.2.0}}
 
-First version submitted to CRAN.
-
+\begin{itemize}
+ \item First version submitted to CRAN.
+\end{itemize}
 
 
 \subsection{Session info}

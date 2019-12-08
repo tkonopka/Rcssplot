@@ -31,18 +31,17 @@ metaplot <- function(filename) {
   # with Rcssplot
   testplot2 <- function(x, main="Testplot2", submain="",
                         Rcss="default", Rcssclass=c()) {
-    barpos <- Rcssbarplot(x, axes=FALSE, axisnames=FALSE,
+    barpos <- barplot(x, axes=FALSE, axisnames=FALSE,
                           Rcss=Rcss, Rcssclass=Rcssclass)
-    Rcssaxis(1, at=barpos[,1], labels=names(x),
+    axis(1, at=barpos[,1], labels=names(x),
              Rcss=Rcss, Rcssclass=c(Rcssclass,"x"))
-    Rcssaxis(2, Rcss=Rcss, Rcssclass=c(Rcssclass,"y"))  
-    Rcssmtext(main, Rcss=Rcss, Rcssclass=c(Rcssclass,"main"))
-    Rcssmtext(submain, Rcss=Rcss, Rcssclass=c(Rcssclass,"submain"))
+    axis(2, Rcss=Rcss, Rcssclass=c(Rcssclass,"y"))  
+    mtext(main, Rcss=Rcss, Rcssclass=c(Rcssclass,"main"))
+    mtext(submain, Rcss=Rcss, Rcssclass=c(Rcssclass,"submain"))
   }
   # uses overloading internally
   testplot3 <- function(x, main="Testplot3", submain="",
-                        Rcss="default", Rcssclass=c()) {
-    RcssOverload()    
+                        Rcss="default", Rcssclass=c()) {   
     barpos <- barplot(x, axes=FALSE, axisnames=FALSE,
                       Rcss=Rcss, Rcssclass=Rcssclass)
     axis(1, at=barpos[,1], labels=names(x),
@@ -54,7 +53,6 @@ metaplot <- function(filename) {
   # uses overloading and default styles
   testplot4 <- function(x, main="Testplot4", submain="",
                         Rcss="default", Rcssclass=c()) {
-    RcssOverload()
     RcssDefaultStyle = RcssGetDefaultStyle(Rcss)
     RcssCompulsoryClass = RcssGetCompulsoryClass(Rcssclass)
     barpos <- barplot(x, axes=FALSE, axisnames=FALSE)
@@ -86,7 +84,6 @@ metaplot <- function(filename) {
   testplot4(x0, main="Loc overL, defaults, abc",  subm="... new color",
             Rcss=style6, Rcssclass="abc")
   
-  RcssOverload()
   RcssDefaultStyle = style6
   testplot5(x0, main="Glob overL, Glob style", ".. back to normal")
   testplot5(x0, main="Glob overL, Glob style", subm="..should be same")

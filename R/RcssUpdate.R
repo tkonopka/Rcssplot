@@ -39,8 +39,6 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 }
 
 
-
-
 #' Modify an Rcss style sheet object
 #' 
 #' Creates a new Rcss style sheet object from the input, modifying

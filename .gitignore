@@ -12,6 +12,7 @@
 
 ## ignoring intermediate vignette data
 vignettes/figure/
+vignettes/cache/
 
 ## ignoring output of tests
 tests/*.pdf

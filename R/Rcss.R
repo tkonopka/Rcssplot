@@ -336,18 +336,23 @@ RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
 #' @export 
 RcssOverload = function() {
 
-  # a vector with all the wrappers
-  overload <- c("abline", "arrows", "axis", "barplot", "box",
-                "boxplot", "contour", "grid", "hist", "jpeg", "legend",
-                "lines", "matplot", "mtext", "text", "par", "pdf", "plot",
-                "png", "points", "polygon", "rect", "stripchart", "text",
-                "title")
-  
-  # create and evaluate commands to overload standard functions by Rcss
-  for (x in overload) {
-    eval(parse(text=paste0(x, " = function(...) { Rcss", x, "(...) }")),
-         envir=parent.frame())
+  msg = c("RcssOverload is deprecated and redundant.",
+          "All Rcssplot wrappers already mask graphics functions")
+  warning(paste(msg, collapse="\n"))
+
+  if (FALSE) {
+    # a vector with all the wrappers
+    overload <- c("abline", "arrows", "axis", "barplot", "box",
+                  "boxplot", "contour", "grid", "hist", "jpeg", "legend",
+                  "lines", "matplot", "mtext", "text", "par", "pdf", "plot",
+                  "png", "points", "polygon", "rect", "stripchart", "text",
+                  "title")
+    
+    # create and evaluate commands to overload standard functions by Rcss
+    for (x in overload) {
+      eval(parse(text=paste0(x, " = function(...) { Rcss", x, "(...) }")),
+           envir=parent.frame())
+    }
   }
-  
 }
 

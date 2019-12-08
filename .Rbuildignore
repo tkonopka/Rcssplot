@@ -10,11 +10,13 @@ tests
 
 ## Temporary files for vignette compilation
 ^vignettes/fig.+$
+^vignettes/cach.+$
 ^vignettes/.+aux$
 ^vignettes/.+log$
 ^vignettes/.+out$
 ^vignettes/.+blg$
 ^vignettes/.+bbl$
 ^vignettes/.+~$
+^vignettes/.+md$
 
 README*
