@@ -200,3 +200,13 @@ text,,mtext {
 # clean up any temporary file
 unlink(tofile(""))
 
+
+
+
+###############################################################################
+# test overloading; it is now deprecated and redundant
+
+
+test_that("overloading is deprecated", {
+  expect_warning(RcssOverload(), "redundant")
+})

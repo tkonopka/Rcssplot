@@ -5,6 +5,10 @@
 # Author: Tomasz Konopka
 
 
+# This is used to determine how the watch function listens to more/stop cues
+options(Rcssplot.connection = stdin())
+
+
 #' development tool for adjusting Rcss and R graphics code
 #'
 #' This is a macro script that loads R code and a default Rcss style,
@@ -32,19 +36,15 @@
 RcssWatch <- function(f, files=NULL, ...) {
   
   print.space = function(x) {
-    cat(paste("\n", x, "\n", sep=""))
+    message(paste("\n", x, "\n", sep=""))
   }
   
   # split up the files by extension
   Rcss.files = grep("css$", files, value=TRUE)
   R.files = grep("[R|r]$", files, value=TRUE)
   
-  first <- TRUE
   continue <- TRUE
   while (continue) {
-    if (!first) {
-      invisible(readline(prompt="Press [enter] to re-run, or [Ctrl-C] to stop"))
-    }
     # reload Rcss and code
     tryCatch({
       for (x in R.files) {
@@ -60,11 +60,15 @@ RcssWatch <- function(f, files=NULL, ...) {
     }, warning=print.space, error=print.space)
     
     # abort if there is no need to watch the Rcss or R files
-    first <- FALSE
     if (identical(files, NULL) | length(files)==0) {
       message("stopping - no files to watch")
       continue <- FALSE
+    } else {
+      message("Press [enter] to re-run, or [q] and [enter] to stop")
+      response <-readLines(con=getOption("Rcssplot.connection"), n=1)
+      continue <- !startsWith(response, "q")
     }
+    
   }
 }
 

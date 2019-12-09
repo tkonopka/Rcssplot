@@ -5,6 +5,8 @@ cat("\ntest_lexer.R ")
 source("helpers.R")
 
 
+
+
 ###############################################################################
 # lexing small components
 
@@ -130,5 +132,37 @@ test_that("parse hex tokens in uppercase", {
   ## good input will point to a hash sign
   expect_equal(RcssParseHexToken(fdata, 1), 8)
   expect_equal(RcssParseHexToken(fdata, 9), 18)
+})
+
+
+
+
+###############################################################################
+# lexing from text
+
+test_that("Lex from a string", {
+  expect_silent(RcssLexer(text=c("text { cex: 2; }", "points { pch: 19; }")))
+})
+
+
+test_that("Lex number with a positive sign", {
+  # parse text with and without plus sign
+  raw.with = RcssLexer(text="abc { value: +2; }")
+  raw.without = RcssLexer(text="abc { value: 2; }")
+  result.with = raw.with[raw.with$type=="NUMBER", "token"]
+  result.without = raw.without[raw.without$type=="NUMBER", "token"]  
+  expect_equal(as.integer(result.with), as.integer(result.without))
+})
+
+
+test_that("Lex incomplete string", {
+  # parse text with and without plus sign
+  expect_silent(RcssLexer(text="abc { value: 123"))
+})
+
+
+test_that("Lex comment without ending", {
+  # parse text with and without plus sign
+  expect_silent(RcssLexer(text="abc { x: 1; } /** comment "))
 })
 

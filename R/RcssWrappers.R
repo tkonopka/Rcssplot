@@ -12,13 +12,6 @@
 # graphics function, and executes it.
 #
 #
-# Note 1:
-#
-# There is a bit of repetition here, but some of the wrappers
-# differ somewhat because of required arguments.
-# e.g. "side" for axis() vs. "x" and "y" for plot
-# Perhaps some of these function could be generated automatically.
-#
 
 
 # abline(a = NULL, b = NULL, h = NULL, v = NULL, reg = NULL,
@@ -244,7 +237,7 @@ grid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
 
 # hist(x, ...)
 #
-#' #' Draw a styled histogram
+#' Draw a styled histogram
 #' 
 #' This is a wrapper for R's hist function.
 #' See R's documentation for graphics::hist for further details.
