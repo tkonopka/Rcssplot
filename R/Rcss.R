@@ -28,7 +28,6 @@ NULL
 #' function returns a basic Rcss object. If multiple files, function
 #' reads each one and produces a joint style.
 #' @param text character, a string with Rcss
-#'
 #' @return Rcss object
 #'
 #' @examples
@@ -49,6 +48,9 @@ Rcss <- function(file=NULL, text=NULL) {
   # if user does not specify a css file, return bare-bones object
   if (is.null(file) & is.null(text)) {
     return(ans)    
+  }
+  if ((length(file) + length(text)) == 0) {
+    return(ans)
   }
   
   # get a parsetree for the input file

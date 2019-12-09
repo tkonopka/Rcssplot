@@ -4,14 +4,12 @@
 \alias{RcssWatch}
 \title{development tool for adjusting Rcss and R graphics code}
 \usage{
-RcssWatch(f, Rcss.files = NULL, R.files = NULL, ...)
+RcssWatch(f, files = NULL, ...)
 }
 \arguments{
 \item{f}{function or character of function name, executed at each iteration}
 
-\item{Rcss.files}{character, paths to Rcss files}
-
-\item{R.files}{character, paths to R files}
+\item{files}{character, paths to R and Rcss files}
 
 \item{...}{other arguments, passed to function f}
 }
@@ -21,8 +19,16 @@ and then executes a function. This process is repeated indefinitely.
 }
 \examples{
 
-# this repeatedly draws and redraws a bar plot
+# Note: the examples below draw a charat once and exit.
+# To enable quick re-drawing, RcssWatch must be provided with file paths
+
+# draw and redraw a bar plot
 RcssWatch(plot, x=1:4, y=1:4)
+
+# alternative syntax, using a function name as a string
+custom.barplot <- function(x=1:4, main="") { barplot(x, main=main) }
+RcssWatch("custom.barplot", main="Custom")
+
 # for more interesting behavior, specify a files with styles and R source
 
 }

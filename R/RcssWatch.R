@@ -12,21 +12,32 @@
 #'
 #' @export
 #' @param f function or character of function name, executed at each iteration
-#' @param Rcss.files character, paths to Rcss files
-#' @param R.files character, paths to R files
+#' @param files character, paths to R and Rcss files
 #' @param ... other arguments, passed to function f
 #'
 #' @examples
 #'
-#' # this repeatedly draws and redraws a bar plot
+#' # Note: the examples below draw a charat once and exit.
+#' # To enable quick re-drawing, RcssWatch must be provided with file paths
+#'
+#' # draw and redraw a bar plot
 #' RcssWatch(plot, x=1:4, y=1:4)
+#'
+#' # alternative syntax, using a function name as a string
+#' custom.barplot <- function(x=1:4, main="") { barplot(x, main=main) }
+#' RcssWatch("custom.barplot", main="Custom")
+#' 
 #' # for more interesting behavior, specify a files with styles and R source
 #'
-RcssWatch <- function(f, Rcss.files=NULL, R.files=NULL, ...) {
-
+RcssWatch <- function(f, files=NULL, ...) {
+  
   print.space = function(x) {
     cat(paste("\n", x, "\n", sep=""))
   }
+  
+  # split up the files by extension
+  Rcss.files = grep("css$", files, value=TRUE)
+  R.files = grep("[R|r]$", files, value=TRUE)
   
   first <- TRUE
   continue <- TRUE
@@ -50,8 +61,8 @@ RcssWatch <- function(f, Rcss.files=NULL, R.files=NULL, ...) {
     
     # abort if there is no need to watch the Rcss or R files
     first <- FALSE
-    if (identical(Rcss.files, NULL) & identical(R.files, NULL)) {
-      message("stopping - no files to watch\n")
+    if (identical(files, NULL) | length(files)==0) {
+      message("stopping - no files to watch")
       continue <- FALSE
     }
   }
