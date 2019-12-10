@@ -18,3 +18,13 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's par function.
 See R's documentation for graphics::par for further details.
 }
+\examples{
+
+# set properties for plot
+par(ps=8, mar=c(3, 8, 3, 1))
+plot(c(0, 1), c(0, 1), type="n", frame=FALSE)
+text(rep(0.5, 2), c(0.2, 0.5), c("abc", "def"))
+par(ps=12)
+text(0.5, 0.8, "xyz")
+
+}

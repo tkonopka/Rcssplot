@@ -34,3 +34,10 @@ See also related functions RcssGetPropertyValueOrDefault, which
 is the same, except that RcssValue is shorter to write and takes
 the Rcss object as its last argument.
 }
+\examples{
+
+style1 <- Rcss(text="custom { key: 100 }")
+RcssValue("custom", "key", default=1, Rcss=style1)
+RcssValue("custom", "key2", default=0, Rcss=style1)
+
+}

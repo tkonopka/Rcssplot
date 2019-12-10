@@ -21,3 +21,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's rect function.
 See R's documentation for graphics::rect for further details.
 }
+\examples{
+
+# draw rectangles on an existing plot
+plot(c(0, 10), c(0, 10), type="n", xlab="", ylab="")
+rect(4.5, 1, 5.5, 3)
+rect(c(1, 7.5), c(6, 6), c(2.5, 9), c(8, 8))
+
+}

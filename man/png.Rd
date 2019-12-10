@@ -20,3 +20,12 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's png function.
 See R's documentation for grDevices::png for further details.
 }
+\examples{
+
+# send content of graphics to a png file
+# to run this, un-comment the png() and dev.off() lines
+# png(file="example-file.png")
+barplot(1:5)
+# dev.off()
+
+}

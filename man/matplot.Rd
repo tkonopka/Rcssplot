@@ -22,3 +22,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's matplot function.
 See R's documentation for graphics::matplot for further details.
 }
+\examples{
+
+# draw scatter based on column in a matrix
+dataset = cbind(A=rnorm(20), B=rnorm(20))
+matplot(dataset)
+
+}

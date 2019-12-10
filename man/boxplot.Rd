@@ -21,3 +21,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's boxplot function.
 See R's documentation for graphics::boxplot for further details.
 }
+\examples{
+
+# draw a complete boxplot
+dataset <- list(A=rpois(30, 10), B=rpois(30, 20))
+boxplot(dataset, col=c("#dd0000", "#dd8888"))
+
+}

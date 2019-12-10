@@ -36,3 +36,11 @@ defined via RcssSetDefaultStyle().}
 This is a wrapper for R's abline function.
 See R's documentation for graphics::abline for further details.
 }
+\examples{
+
+# draw a set of horizontal lines and a vertical line
+plot(c(0, 1), c(0, 1), type="n")
+abline(h=seq(0, 1, by=0.2))
+abline(v=0.8)
+
+}

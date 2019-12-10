@@ -37,3 +37,8 @@ one or more properties.
 \details{
 Equivallent to RcssChange: use RcssChange instead
 }
+\examples{
+
+# use RcssChange instead
+
+}

@@ -20,3 +20,9 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's barplot function.
 See R's documentation for graphics::barplot for further details.
 }
+\examples{
+
+# draw a complete barplot
+barplot(1:5)
+
+}

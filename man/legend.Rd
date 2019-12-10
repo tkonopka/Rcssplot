@@ -22,3 +22,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's legend function.
 See R's documentation for graphics::legend for further details.
 }
+\examples{
+
+# add a legend to an existing plot
+plot(1:8, 1:8, col=rep(c(1,2), each=4), pch=19)
+legend(7, 3, c("A", "B"), pch=19, col=1:2)
+
+}

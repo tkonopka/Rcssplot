@@ -20,3 +20,12 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's pdf function.
 See R's documentation for grDevices::pdf for further details
 }
+\examples{
+
+# send content of graphics to a pdf file
+# to run this, un-comment the pdf() and dev.off() lines
+# png(file="example-file.pdf")
+barplot(1:5)
+# dev.off()
+
+}

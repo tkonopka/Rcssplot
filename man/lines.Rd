@@ -20,3 +20,12 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's lines function.
 See R's documentation for graphics::lines for further details.
 }
+\examples{
+
+# add lines to an existing plot area
+plot(c(0, 10), c(0, 10), type="n")
+lines(c(1,8), c(2, 2), lwd=3, col="black")
+lines(c(1, 7, NA, 4, 9), c(1, 6, NA, 1, 3), lwd=1, col="blue")
+lines(c(8, 3), c(7, 9), lwd=3, lty=2, col="red")
+
+}

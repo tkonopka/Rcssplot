@@ -25,3 +25,8 @@ of the property.
 \details{
 Equivalent to RcssProperty; use RcssProperty instead.
 }
+\examples{
+
+# use RcssProperty or RcssValue instead
+
+}

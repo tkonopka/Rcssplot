@@ -18,3 +18,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's grid function.
 See R's documentation for graphics::grid for further details.
 }
+\examples{
+
+# add a grid to an existing plot
+plot(c(0, 10), c(0, 10), type="n", xaxs="i", yaxs="i", las=1)
+grid(nx=10, ny=5, col="#777777")
+
+}

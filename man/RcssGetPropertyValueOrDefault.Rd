@@ -35,3 +35,8 @@ RcssGetPropertyValue().
 \details{
 Equivalent to RcssValue(); use RcssValue() instead
 }
+\examples{
+
+# use RcssValue instead
+
+}

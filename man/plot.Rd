@@ -20,3 +20,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's plot function.
 See R's documentation for graphics::plot for further details.
 }
+\examples{
+
+# draw a new empty plot area - unit square
+plot(c(0, 1), c(0, 1), type="n", xlab="", ylab="")
+# draw a plot area, automatically add some points
+plot(runif(20), rpois(20, 100))
+
+}

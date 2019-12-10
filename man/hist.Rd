@@ -20,3 +20,13 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's hist function.
 See R's documentation for graphics::hist for further details.
 }
+\examples{
+
+# draw a complete histogram
+dataset <- rpois(400, 6)
+hist(dataset, breaks=seq(0, max(dataset)))
+# only obtain the bin counts, without plotting
+histdata <- hist(dataset, breaks=seq(0, 2+max(dataset), by=2), plot=FALSE)
+histdata
+
+}

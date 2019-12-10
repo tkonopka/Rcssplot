@@ -28,6 +28,11 @@
 #' when propertylist is set to NULL
 #' @param value new values associated with property above. This is
 #' only used propertylist is set to NULL
+#'
+#' @examples
+#'
+#' # use RcssChange instead
+#'
 RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL, 
                                     propertylist = NULL,
                                     property = NULL, value = NULL) {
@@ -61,6 +66,15 @@ RcssChangePropertyValue <- function(Rcss, selector, Rcssclass = NULL,
 #' actually affecting the default style. To change how the
 #' default works in practice, assign this return value to
 #' RcssDefaultStyle
+#'
+#'
+#' @examples
+#'
+#' style1 <- Rcss(text="points { cex: 1; pch: 19; }")
+#' printRcss("points", Rcss=style1, verbose=TRUE)
+#' style2 <- RcssChange("points", list(cex=2), Rcss=style1)
+#' printRcss("points", Rcss=style2, verbose=TRUE)
+#'
 RcssChange <- function(selector,  
                        propertylist = NULL,
                        property = NULL, value = NULL,

@@ -31,3 +31,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's contour function.
 See R's documentation for graphics::contour for further details.
 }
+\examples{
+
+# draw a complete contour plot
+dataset <- outer(1:10, 1:10)
+contour(z=dataset)
+
+}

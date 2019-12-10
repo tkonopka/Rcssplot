@@ -23,3 +23,11 @@ the actual value associated to the property.
 \description{
 Extract information about property and its value
 }
+\examples{
+
+style1 <- Rcss(text="points { cex: 2; }")
+# cex is defined, col is not defined
+RcssProperty("points", "cex", Rcss=style1)
+RcssProperty("points", "col", Rcss=style1)
+
+}

@@ -41,3 +41,11 @@ RcssDefaultStyle
 Creates a new Rcss style sheet object from the input, modifying
 one or more properties.
 }
+\examples{
+
+style1 <- Rcss(text="points { cex: 1; pch: 19; }")
+printRcss("points", Rcss=style1, verbose=TRUE)
+style2 <- RcssChange("points", list(cex=2), Rcss=style1)
+printRcss("points", Rcss=style2, verbose=TRUE)
+
+}

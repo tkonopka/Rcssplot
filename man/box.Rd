@@ -21,3 +21,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's box function.
 See R's documentation for graphics::box for further details.
 }
+\examples{
+
+# draw a box around an existing plot
+plot(c(0, 1), c(0, 1), type="n", frame=FALSE)
+box(lwd=3)
+
+}

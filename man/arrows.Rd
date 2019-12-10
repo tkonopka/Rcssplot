@@ -22,3 +22,10 @@ defined via RcssSetDefaultStle()}
 This is a wrapper for R's arrows function.
 See R's documentation for graphics::arrows for further details.
 }
+\examples{
+
+# draw an arrow
+plot(c(0, 1), c(0, 1), type="n")
+arrows(0.2, 0.2, x1=0.8, y1=0.5)
+
+}

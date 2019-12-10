@@ -32,3 +32,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's title function.
 See R's documentation for graphics::title for further details.
 }
+\examples{
+
+# add a title
+plot(c(0, 1), c(0, 1), type="n", xlab="", ylab="")
+title("This is the title")
+title(sub="This is a bottom title")
+
+}

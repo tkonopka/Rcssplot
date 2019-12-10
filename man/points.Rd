@@ -20,3 +20,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's points function.
 See R's documentation for graphics::points for further details.
 }
+\examples{
+
+# draw a set of points onto an existing plot
+plot(c(0, 1), c(0, 1), type="n")
+points(runif(10), runif(10))
+points(runif(10), runif(10), col="blue", pch=19)
+
+}

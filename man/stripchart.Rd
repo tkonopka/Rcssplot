@@ -20,3 +20,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's stripchart function.
 See R's documentation for graphics::stripchart for further details.
 }
+\examples{
+
+# draw a complete strip-chart plot
+dataset <- list(A=c(1,9,3,8), B=c(3,4,2,9,2), C=rpois(8, 10))
+stripchart(dataset)
+stripchart(dataset, method="jitter", vertical=TRUE, pch=19)
+
+}

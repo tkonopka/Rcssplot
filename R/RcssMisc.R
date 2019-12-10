@@ -16,7 +16,9 @@
 #' @param ... Further parameters, passed to plot()
 #'
 #' @examples
+#'
 #' parplot(x=1:4, y=c(1,3,2,4))
+#'
 parplot <- function(x, y,
                     Rcss="default", Rcssclass=NULL, ...) {
   par(Rcss=Rcss, Rcssclass=Rcssclass)

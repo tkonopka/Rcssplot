@@ -20,3 +20,10 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's polygon function.
 See R's documentation for graphics::polygon for further details.
 }
+\examples{
+
+# draw a multi-sided shape on an existing plot
+plot(c(0, 10), c(0, 10), type="n", xlab="", ylab="")
+polygon(c(1, 4, 7, 7, 1), c(1, 1, 4, 8, 8), col="blue")
+
+}

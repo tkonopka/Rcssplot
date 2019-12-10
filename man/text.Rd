@@ -29,3 +29,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's text function.
 See R's documentation for graphics::text for further details.
 }
+\examples{
+
+# add text to an existing plot
+plot(c(0, 1), c(0, 1), type="n")
+text(0.1, 0.1, "A")
+text(c(0.2, 0.7), c(0.8, 0.6), c("B", "C"))
+
+}

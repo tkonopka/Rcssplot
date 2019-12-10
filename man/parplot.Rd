@@ -21,5 +21,7 @@ The sequence of par() and plot() occurs so frequently that
 it a shortcut is helpful.
 }
 \examples{
+
 parplot(x=1:4, y=c(1,3,2,4))
+
 }

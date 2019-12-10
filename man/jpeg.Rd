@@ -20,3 +20,12 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's jpeg function.
 See R's documentation for grDevices::jpeg for further details
 }
+\examples{
+
+# send content of graphics to a jpg file
+# to run this, un-comment the jpeg() and dev.off() lines
+# jpeg(file="example-file.jpg")
+barplot(1:5)
+# dev.off()
+
+}

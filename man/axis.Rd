@@ -22,3 +22,11 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's axis function.
 See R's documentation for graphics::axis for further details.
 }
+\examples{
+
+# draw separate axes on an empty plot
+plot(c(0, 1), c(0, 1), type="n", axes=FALSE, xlab="x-axis", ylab="")
+axis(1)
+axis(3)
+
+}

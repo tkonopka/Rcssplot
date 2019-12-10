@@ -20,3 +20,13 @@ defined via RcssSetDefaultStyle()}
 This is a wrapper for R's mtext function.
 See R's documentation for graphics::mtext for further details.
 }
+\examples{
+
+# draw text into a margin
+plot(c(0, 1), c(0, 1), type="n", xlab="", ylab="")
+mtext(side=1, "bottom x-axis label", line=2.5)
+mtext(side=2, "left y-axis label", line=2.5)
+mtext(side=3, "top x-axis label")
+mtext(side=4, "right y-axis label")
+
+}

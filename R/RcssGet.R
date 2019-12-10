@@ -25,6 +25,11 @@
 #' "text", etc.)
 #' @param property name of property of interest (e.g. "col", "pch", etc.)
 #' @param Rcssclass subclass of style sheet
+#'
+#' @examples
+#'
+#' # use RcssProperty or RcssValue instead
+#'
 RcssGetPropertyValue <- function(Rcss, selector, property,
                                  Rcssclass = NULL) {
   warning("RcssGetPropertyValue is deprecated. Use RcssProperty instead.")
@@ -42,7 +47,15 @@ RcssGetPropertyValue <- function(Rcss, selector, property,
 #'
 #' @return list with two ites. Component "defined" is a boolean that indicates
 #' whether the property is defined in the style. Component "value" gives
-#' the actual value associated to the property. 
+#' the actual value associated to the property.
+#'
+#' @examples
+#'
+#' style1 <- Rcss(text="points { cex: 2; }")
+#' # cex is defined, col is not defined
+#' RcssProperty("points", "cex", Rcss=style1)
+#' RcssProperty("points", "col", Rcss=style1)
+#'
 RcssProperty <- function(selector, property,
                          Rcssclass=NULL, Rcss="default") {
   
@@ -100,6 +113,11 @@ RcssProperty <- function(selector, property,
 #' @param default value to return if the desired property is not defined
 #' in Rcss
 #' @param Rcssclass subclass of style sheet
+#'
+#' @examples
+#'
+#' # use RcssValue instead
+#'
 RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
                                           default=NULL,
                                           Rcssclass = NULL) {
@@ -125,6 +143,13 @@ RcssGetPropertyValueOrDefault <- function(Rcss, selector, property,
 #' @param Rcss Rcss object
 #'
 #' @return a value from the Rcss object
+#'
+#' @examples
+#'
+#' style1 <- Rcss(text="custom { key: 100 }")
+#' RcssValue("custom", "key", default=1, Rcss=style1)
+#' RcssValue("custom", "key2", default=0, Rcss=style1)
+#'
 RcssValue <- function(selector, property,
                       default=NULL, Rcssclass=NULL, Rcss="default") {
   
