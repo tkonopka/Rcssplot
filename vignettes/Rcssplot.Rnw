@@ -610,11 +610,11 @@ showrcss("Rcss/grammar.txt")
 \subsection*{{v1.0.0}}
 
 \begin{itemize}
-  \item All Rcss wrappers change name to match the function names from base graphics. They automatically mask base graphics functions.
-  \item RcssWatch utility
+  \item All Rcss wrappers change name to match functions from base graphics. They automatically mask base graphics functions.
+  \item Watch utility.
   \item Miscellaneous convenience functions: {\tt ctext}, {\tt parplot}
   \item Error messages generated during parsing of Rcss files include line numbers in the original files.
-  \item Some function from 0.x versions are made redundant or deprecated. These provide warning messages, but will be removed in a future release.
+  \item Some functions from 0.x versions are made redundant or deprecated. These provide warning messages, but will be removed in a future release.
 \end{itemize}
 
 
@@ -622,7 +622,7 @@ showrcss("Rcss/grammar.txt")
 \subsection*{{v0.3.0}}
 
 \begin{itemize}
- \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously exisitng functions, but are less verbose, epsecially forfetching values from a default style. 
+ \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously exisitng functions, but are less verbose, epsecially for fetching values from a default style. 
  \item Better parsing and handling of special values in css files, e.g. TRUE/FALSE, NA, NULL.
 \end{itemize}
 
