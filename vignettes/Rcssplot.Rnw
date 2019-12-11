@@ -158,7 +158,7 @@ To use this framework, we load the package.
 library(Rcssplot)
 @
 
-\noindent This command triggers some messages from the R environment. They convey that the package provides new implementations for functions that are already provided by base graphics. This means that executing commands with one of the listed names, for example {\tt mtext}, will launch implementations provided by Rcssplot rather than by the core package {\tt graphics}.
+\noindent This command triggers some messages from the R environment. They convey that the package provides new implementations for functions provided by base graphics. This means that executing commands with one of the listed names, for example {\tt mtext}, will launch implementations provided by Rcssplot rather than by the core package {\tt graphics}. The new implementations are designed to mimic behaviors of the familiar base graphics, but also add new features.
 
 
 
