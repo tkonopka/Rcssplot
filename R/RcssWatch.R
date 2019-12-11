@@ -5,7 +5,7 @@
 # Author: Tomasz Konopka
 
 
-# This is used to determine how the watch function listens to more/stop cues
+# connection used by the watch function
 options(Rcssplot.connection = stdin())
 
 
@@ -42,6 +42,10 @@ RcssWatch <- function(f, files=NULL, ...) {
   # split up the files by extension
   Rcss.files = grep("css$", files, value=TRUE)
   R.files = grep("[R|r]$", files, value=TRUE)
+  listen.con = getOption("Rcssplot.connection")
+  if (is.null(listen.con)) {
+    listen.con = stdin()
+  }
   
   continue <- TRUE
   while (continue) {
@@ -65,7 +69,7 @@ RcssWatch <- function(f, files=NULL, ...) {
       continue <- FALSE
     } else {
       message("Press [enter] to re-run, or [q] and [enter] to stop")
-      response <-readLines(con=getOption("Rcssplot.connection"), n=1)
+      response <-readLines(con=listen.con, n=1)
       continue <- !startsWith(response, "q")
     }
     
