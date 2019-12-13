@@ -24,7 +24,7 @@ title(
 \item{Rcss}{style sheet object. Leave "default" to use a style
 defined via RcssSetDefaultStyle()}
 
-\item{Rcssclass}{sub class of style sheet}
+\item{Rcssclass}{character, style class}
 
 \item{...}{Further parameters, see documentation of graphics::title}
 }

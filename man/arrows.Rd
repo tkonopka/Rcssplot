@@ -14,7 +14,7 @@ arrows(x0, y0, x1 = x0, y1 = y0, Rcss = "default", Rcssclass = NULL, ...)
 \item{Rcss}{style sheet object. Leave "default" to use a style
 defined via RcssSetDefaultStle()}
 
-\item{Rcssclass}{sub class of style sheet}
+\item{Rcssclass}{character, style class}
 
 \item{...}{Futher parameters, see documentation of graphics::arrows}
 }

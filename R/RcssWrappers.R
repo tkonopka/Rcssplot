@@ -29,7 +29,7 @@
 #' @param coef vector with interect and slope for line
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle().
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of abline()
 #'
 #' @examples
@@ -67,7 +67,7 @@ abline <-  function(a = NULL, b = NULL, h = NULL, v = NULL,
 #' @param x1,y1 coordinates of *to* endpoint
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Futher parameters, see documentation of graphics::arrows
 #'
 #' @examples
@@ -131,7 +131,7 @@ axis <-  function(side,
 #' @param height numeric vector giving bar lengths
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::barplot
 #'
 #' @examples
@@ -190,7 +190,7 @@ box <-  function(which = "plot",
 #' of numeric vectors; see documentation of boxplot() 
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::boxplot
 #'
 #' @examples
@@ -232,7 +232,7 @@ boxplot <-  function(x,
 #' @param z matrix of values
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::contour
 #'
 #' @examples
@@ -261,7 +261,7 @@ contour <- function(x = seq(0, 1, length.out = nrow(z)),
 #' @export 
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::grid
 #'
 #' @examples
@@ -289,7 +289,7 @@ grid <-  function(Rcss = "default", Rcssclass = NULL, ...) {
 #' @param x numeric vector
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::hist
 #'
 #' @examples
@@ -329,7 +329,7 @@ hist <- function(x,
 #' @param file character string with file name
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of grDevices::jpeg
 #'
 #' @examples
@@ -371,7 +371,7 @@ jpeg <- function(file,
 #' @param legend character vector with labels (text appears in the legend)
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::legend
 #'
 #' @examples
@@ -407,7 +407,7 @@ legend <- function(x, y = NULL, legend,
 #' @param x,y coordinates for start and end points for lines
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::lines
 #'
 #' @examples
@@ -438,7 +438,7 @@ lines <- function(x, y = NULL,
 #' vector of 1:n is used. Missing values (NAs) are allowed.
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::lines
 #'
 #' @examples
@@ -476,7 +476,7 @@ matplot <- function(x, y,
 #' @param text characters to print on the plot
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::mtext
 #'
 #' @examples
@@ -507,7 +507,7 @@ mtext <- function(text,
 #' @export
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::par
 #'
 #' @examples
@@ -541,7 +541,7 @@ par <- function(Rcss = "default", Rcssclass = NULL, ...) {
 #' @param file character string with file name
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of grDevices::pdf
 #'
 #' @examples
@@ -572,7 +572,7 @@ pdf <- function(file,
 #' @param x,y coordinates for points on the plot
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::plot
 #'
 #' @examples
@@ -614,7 +614,7 @@ plot <- function(x, y,
 #' @param file character string with file name
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of grDevices::png
 #'
 #' @examples
@@ -645,7 +645,7 @@ png <- function(file,
 #' @param x,y coordinates for points on the plot
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::points
 #'
 #' @examples
@@ -677,7 +677,7 @@ points <- function(x, y = NULL,
 #' @param x,y coordinates for polygon vertices
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::polygon
 #'
 #' @examples
@@ -709,7 +709,7 @@ polygon <- function(x, y = NULL,
 #' vertices
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::rect
 #'
 #' @examples
@@ -741,7 +741,7 @@ rect <- function(xleft, ybottom, xright, ytop,
 #' @param x list of numeric vectors
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::stripchart
 #'
 #' @examples
@@ -774,7 +774,7 @@ stripchart <- function(x,
 #' @param labels characters to print on the plot
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::text
 #'
 #' @examples
@@ -807,7 +807,7 @@ text <- function(x, y=NULL, labels=seq_along(x),
 #' @param xlab,ylab labels on axes
 #' @param Rcss style sheet object. Leave "default" to use a style
 #' defined via RcssSetDefaultStyle()
-#' @param Rcssclass sub class of style sheet
+#' @param Rcssclass character, style class
 #' @param ... Further parameters, see documentation of graphics::title
 #'
 #' @examples
