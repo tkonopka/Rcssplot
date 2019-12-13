@@ -21,6 +21,7 @@
 #' start the Lexer
 #'
 #' @keywords internal
+#' @noRd
 #' @param f character, input file, or vector of input files
 #' @param text character, strings with Rcss
 #'
@@ -49,6 +50,7 @@ RcssLexer <- function(file=NULL, text=NULL) {
 #' check if a file exists, then read it
 #'
 #' @keywords internal
+#' @noRd
 #' @param f character, single file name
 #'
 #' @return contents of file with a space and a newline character
@@ -73,6 +75,7 @@ RcssFileCheckRead <- function(f) {
 #' Dispatches to other tokens to parse the next tokens.
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer, current position in the character vector
 #'
@@ -114,6 +117,7 @@ RcssLexChars <- function(chardata, pos=1) {
 #' concatenate a subset of characters
 #'
 #' @keywords internal
+#' @noRd
 #' @param cc character vector
 #' @param pos integer, start position
 #' @param newpos integer, end position
@@ -126,6 +130,7 @@ RcssGetToken <- function(cc, pos, newpos) {
 #' process one token starting at position 'pos'
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer, current position in the cc vector
 #' @param terminals character vector, characters that mark end of a token
@@ -194,6 +199,7 @@ RcssLexNextToken <- function(chardata, pos,
 #' parse a comment
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos current position (expects '/' followed by '*')
 #'
@@ -224,6 +230,7 @@ RcssParseComment <- function(chardata, pos) {
 #' helper for string parsing
 #'
 #' @keywords internal
+#' @noRd
 #' @param cc vector of characters
 #' @param pos integer, position of character to check escape for (e.g. a " in a string)
 #'
@@ -242,6 +249,7 @@ RcssIsEscaped <- function(cc, pos) {
 #' parse a number
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer, current position (expects '-' or 0-9)
 #' @param exponent logical, set TRUE if parsing an exponent of a number
@@ -308,6 +316,7 @@ RcssParseNumber <- function(chardata, pos, exponent=FALSE, decimal=FALSE) {
 #' parse a string
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer, current position (expects '/' followed by '*')
 #' @param delimiter character, either " or ' (used to catch nested strings)
@@ -338,6 +347,7 @@ RcssParseString <- function(chardata, pos, delimiter="\"") {
 #' parse a hex color
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer, current position (this function expects a hash sign)
 #'
@@ -369,6 +379,7 @@ RcssParseHexToken <- function(chardata, pos) {
 #' parser for a generic token
 #'
 #' @keywords internal
+#' @noRd
 #' @param chardata data frame with characters and line numbers
 #' @param pos integer current position
 #' @param delimiters vector or delimiters that demarcate end of a token

@@ -140,6 +140,7 @@ RcssChange <- function(selector,
 #' Helper to RcssChangePropertyValue (very similar name...)
 #'
 #' @keywords internal
+#' @noRd
 #' @param RcssProperties object
 #' @param Rcssclass character, style class
 #' @param propertylist list
@@ -183,6 +184,7 @@ RcssPropertiesChangeValue <- function(RcssProperties,
 #' update a current set of properties and values
 #'
 #' @keywords internal
+#' @noRd
 #' @param nowcss - a starting list of properties
 #' @param changelist - a list of properties to update 
 #'

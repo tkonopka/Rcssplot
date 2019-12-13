@@ -8,6 +8,7 @@
 #' stop with call. = FALSE
 #'
 #' @keywords internal
+#' @noRd
 #' @param ... arguments passed to stop()
 stopCF <- function(...) {
   stop(..., call. = FALSE)
@@ -17,6 +18,7 @@ stopCF <- function(...) {
 #' trigger a stop, with a message 
 #'
 #' @keywords internal
+#' @noRd
 #' @param msg character, message to display
 #' @param line.number integer, used as part of the error message
 stopAtLine <- function(msg, line.number) {
@@ -28,6 +30,7 @@ stopAtLine <- function(msg, line.number) {
 #' "col=VALUE, lty=VALUE, " (with comma at the end)
 #'
 #' @keywords internal
+#' @noRd
 #' @param varnames character vector
 #' @param listname character
 #'

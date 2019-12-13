@@ -11,6 +11,7 @@ Depends:
 Imports:
     methods,
     graphics,
+    grDevices,
     stats,
     utils
 Suggests:

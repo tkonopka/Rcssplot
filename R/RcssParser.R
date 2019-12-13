@@ -9,6 +9,7 @@
 #' parse a text file assuming it is in css format.
 #'
 #' @keywords internal
+#' @noRd
 #' @param file character, files on disk
 #' @param text character, strings with Rcss
 #'
@@ -23,6 +24,7 @@ RcssParser <- function(file=NULL, text=NULL) {
 #' wrapper to produce generic errors
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame with lexed information
 #' @param n integer, row number in lextab
 #' @param parsefunction character, used in error message
@@ -42,6 +44,7 @@ RcssParseError <- function(lextab, n, parsefunction, expecting) {
 #' convert lexed tokens into a tree with selectors and declarations 
 #' 
 #' @keywords internal
+#' @noRd
 #' @param lextab data.frame with lexed tokens
 #'
 #' @return tree 
@@ -68,6 +71,7 @@ RcssMakeParseTree <- function(lextab) {
 #' parse one rule set (Selectors { Declarations })
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame with tokens
 #' @param n inteer, current row in the data frame
 RcssParseRuleSet <- function(lextab, n) {
@@ -82,6 +86,7 @@ RcssParseRuleSet <- function(lextab, n) {
 #' parse one selector (IDENT [ class]* | class)
 #' 
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame with tokens
 #' @param n ineger, current row in the data frame
 #'
@@ -120,6 +125,7 @@ RcssParseSelector <- function(lextab, n) {
 #' parse a set of selectors (i.e. selector [ ',' selector ]*)
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame with tokens
 #' @param n integer, current row in the data frame 
 RcssParseSelectorSet <- function(lextab, n) {
@@ -146,6 +152,7 @@ RcssParseSelectorSet <- function(lextab, n) {
 #' (expects to start with a '{' and end with a '}')
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame with tokens
 #' @param n integer, current row in the data.frame to process
 RcssParseDeclarationSet <- function(lextab, n) {
@@ -182,6 +189,7 @@ RcssParseDeclarationSet <- function(lextab, n) {
 #' parse special strings into R primitives
 #'
 #' @keywords internal
+#' @noRd
 #' @param tok one string
 #'
 #' @return R primitive for that string, "NULL" gives an empty list
@@ -198,6 +206,7 @@ parseIDENT <- function(tok) {
 #' Parse one declaration (expects an IDENT)
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame
 #' @param n integer, row identifier in lextab
 RcssParseDeclaration <- function(lextab, n) {
@@ -256,6 +265,7 @@ RcssParseDeclaration <- function(lextab, n) {
 #' will concatenate the text together
 #'
 #' @keywords internal
+#' @noRd
 #' @param lextab data frame
 #' @param n integer, row number in lextab
 RcssParseProperty <- function(lextab, n) {

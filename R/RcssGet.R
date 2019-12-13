@@ -178,6 +178,7 @@ RcssValue <- function(selector, property,
 #' This is a helper function for RcssGetPropertyValue
 #'
 #' @keywords internal
+#' @noRd
 #' @param RcssProperties object
 #' @param property character
 #' @param Rcssclass character, style class
@@ -237,6 +238,7 @@ RcssHelperGetPropertyValue <- function(RcssProperties, property,
 #' get properties, recursively
 #'
 #' @keywords internal
+#' @noRd
 #' @param RcssProperties object
 #'
 #' @return character vector
@@ -260,6 +262,7 @@ getAllProperties <- function(RcssProperties) {
 #' (Used internally, 2 frames down from user interaction)
 #'
 #' @keywords internal
+#' @noRd
 #' @param Rcss object
 #' @param selector character
 #' @param Rcssclass character, style class

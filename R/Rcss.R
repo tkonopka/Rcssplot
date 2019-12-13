@@ -9,6 +9,7 @@
 #' @import stats
 #' @import utils
 #' @import graphics
+#' @import grDevices
 NULL
 
 
@@ -179,6 +180,7 @@ printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
 #' print a set of property key/value pairs
 #' 
 #' @keywords internal
+#' @noRd
 #' @param RcssProperties object
 #' @param verbose logical
 #' @param indent integer, prefix capturing spaces for indentation
@@ -305,6 +307,7 @@ RcssGetCompulsoryClass <- function(Rcssclass=NULL) {
 #' while this uses parent.frame() chain
 #' 
 #' @keywords internal
+#' @noRd
 #' @param what character, use either "RcssDefaultStyle" or "RcssCompulsoryClass"
 RcssGetDefault <- function(what) {
   # parent frame counter
@@ -339,6 +342,7 @@ RcssGetDefault <- function(what) {
 #' (includes space for base properties and for subclasses)
 #'
 #' @keywords internal
+#' @noRd
 RcssPropertiesConstructor <- function() {
   # RcssProperties object will contain two lists,
   # one list for basic properties
@@ -353,6 +357,7 @@ RcssPropertiesConstructor <- function() {
 #' the items inserted into this list/object will be called "selectors"
 #'
 #' @keywords internal
+#' @noRd
 RcssConstructor <- function() {  
   result <- list()
   class(result) <- "Rcss"  
@@ -363,6 +368,7 @@ RcssConstructor <- function() {
 #' object maintenance
 #'
 #' @keywords internal
+#' @noRd
 #' @param RcssProperties object
 #' @param Rcssclass character, style class
 #'
