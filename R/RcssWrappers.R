@@ -208,6 +208,45 @@ boxplot <-  function(x,
 }
 
 
+
+#cairo_pdf(filename = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
+#               width = 7, height = 7, pointsize = 12,
+#               onefile = FALSE, family = "sans", bg = "white",
+#               antialias = c("default", "none", "gray", "subpixel"),
+#               fallback_resolution = 300)
+#     
+#' Create a styled cairo_pdf figure
+#'
+#' This is a wrapper for R's cairo_pdf function.
+#' See R's documentation for grDevices::cairo_pdf for further details
+#'
+#' Note this uses styles from 'pdf' css selectors
+#' 
+#' @export
+#' @param filename character string with file name
+#' @param Rcss style sheet object. Leave "default" to use a style
+#' defined via RcssSetDefaultStyle()
+#' @param Rcssclass character, style class
+#' @param ... Further parameters, see documentation of grDevices::pdf
+#'
+#' @examples
+#'
+#' # send content of graphics to a pdf file
+#' # to run this, un-comment the pdf() and dev.off() lines
+#' # cairo_pdf(file="example-file.pdf")
+#' barplot(1:5)
+#' # dev.off()
+#'
+cairo_pdf <- function(filename,
+                      Rcss = "default", Rcssclass = NULL, ...) {
+  
+  nowcss <- RcssGetProperties(Rcss, "pdf", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., filename=filename))
+  do.call(grDevices::cairo_pdf, nowcss)
+}
+
+
+
 # contour(x = seq(0, 1, length.out = nrow(z)),
 #             y = seq(0, 1, length.out = ncol(z)),
 #             z,
@@ -758,6 +797,41 @@ stripchart <- function(x,
   nowcss <- RcssUpdateProperties(nowcss, list(x=x, ...))
   do.call(graphics::stripchart, nowcss)
 }
+
+
+
+#svg(filename = if(onefile) "Rplots.svg" else "Rplot%03d.svg",
+#         width = 7, height = 7, pointsize = 12,
+#         onefile = FALSE, family = "sans", bg = "white",
+#         antialias = c("default", "none", "gray", "subpixel"))     
+#' Create a styled svg figure
+#'
+#' This is a wrapper for R's svg function.
+#' See R's documentation for grDevices::svg for further details
+#'
+#' @export
+#' @param filename character string with file name
+#' @param Rcss style sheet object. Leave "default" to use a style
+#' defined via RcssSetDefaultStyle()
+#' @param Rcssclass character, style class
+#' @param ... Further parameters, see documentation of grDevices::svg
+#'
+#' @examples
+#'
+#' # send content of graphics to a pdf file
+#' # to run this, un-comment the pdf() and dev.off() lines
+#' # svg(file="example-file.svg")
+#' barplot(1:5)
+#' # dev.off()
+#'
+svg <- function(filename,
+                Rcss = "default", Rcssclass = NULL, ...) {
+  
+  nowcss <- RcssGetProperties(Rcss, "svg", Rcssclass = Rcssclass)
+  nowcss <- RcssUpdateProperties(nowcss, list(..., filename=filename))
+  do.call(grDevices::svg, nowcss)
+}
+
 
 
 # text(x, y = NULL, labels = seq_along(x), adj = NULL,

@@ -139,6 +139,19 @@ test_that("boxplot wrapper", {
 })
 
 
+test_that("cairo_pdf wrapper", {
+  filename = testfile("pdf-cairo")
+  expect_false(file.exists(filename))
+  myplot = function(filename) {
+    cairo_pdf(filename)
+    plot(x0, main="plain")
+    dev.off()
+  }
+  expect_silent(myplot(filename))
+  expect_true(file.exists(filename))
+})
+
+
 test_that("contour wrapper", {
   filename = testfile("contour")
   expect_false(file.exists(filename))
@@ -451,6 +464,19 @@ test_that("stripchart wrapper", {
     stripchart(x3, main="empty style", Rcss=style0)
     stripchart(x3, main="style5", Rcss=style5)
     stripchart(x3, main="style5, abc", Rcss=style5, Rcssclass="abc")
+    dev.off()
+  }
+  expect_silent(myplot(filename))
+  expect_true(file.exists(filename))
+})
+
+
+test_that("svg wrapper", {
+  filename = testfile("svg")
+  expect_false(file.exists(filename))
+  myplot = function(filename) {
+    svg(filename)
+    plot(x0, main="plain")
     dev.off()
   }
   expect_silent(myplot(filename))

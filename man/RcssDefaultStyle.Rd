@@ -4,7 +4,9 @@
 \name{RcssDefaultStyle}
 \alias{RcssDefaultStyle}
 \title{Default Rcssplot style sheet}
-\format{An object of class \code{NULL} of length 0.}
+\format{
+An object of class \code{NULL} of length 0.
+}
 \usage{
 RcssDefaultStyle
 }
