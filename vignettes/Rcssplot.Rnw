@@ -66,7 +66,7 @@ This vignette is organized as follows. The next section reviews how to create co
 
 To start, let's look at styling plots using R's built-in capabilities, called `base graphics'. For concreteness, let's use an example with a bar chart and a small data vector.
 
-<<>>=
+<<basebarfun_1>>=
 a <- setNames(c(35, 55, 65, 75, 80, 80), letters[1:6])
 a
 @
