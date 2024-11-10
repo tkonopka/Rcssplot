@@ -9,6 +9,7 @@
 */*.out
 */*.pdf
 */*.tex
+.idea
 
 ## ignoring intermediate vignette data
 vignettes/figure/
