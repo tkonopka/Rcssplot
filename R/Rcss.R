@@ -120,7 +120,7 @@ Rcss <- function(file=NULL, text=NULL) {
 #' custom.style
 #'
 print.Rcss <- function(x, ...) {
-  if (class(x) != "Rcss") {
+  if (!is(x, "Rcss")) {
     stopCF("print.Rcss: input object is not Rcss\n")
   }
   cat("Rcssplot:\n")
@@ -152,7 +152,7 @@ print.Rcss <- function(x, ...) {
 printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
   
   # some basic checks
-  if (class(Rcss) != "Rcss") {
+  if (!is(Rcss, "Rcss")) {
     stopCF("printRcss: input object is not Rcss\n")
   }
   
@@ -247,10 +247,10 @@ RcssDefaultStyle <- NULL
 #' 
 RcssGetDefaultStyle <- function(Rcss="default") {
   # perhaps ignore the current default and return the new object
-  if (class(Rcss) == "Rcss") {
+  if (is(Rcss, "Rcss")) {
     return(Rcss)    
   }
-  if (is.na(Rcss) | is.null(Rcss) >0) {
+  if (is.na(Rcss) | is.null(Rcss) > 0) {
     return(Rcss)  
   }
   # if here, the user is not asking to reset the default.
@@ -402,8 +402,8 @@ RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
 #' suppressWarnings(RcssOverload())
 #'
 RcssOverload = function() {
-  msg = c("RcssOverload is deprecated and redundant.",
-          "All Rcssplot wrappers already mask graphics functions")
+  msg <- c("RcssOverload is deprecated and redundant.",
+           "All Rcssplot wrappers already mask graphics functions")
   warning(paste(msg, collapse="\n"))
 }
 

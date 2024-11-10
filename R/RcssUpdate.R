@@ -90,7 +90,7 @@ RcssChange <- function(selector,
   }
   
   # sanity check, function only works to modify valid Rcss objects
-  if (class(Rcss) != "Rcss") {
+  if (!is(Rcss, "Rcss")) {
     stopCF("RcssChange: input is not Rcss \n")
   }
   # check that the selector is one of the accepted ones
