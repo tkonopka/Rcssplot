@@ -1,5 +1,7 @@
 ## Files to ignore when building package
 
+.idea
+
 ## For github checks
 .travis.yml
 .gitignore

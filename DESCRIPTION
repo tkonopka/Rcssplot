@@ -20,6 +20,5 @@ Suggests:
     testthat
 License: GPL-2
 URL: https://github.com/tkonopka/Rcssplot
-LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
