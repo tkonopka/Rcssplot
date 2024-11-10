@@ -23,7 +23,7 @@
 
 \maketitle 
 
-<<echo = FALSE>>=
+<<showrcss, echo = FALSE>>=
 library("knitr")
 opts_chunk$set(fig.pos = "", fig.align = "center")
 
@@ -55,7 +55,7 @@ showrcss = function(f, remove=4) {
 
 The R environment provides provides numerous ways to fine-tune the appearance of plots and charts. Taking advantage of these features can make complex data visualizations more appealing and meaningful. For example, customization can make some components in a composite visualization stand out from the background. However, such tuning can result in code that is long and complex. 
 
-A specific problem with code for graphics is that it often mixes operations on data with book-keeping of visual appearance. The mixture makes such code difficult to maintain and extend. A similar problem in web develpment is addressed by separating style settings from content using cascading style sheets. The Rcssplot package implements a similar mechanism for the R environment.
+A specific problem with code for graphics is that it often mixes operations on data with book-keeping of visual appearance. The mixture makes such code difficult to maintain and extend. A similar problem in web development is addressed by separating style settings from content using cascading style sheets. The Rcssplot package implements a similar mechanism for the R environment.
 
 This vignette is organized as follows. The next section reviews how to create composite visualizations with base graphics. Later sections describe how to manage visual style using Rcssplot. The vignette ends with a summary and pointers to other graphics frameworks and packages.
 
@@ -165,7 +165,7 @@ library(Rcssplot)
 
 \subsection{Rcss styles}
 
-Let's adopt a convention whereby files with style definitions have {\tt Rcss} extensions. As an exampe, a file called {\tt vignettes.bar1.Rcss} is available in a sub-folder along with the package vignette. The file is formatted in a similar way to cascading style sheets, {\tt css}, that are ubiquitous in web design.
+Let's adopt a convention whereby files with style definitions have {\tt Rcss} extensions. As an example, a file called {\tt vignettes.bar1.Rcss} is available in a sub-folder along with the package vignette. The file is formatted in a similar way to cascading style sheets, {\tt css}, that are ubiquitous in web design.
 
 <<barrcss_1, eval=TRUE, echo = FALSE, comment=NA>>=
 showrcss("Rcss/vignettes.bar1.Rcss")
@@ -342,7 +342,7 @@ This section covers some additional features provided by the package. The first 
 
 \subsection{Default styles and compulsory classes}
 
-While the code in {\tt rcss.barplot.1} is simpler than in {\tt base.barplot.1}, it still contains repetitive elements. In particualr, constructions {\tt Rcss=Rcss} and {\tt Rcssclass=Rcssclasss} appear in almost every line. We can avoid this repetition by setting a default style and a compulsory class through {\tt RcssDefaultStyle} and {\tt RcssCompulsoryClass}. These objects can be defined in any environment, for example inside a function. Consider the following adjustment of our barplot function.
+While the code in {\tt rcss.barplot.1} is simpler than in {\tt base.barplot.1}, it still contains repetitive elements. In particular, constructions {\tt Rcss=Rcss} and {\tt Rcssclass=Rcssclasss} appear in almost every line. We can avoid this repetition by setting a default style and a compulsory class through {\tt RcssDefaultStyle} and {\tt RcssCompulsoryClass}. These objects can be defined in any environment, for example inside a function. Consider the following adjustment of our barplot function.
 
 <<rbarplot2, eval = TRUE>>=
 ## barplot using Rcssplot, version 2 (using a default style and a compulsory class)
@@ -570,7 +570,7 @@ The Rcssplot package is intended to provide a straightforward and familiar means
 \noindent Many thanks to R's documentation and manuals. A particularly valuable resource is \cite{advancedR}.
 
 \vspace*{0.3cm}
-\noindent Rcssplot is developed on github with contributions from (in alphabetical order): FrancoisGuillem, nfultz. 
+\noindent Rcssplot is developed on github with contributions from (in alphabetical order): FrancoisGuillem, nfultz, yihui.
 
 
 
@@ -632,6 +632,13 @@ showrcss("Rcss/grammar.txt")
 
 \subsection{Version history}
 
+\subsection*{{v1.1.0}}
+
+\begin{itemize}
+  \item Update vignette code for compatibility with new versions of knitr and R
+  \item Update package description and code patterns for compatibility with new versions of R
+\end{itemize}
+
 
 \subsection*{{v1.0.0}}
 
@@ -644,13 +651,13 @@ showrcss("Rcss/grammar.txt")
 \end{itemize}
 
 
-
 \subsection*{{v0.3.0}}
 
 \begin{itemize}
- \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously exisitng functions, but are less verbose, epsecially for fetching values from a default style. 
+ \item New functions for getting and setting values from Rcss objects: {\tt RcssValue}, {\tt RcssUpdate}. These functions are complementary to previously existing functions, but are less verbose, especially for fetching values from a default style.
  \item Better parsing and handling of special values in css files, e.g. TRUE/FALSE, NA, NULL.
 \end{itemize}
+
 
 \subsection*{{v0.2.0}}
 
@@ -661,7 +668,7 @@ showrcss("Rcss/grammar.txt")
 
 \subsection{Session info}
 
-<<>>=
+<<session_info>>=
 sessionInfo()
 @ 
 

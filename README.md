@@ -70,5 +70,5 @@ hist(x100, breaks=10)
 
 ## Acknowledgments
 
-Many thanks to the CRAN team and contributors: FrancoisGuillem, nfultz
+Many thanks to the CRAN team and contributors: FrancoisGuillem, nfultz, yihui.
 
